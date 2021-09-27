@@ -96,6 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Dont have an Account"
+        android:onClick="clickToCreateAccount"
         app:layout_constraintEnd_toEndOf="@+id/btnlogin"
         app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="@+id/btnlogin"
