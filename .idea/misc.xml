@@ -8,12 +8,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/font/font.xml" value="0.23229166666666667" />
-        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/activity_main.xml" value="0.20208333333333334" />
+        <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/drawable/input_bg.xml" value="0.14010416666666667" />
+        <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/font/font.xml" value="0.16041666666666668" />
+        <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/activity_main.xml" value="0.264" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
