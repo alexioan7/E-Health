@@ -93,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
