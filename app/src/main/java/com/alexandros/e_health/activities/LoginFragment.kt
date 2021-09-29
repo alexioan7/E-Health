@@ -6,6 +6,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
 import com.alexandros.e_health.databinding.FragmentLoginBinding
+import com.alexandros.e_health.databinding.FragmentRegisterBinding
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
@@ -14,7 +15,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
-        binding.tvRegister.setOnClickListener{
+        binding.tvRegister.setOnClickListener(){
             navRegister()
         }
     }
