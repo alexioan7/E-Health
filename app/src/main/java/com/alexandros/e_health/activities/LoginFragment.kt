@@ -8,10 +8,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
 import com.alexandros.e_health.databinding.FragmentLoginBinding
-import com.alexandros.e_health.viewmodels.LoginFunctions
-import com.alexandros.e_health.viewmodels.LoginScreenViewModel
+import com.alexandros.e_health.viewmodels.AuthScreenViewModel
+import com.alexandros.e_health.viewmodels.AuthFunctions
 
-class LoginFragment : Fragment(R.layout.fragment_login), LoginFunctions {
+class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
 
     private lateinit var binding: FragmentLoginBinding
 
@@ -19,7 +19,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), LoginFunctions {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
 
-        val viewmodel= ViewModelProviders.of(this).get(LoginScreenViewModel::class.java)
+        val viewmodel= ViewModelProviders.of(this).get(AuthScreenViewModel::class.java)
 
         //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
         //this will bind our data with the UI
@@ -43,9 +43,10 @@ class LoginFragment : Fragment(R.layout.fragment_login), LoginFunctions {
     }
 
     override fun OnStarted() {
-        Log.d("Login fragment","Login...")
+       Log.d("Login fragment","Login...")
         //Toast.makeText(MainActivity, "Login", Toast.LENGTH_LONG).show()
-      //toast("Login..")
+
+
     }
 
     override fun OnSuccess() {

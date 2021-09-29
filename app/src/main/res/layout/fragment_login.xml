@@ -8,7 +8,7 @@
     <data>
         <variable
             name="loginviewmodel"
-            type="com.alexandros.e_health.viewmodels.LoginScreenViewModel" />
+            type="com.alexandros.e_health.viewmodels.AuthScreenViewModel" />
 
     </data>
 

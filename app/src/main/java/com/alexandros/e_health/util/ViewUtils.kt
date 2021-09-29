@@ -6,6 +6,6 @@ import android.widget.Toast
 //extension function named toast to display toasts
 
 fun Context.toast(message:String){
-   Toast.makeText(this, message,Toast.LENGTH_LONG).show()
+    Toast.makeText(this, message,Toast.LENGTH_LONG).show()
 
 }

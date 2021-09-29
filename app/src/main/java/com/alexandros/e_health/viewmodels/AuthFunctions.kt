@@ -1,6 +1,6 @@
 package com.alexandros.e_health.viewmodels
 
-interface LoginFunctions {
+interface AuthFunctions {
 
     fun OnStarted()
     fun OnSuccess()
