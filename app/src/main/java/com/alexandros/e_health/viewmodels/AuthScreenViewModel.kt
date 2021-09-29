@@ -2,8 +2,9 @@ package com.alexandros.e_health.viewmodels
 
 import android.view.View
 import androidx.lifecycle.ViewModel
+import com.alexandros.e_health.repositories.AuthRepository
 
-class AuthScreenViewModel: ViewModel(){
+class AuthScreenViewModel(private val authRepo: AuthRepository): ViewModel() {
 
     //variables
     var id: String? = null
@@ -23,6 +24,10 @@ class AuthScreenViewModel: ViewModel(){
 
     var authListener:AuthFunctions?=null
 
+//    fun registerUser() {
+//        authRepo.registerUser()
+//    }
+//
     fun onLoginButtonClick(view: View){
         authListener?.OnStarted()
 

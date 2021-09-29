@@ -18,6 +18,13 @@ class RegisterFragment : Fragment(R.layout.fragment_register) , AuthFunctions{
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterBinding.bind(view)
         val viewmodel= ViewModelProviders.of(this).get(AuthScreenViewModel::class.java)
+//        var firstname = ""
+//        binding.btnRegister.setOnClickListener {
+//            val tt = binding.txtFirstName.text
+//            firstname = "blabla"
+//            viewmodel.registerUser(name, lastname, age)
+//        }
+
 
         //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
         //this will bind our data with the UI
