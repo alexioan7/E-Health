@@ -1,10 +1,9 @@
 package com.alexandros.e_health.repositories
 
-import android.provider.ContactsContract
-import com.alexandros.e_health.api.AuthApi
+import com.alexandros.e_health.api.AuthApiInterface
 
 class AuthRepository(
-    private val api: AuthApi
+    private val api: AuthApiInterface
 ) : BaseRepository() {
 
     suspend fun registerUser(
