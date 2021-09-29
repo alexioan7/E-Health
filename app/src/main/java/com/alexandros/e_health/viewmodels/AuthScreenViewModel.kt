@@ -42,6 +42,9 @@ class AuthScreenViewModel: ViewModel(){
 
     fun onRegisterButtonClick(view: View){
         authListener?.OnStarted()
+        authListener?.OnSuccess()
+        authListener?.OnFailure("Wrong")
+
 
 
 

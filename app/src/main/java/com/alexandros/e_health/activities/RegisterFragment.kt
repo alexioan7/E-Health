@@ -1,6 +1,7 @@
 package com.alexandros.e_health.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -34,14 +35,14 @@ class RegisterFragment : Fragment(R.layout.fragment_register) , AuthFunctions{
     }
 
     override fun OnStarted() {
-        TODO("Not yet implemented")
+        Log.d("RegisterFragment","Signin up..")
     }
 
     override fun OnSuccess() {
-        TODO("Not yet implemented")
+        Log.d("RegisterFragment","Succeed..")
     }
 
     override fun OnFailure(message: String) {
-        TODO("Not yet implemented")
+       Log.d("RegisterFragment","Something went wrong")
     }
 }
