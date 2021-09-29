@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
 import com.alexandros.e_health.databinding.FragmentRegisterBinding
@@ -14,10 +14,12 @@ import com.alexandros.e_health.viewmodels.AuthScreenViewModel
 class RegisterFragment : Fragment(R.layout.fragment_register) , AuthFunctions{
 
     private lateinit var binding: FragmentRegisterBinding
+    private lateinit var viewmodel: AuthScreenViewModel
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterBinding.bind(view)
-        val viewmodel= ViewModelProviders.of(this).get(AuthScreenViewModel::class.java)
+        viewmodel= ViewModelProvider(this).get(AuthScreenViewModel::class.java)
 //        var firstname = ""
 //        binding.btnRegister.setOnClickListener {
 //            val tt = binding.txtFirstName.text

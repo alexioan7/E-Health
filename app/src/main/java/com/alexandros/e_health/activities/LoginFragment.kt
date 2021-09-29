@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
 import com.alexandros.e_health.databinding.FragmentLoginBinding
@@ -14,12 +14,13 @@ import com.alexandros.e_health.viewmodels.AuthFunctions
 class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
 
     private lateinit var binding: FragmentLoginBinding
+    private lateinit var viewmodel: AuthScreenViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
 
-        val viewmodel= ViewModelProviders.of(this).get(AuthScreenViewModel::class.java)
+        viewmodel= ViewModelProvider(this).get(AuthScreenViewModel::class.java)
 
         //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
         //this will bind our data with the UI

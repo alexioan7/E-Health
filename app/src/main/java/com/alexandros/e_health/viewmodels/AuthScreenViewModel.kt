@@ -4,7 +4,9 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import com.alexandros.e_health.repositories.AuthRepository
 
-class AuthScreenViewModel(private val authRepo: AuthRepository): ViewModel() {
+//the below line removed from the class params
+//private val authRepo: AuthRepository
+class AuthScreenViewModel(): ViewModel() {
 
     //variables
     var id: String? = null
