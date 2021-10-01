@@ -1,19 +1,50 @@
 package com.alexandros.e_health.repositories
 
-import com.alexandros.e_health.api.AuthApiInterface
+import android.util.Log
+import com.alexandros.e_health.api.RemoteDataSource
+import com.alexandros.e_health.api.responseModel.RegisterBody
+import com.alexandros.e_health.api.responseModel.RegisterUserResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class AuthRepository(
-    private val api: AuthApiInterface
-) : BaseRepository() {
+object AuthRepository {
+    private const val TAG = "AuthRepository"
 
-    suspend fun registerUser(
+
+    fun registerUser(
         amka: String,
         password: String,
         name: String,
         surname: String,
         email: String,
-        phoneNumber: Number
-    ) = safeApiCall {
-        api.registerUser(amka, password, name, surname, email, phoneNumber)
+        phoneNumber: String
+    ) {
+        val dataSource = RemoteDataSource()
+
+        Log.i(TAG, "registerUser: Call is started")
+       val  body = RegisterBody(amka, password, name, surname, email, phoneNumber.toInt())
+        dataSource.getRetrofit()
+            .registerUser(body)
+            .enqueue(object : Callback<RegisterUserResponse> {
+                override fun onResponse(
+                    call: Call<RegisterUserResponse>,
+                    response: Response<RegisterUserResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(TAG, "onResponse: Response Successful")
+                    }
+                }
+
+                override fun onFailure(call: Call<RegisterUserResponse>, t: Throwable) {
+                    Log.i(TAG, "onFailure: " + t.message)
+                }
+            })
+
     }
+
+
 }
+
+
+

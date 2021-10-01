@@ -1,4 +1,4 @@
-package com.alexandros.e_health.util
+package com.alexandros.e_health.utils
 
 import android.content.Context
 import android.widget.Toast

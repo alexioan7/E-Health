@@ -36,9 +36,12 @@
             app:layout_constraintVertical_bias="0.0" />
 
 
+
+        <!--android:onClick="@{registerviewmodel::onRegisterButtonClick}"-->
+
+
         <Button
             android:id="@+id/btnRegister"
-            android:onClick="@{registerviewmodel::onRegisterButtonClick}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -103,7 +106,7 @@
             android:drawablePadding="5dp"
             android:ems="10"
             android:hint="Phone Number"
-            android:inputType="phone"
+            android:inputType="text"
             android:minHeight="48dp"
             android:paddingStart="10dp"
             android:paddingTop="10dp"

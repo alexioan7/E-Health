@@ -43,6 +43,7 @@ android {
 dependencies {
     def nav_version = "2.3.5"
     def lifecycle_version = "2.3.1"
+    def okHttpInterceptor = "4.7.2"
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -51,6 +52,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
 
+
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpInterceptor"
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
