@@ -18,6 +18,9 @@
         tools:context=".activities.RegisterFragment">
 
 
+        <!--android:onClick="@{registerviewmodel::onRegisterButtonClick}"-->
+
+
         <TextView
             android:id="@+id/appname"
             android:layout_width="246dp"
@@ -33,12 +36,7 @@
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-
-
-        <!--android:onClick="@{registerviewmodel::onRegisterButtonClick}"-->
-
+            app:layout_constraintVertical_bias="0.512" />
 
         <Button
             android:id="@+id/btnRegister"

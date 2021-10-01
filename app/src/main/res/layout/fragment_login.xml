@@ -2,6 +2,7 @@
 
 <layout
 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -12,7 +13,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/login_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,7 +50,7 @@
         <EditText
             android:text="@={loginviewmodel.id}"
             android:id="@+id/txtHealthNumber"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
             android:background="@drawable/input_bg"
@@ -69,9 +70,8 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <EditText
-            android:text="@={loginviewmodel.password}"
             android:id="@+id/txtPassword"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/input_bg"
@@ -85,17 +85,16 @@
             android:paddingTop="10dp"
             android:paddingEnd="10dp"
             android:paddingBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@={loginviewmodel.password}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtHealthNumber"
-            app:layout_constraintVertical_bias="0.027" />
+            app:layout_constraintTop_toBottomOf="@+id/txtHealthNumber" />
 
         <Button
             android:id="@+id/btnlogin"
             android:onClick="@{loginviewmodel::onLoginButtonClick}"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:backgroundTint="@color/black"
