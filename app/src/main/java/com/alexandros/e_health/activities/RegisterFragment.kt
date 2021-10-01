@@ -27,6 +27,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
         var surname = ""
         var amka = ""
         var password = ""
+        var confirmPassword = ""
         var email = ""
         var phoneNumber: String
 
@@ -36,10 +37,11 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
             surname = binding.txtLastName.text.toString()
             amka = binding.txtHealthNumber.text.toString()
             password = binding.txtPassword.text.toString()
+            confirmPassword = binding.txtPasswordConfirm.text.toString()
             email = binding.txtEmail.text.toString()
             phoneNumber = binding.txtPhoneNumber.text.toString()
-            Log.i("fron onclick", "malakiew")
-            viewmodel.registerUser(amka, password, firstname, surname, email, phoneNumber)
+            Log.i("fron onclick", "malakiesssssssss")
+            viewmodel.registerUser(amka, password, confirmPassword, firstname, surname, email, phoneNumber)
         }
 
 

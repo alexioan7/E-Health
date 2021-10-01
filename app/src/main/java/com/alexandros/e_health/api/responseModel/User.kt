@@ -1,10 +1,6 @@
 package com.alexandros.e_health.api.responseModel
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
-@Parcelize
-data class  User(
+data class User(
     val __v: Int,
     val _id: String,
     val amka: String,
@@ -13,6 +9,6 @@ data class  User(
     val familyDoctor: String,
     val name: String,
     val password: String,
-    val phoneNumber: Int,
+    val phoneNumber: String,
     val surname: String
-) : Parcelable
+)

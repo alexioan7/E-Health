@@ -23,6 +23,7 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
      fun registerUser(
          id: String,
          password: String,
+         confirmPassword: String,
          firstName: String,
          lastName: String,
          email: String,
@@ -30,6 +31,7 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
     ) {
         var repoId = id
         var repoPassword = password
+        var repoConfirmPassword = confirmPassword
         var repoFirstName = firstName
         var repoLastname = lastName
         var repoEmail = email
@@ -37,6 +39,7 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
         authRepo.registerUser(
             repoId,
             repoPassword,
+            repoConfirmPassword,
             repoFirstName,
             repoLastname,
             repoEmail,

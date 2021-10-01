@@ -15,6 +15,7 @@ object AuthRepository {
     fun registerUser(
         amka: String,
         password: String,
+        confirmPassword: String,
         name: String,
         surname: String,
         email: String,
@@ -23,7 +24,7 @@ object AuthRepository {
         val dataSource = RemoteDataSource()
 
         Log.i(TAG, "registerUser: Call is started")
-       val  body = RegisterBody(amka, password, name, surname, email, phoneNumber.toInt())
+        val body = RegisterBody(amka, password, confirmPassword, name, surname, email, phoneNumber)
         dataSource.getRetrofit()
             .registerUser(body)
             .enqueue(object : Callback<RegisterUserResponse> {

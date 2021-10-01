@@ -10,7 +10,7 @@ import retrofit2.http.POST
 interface AuthApiInterface {
 
 
-    @POST("users")
+    @POST("users/signup")
     fun registerUser(@Body body: RegisterBody
     ): Call<RegisterUserResponse>
 }
