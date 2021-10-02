@@ -67,6 +67,7 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
         authListener?.OnStarted()
         authListener?.OnSuccess()
         authListener?.OnFailure("Wrong")
+        registerUser(id.toString(), password.toString(), passwordConfirm.toString(), firstName.toString(), lastName.toString(), email.toString(), phoneNumber.toString())
 
 
     }

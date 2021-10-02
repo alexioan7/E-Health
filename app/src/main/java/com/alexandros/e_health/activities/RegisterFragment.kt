@@ -23,27 +23,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
         binding = FragmentRegisterBinding.bind(view)
         viewmodel = ViewModelProvider(requireActivity(),ViewModelFactory(AuthRepository)).get(AuthScreenViewModel::class.java)
 
-        var firstname = ""
-        var surname = ""
-        var amka = ""
-        var password = ""
-        var confirmPassword = ""
-        var email = ""
-        var phoneNumber: String
-
-
-        binding.btnRegister.setOnClickListener {
-            firstname = binding.txtFirstName.text.toString()
-            surname = binding.txtLastName.text.toString()
-            amka = binding.txtHealthNumber.text.toString()
-            password = binding.txtPassword.text.toString()
-            confirmPassword = binding.txtPasswordConfirm.text.toString()
-            email = binding.txtEmail.text.toString()
-            phoneNumber = binding.txtPhoneNumber.text.toString()
-            Log.i("fron onclick", "malakiesssssssss")
-            viewmodel.registerUser(amka, password, confirmPassword, firstname, surname, email, phoneNumber)
-        }
-
 
         //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
         //this will bind our data with the UI

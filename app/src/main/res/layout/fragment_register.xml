@@ -18,7 +18,7 @@
         tools:context=".activities.RegisterFragment">
 
 
-        <!--android:onClick="@{registerviewmodel::onRegisterButtonClick}"-->
+
 
 
         <TextView
@@ -40,6 +40,7 @@
 
         <Button
             android:id="@+id/btnRegister"
+            android:onClick="@{registerviewmodel::onRegisterButtonClick}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
