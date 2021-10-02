@@ -8,12 +8,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/drawable/input_bg.xml" value="0.14010416666666667" />
-        <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/font/font.xml" value="0.16041666666666668" />
-        <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="app/src/main/res/font/font.xml" value="0.15925925925925927" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.15364583333333334" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/activity_main.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/activity_main2.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/activity_test_actvity.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/fragment_login.xml" value="0.24895833333333334" />
+        <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/fragment_register.xml" value="0.24895833333333334" />
       </map>
     </option>
   </component>
