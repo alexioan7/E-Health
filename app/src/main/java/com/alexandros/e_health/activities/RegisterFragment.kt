@@ -57,7 +57,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
     }
 
     private fun navRegister() {
-        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        findNavController().popBackStack()
     }
 
     override fun OnStarted() {
