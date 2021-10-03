@@ -9,8 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
 import com.alexandros.e_health.databinding.FragmentLoginBinding
 import com.alexandros.e_health.repositories.AuthRepository
-import com.alexandros.e_health.viewmodels.AuthScreenViewModel
 import com.alexandros.e_health.viewmodels.AuthFunctions
+import com.alexandros.e_health.viewmodels.AuthScreenViewModel
 import com.alexandros.e_health.viewmodels.ViewModelFactory
 
 class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
@@ -21,7 +21,6 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
-
         viewmodel = ViewModelProvider(requireActivity(),ViewModelFactory(AuthRepository)).get(AuthScreenViewModel::class.java)
 
         //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
