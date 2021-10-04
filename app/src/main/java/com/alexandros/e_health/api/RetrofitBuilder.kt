@@ -5,7 +5,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RemoteDataSource {
+class RetrofitBuilder {
     companion object {
         private const val BASE_URL = "http://192.168.1.7:8000/api/v1/"
     }

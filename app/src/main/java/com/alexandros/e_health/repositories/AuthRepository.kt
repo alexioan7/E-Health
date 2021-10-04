@@ -1,7 +1,7 @@
 package com.alexandros.e_health.repositories
 
 import android.util.Log
-import com.alexandros.e_health.api.RemoteDataSource
+import com.alexandros.e_health.api.RetrofitBuilder
 import com.alexandros.e_health.api.responseModel.LoginBody
 import com.alexandros.e_health.api.responseModel.LoginUserResponse
 import com.alexandros.e_health.api.responseModel.RegisterBody
@@ -23,7 +23,7 @@ object AuthRepository {
         email: String,
         phoneNumber: String
     ) {
-        val dataSource = RemoteDataSource()
+        val dataSource = RetrofitBuilder()
 
         Log.i(TAG, "registerUser: Call is started")
         val body = RegisterBody(amka, password, confirmPassword, name, surname, email, phoneNumber)
@@ -50,7 +50,7 @@ object AuthRepository {
         amka: String,
         password: String
     ) {
-        val dataSource = RemoteDataSource()
+        val dataSource = RetrofitBuilder()
 
         Log.i(TAG, "Login user: Call started")
         val body = LoginBody(amka, password)
