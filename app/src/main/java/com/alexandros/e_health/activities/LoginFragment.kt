@@ -55,7 +55,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
         Log.d("Login fragment", "Succeed")
     }
 
-    override fun OnFailure(message: String) {
+    override fun OnFailure(errorCode: MutableList<Int>) {
         //toast("Wrong Id and Password")
         Log.d("Login fragment", "Wrong Id or Password")
     }
