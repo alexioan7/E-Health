@@ -18,7 +18,8 @@ interface AuthApiInterface {
     ): Call<RegisterUserResponse>
 
     @POST("users/login")
-    fun loginUser(@Body body: LoginBody):
-            Call<LoginUserResponse>
+    fun loginUser(
+        @Body body: LoginBody
+    ): Call<LoginUserResponse>
 
 }
