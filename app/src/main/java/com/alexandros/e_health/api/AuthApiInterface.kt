@@ -11,6 +11,7 @@ interface AuthApiInterface {
 
 
     @POST("users/signup")
-    fun registerUser(@Body body: RegisterBody
+    fun registerUser(
+        @Body body: RegisterBody
     ): Call<RegisterUserResponse>
 }
