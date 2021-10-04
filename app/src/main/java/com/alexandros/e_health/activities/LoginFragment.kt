@@ -56,7 +56,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
         Toast.makeText(activity,"Login Succeed",Toast.LENGTH_LONG).show()
     }
 
-    override fun OnFailure(message: String) {
+    override fun OnFailure(errorCode: MutableList<Int>) {
         //toast("Wrong Id and Password")
         Log.d("Login fragment", "Wrong Id or Password")
         Toast.makeText(activity,"Login Failed",Toast.LENGTH_LONG).show()
