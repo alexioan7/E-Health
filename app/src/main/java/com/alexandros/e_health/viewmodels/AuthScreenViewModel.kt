@@ -66,6 +66,15 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
         )
     }
 
+    fun loginUser(
+        id:String,
+        password: String
+    ) {
+        var repoId = id
+        var repoPassword = password
+        authRepo.loginUser(repoId,repoPassword)
+    }
+
     fun onLoginButtonClick(view: View) {
         var errorCodes: MutableList<Int> = mutableListOf()
         authListener?.OnStarted()
@@ -79,6 +88,7 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
         }
         //success;authentication from backend
         authListener?.OnSuccess()
+        loginUser(id.toString(),password.toString())
 
 
     }

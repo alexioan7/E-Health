@@ -40,6 +40,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
     }
 
     override fun OnStarted() {
+
         binding.textViewHealthIdError.visibility = View.INVISIBLE
         binding.textViewEmailError.visibility = View.INVISIBLE
         binding.textViewPhoneNumberError.visibility = View.INVISIBLE
@@ -47,6 +48,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
         binding.textViewLastNameError.visibility = View.INVISIBLE
         binding.textViewPasswordError.visibility = View.INVISIBLE
         binding.textViewPasswordConfirmError.visibility = View.INVISIBLE
+
     }
 
     override fun OnSuccess() {
