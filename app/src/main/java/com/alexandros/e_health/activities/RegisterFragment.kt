@@ -41,6 +41,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
 
     override fun OnStarted() {
         Log.d("RegisterFragment", "Signin up..")
+
     }
 
     override fun OnSuccess() {
