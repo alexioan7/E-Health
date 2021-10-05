@@ -2,8 +2,9 @@ package com.alexandros.e_health.viewmodels
 
 import android.util.Log
 import android.view.View
-import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.alexandros.e_health.api.responseModel.RegisterUserResponse
 import com.alexandros.e_health.repositories.AuthRepository
 import com.alexandros.e_health.utils.*
 
@@ -29,15 +30,22 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
     //variables
     var id: String? = null
     var password: String? = null
-
     //register variables
     var email: String? = null
     var phoneNumber: String? = null
     var firstName: String? = null
     var lastName: String? = null
     var passwordConfirm: String? = null
-
     var authListener: AuthFunctions? = null
+
+
+    fun getRegisteredUserDataFromRepo(): SingleLiveEvent<RegisterUserResponse> {
+        return authRepo.getDataFromRegisteredUser()
+    }
+
+    fun getFailureMessageFromRegister(): SingleLiveEvent<String>{
+        return authRepo.failureMessageFromRegister
+    }
 
      fun registerUser(
          id: String,
@@ -55,7 +63,7 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
         var repoLastname = lastName
         var repoEmail = email
         var repoPhoneNumber = phoneNumber
-        authRepo.registerUser(
+        authRepo.requestToRegister(
             repoId,
             repoPassword,
             repoConfirmPassword,
@@ -64,6 +72,7 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
             repoEmail,
             repoPhoneNumber
         )
+
     }
 
     fun loginUser(
@@ -72,7 +81,7 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
     ) {
         var repoId = id
         var repoPassword = password
-        authRepo.loginUser(repoId,repoPassword)
+        authRepo.requestToLogin(repoId,repoPassword)
     }
 
     fun onLoginButtonClick(view: View) {
@@ -135,7 +144,7 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
             errorCodes.add(940)
         }
 
-        if(firstName.isNullOrEmpty()){
+        if(lastName.isNullOrEmpty()){
             errorCodes.add(950)
         }
 

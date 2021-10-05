@@ -6,6 +6,7 @@ import com.alexandros.e_health.api.responseModel.LoginBody
 import com.alexandros.e_health.api.responseModel.LoginUserResponse
 import com.alexandros.e_health.api.responseModel.RegisterBody
 import com.alexandros.e_health.api.responseModel.RegisterUserResponse
+import com.alexandros.e_health.utils.SingleLiveEvent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,8 +14,17 @@ import retrofit2.Response
 object AuthRepository {
     private const val TAG = "AuthRepository"
 
+    val userDataFromRegister: SingleLiveEvent<RegisterUserResponse> = SingleLiveEvent()
+    val failureMessageFromRegister: SingleLiveEvent<String> = SingleLiveEvent()
 
-    fun registerUser(
+
+     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
+        return userDataFromRegister
+    }
+
+
+
+    fun requestToRegister(
         amka: String,
         password: String,
         confirmPassword: String,
@@ -36,9 +46,12 @@ object AuthRepository {
                 ) {
                     if (response.isSuccessful && response.body() != null) {
                         Log.i(TAG, "onResponse: Response Successful")
+                        userDataFromRegister.postValue(response.body())
+
+                    }else{
+                        failureMessageFromRegister.postValue(response.errorBody()?.string())
                     }
                 }
-
                 override fun onFailure(call: Call<RegisterUserResponse>, t: Throwable) {
                     Log.i(TAG, "onFailure: " + t.message)
                 }
@@ -46,7 +59,7 @@ object AuthRepository {
 
     }
 
-    fun loginUser(
+    fun requestToLogin(
         amka: String,
         password: String
     ) {
@@ -63,6 +76,7 @@ object AuthRepository {
                 ) {
                     if (response.isSuccessful && response.body() != null) {
                         Log.i(TAG, "onResponse: Response Successful")
+
                     }
                 }
 

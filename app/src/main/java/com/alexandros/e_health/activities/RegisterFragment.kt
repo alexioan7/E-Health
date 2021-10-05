@@ -1,9 +1,14 @@
 package com.alexandros.e_health.activities
 
+import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
@@ -17,22 +22,22 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
 
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var viewmodel: AuthScreenViewModel
+    private lateinit var sharedPreferences: SharedPreferences
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterBinding.bind(view)
         viewmodel = ViewModelProvider(requireActivity(),ViewModelFactory(AuthRepository)).get(AuthScreenViewModel::class.java)
-
-
+        sharedPreferences = requireActivity().getSharedPreferences(requireActivity().packageName,Activity.MODE_PRIVATE)
         //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
         //this will bind our data with the UI
-
         binding.registerviewmodel = viewmodel
-
         viewmodel.authListener = this
         binding.tvLogin.setOnClickListener {
             navRegister()
         }
+
     }
 
     private fun navRegister() {
@@ -53,6 +58,20 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
 
     override fun OnSuccess() {
         Log.d("RegisterFragment", "Succeed..")
+        binding.btnRegister.visibility = View.GONE
+        binding.progressCircular.visibility = View.VISIBLE
+        //Log.i("VIEWMODEL", viewmodel.getRegisteredUserDataFromRepo().value?.status.toString())
+        viewmodel.getRegisteredUserDataFromRepo().observe(requireActivity(), {
+            Log.i("VIEWMODEL", "OnSuccess: ${it?.token}")
+            binding.progressCircular.visibility = View.GONE
+            binding.btnRegister.visibility = View.VISIBLE
+            sharedPreferences.edit().putString("token",it?.token).apply()
+            navRegister()
+        })
+
+        viewmodel.getFailureMessageFromRegister().observe(requireActivity(), {
+            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+        })
     }
 
     override fun OnFailure(errorCodes: MutableList<Int>) {
@@ -99,5 +118,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
             }
 
         }
+
+
+
     }
 }
