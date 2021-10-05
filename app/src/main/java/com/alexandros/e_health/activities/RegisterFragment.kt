@@ -59,43 +59,43 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
         for(error in errorCodes) {
             if (error == 910) {
                 binding.textViewHealthIdError.visibility = View.VISIBLE
-                binding.textViewHealthIdError.text = "HealthId must be 11 numbers"
+                binding.textViewHealthIdError.text = getString(R.string.HealthID_not_valid_error)
             }
             if (error == 911){
                 binding.textViewHealthIdError.visibility = View.VISIBLE
-                binding.textViewHealthIdError.text = "HealthId must not be empty"
+                binding.textViewHealthIdError.text = getString(R.string.filed_required)
             }
             if (error == 920){
                 binding.textViewEmailError.visibility = View.VISIBLE
-                binding.textViewEmailError.text = "Email is not valid"
+                binding.textViewEmailError.text = getString(R.string.email_not_valid_error)
             }
             if (error == 921){
                 binding.textViewEmailError.visibility = View.VISIBLE
-                binding.textViewEmailError.text = "Email must not be empty"
+                binding.textViewEmailError.text = getString(R.string.filed_required)
             }
             if (error == 930){
                 binding.textViewPhoneNumberError.visibility = View.VISIBLE
-                binding.textViewPhoneNumberError.text = "Phone Number is not valid"
+                binding.textViewPhoneNumberError.text = getString(R.string.phone_number_not_valid_error)
             }
             if (error == 931){
                 binding.textViewPhoneNumberError.visibility = View.VISIBLE
-                binding.textViewPhoneNumberError.text = "Phone Number must not be empty"
+                binding.textViewPhoneNumberError.text = getString(R.string.filed_required)
             }
             if (error == 940){
                 binding.textViewFirstNameError.visibility = View.VISIBLE
-                binding.textViewFirstNameError.text = "First Name must not be empty"
+                binding.textViewFirstNameError.text = getString(R.string.filed_required)
             }
             if (error == 950){
                 binding.textViewLastNameError.visibility = View.VISIBLE
-                binding.textViewLastNameError.text = "Last Name must not be empty"
+                binding.textViewLastNameError.text = getString(R.string.filed_required)
             }
             if (error == 960){
                 binding.textViewPasswordError.visibility = View.VISIBLE
-                binding.textViewPasswordError.text = "Password must be at least 8 characters"
+                binding.textViewPasswordError.text = getString(R.string.password_length_error)
             }
             if (error == 961){
                 binding.textViewPasswordConfirmError.visibility = View.VISIBLE
-                binding.textViewPasswordConfirmError.text = "Passwords does not match"
+                binding.textViewPasswordConfirmError.text = getString(R.string.password_not_match_error)
             }
 
         }
