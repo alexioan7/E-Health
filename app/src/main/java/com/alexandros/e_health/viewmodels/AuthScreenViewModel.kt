@@ -9,6 +9,11 @@ import com.alexandros.e_health.repositories.AuthRepository
 import com.alexandros.e_health.utils.*
 
 //ERROR CODES
+//810 -> HealthId must be 11 chars(Login)
+//811 -> HealthId must not be empty(Login)
+
+//820 -> Fill all fields
+
 //910 -> HealthId must be 11 chars
 //911 -> HealthId must not be empty
 
@@ -89,16 +94,15 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
         authListener?.OnStarted()
 
         if (id.isNullOrEmpty() || password.isNullOrEmpty()) {
-
-            //returns error to ui
-            authListener?.OnFailure(errorCodes)
-            return
-
+            errorCodes.add(820)
         }
-        //success;authentication from backend
-        authListener?.OnSuccess()
-        loginUser(id.toString(),password.toString())
 
+        if (errorCodes.size==0){
+            loginUser(id.toString(),password.toString())
+            authListener?.OnSuccess()
+        }else{
+            authListener?.OnFailure(errorCodes)
+        }
 
     }
 
