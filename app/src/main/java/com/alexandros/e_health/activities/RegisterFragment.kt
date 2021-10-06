@@ -100,7 +100,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
             }
             if (error == 931){
                 binding.textViewPhoneNumberError.visibility = View.VISIBLE
-                binding.textViewPhoneNumberError.text = getString(R.string.filed_required)
+                binding.textViewPhoneNumberError.text = getString(R.string.field_required)
             }
             if (error == 940){
                 binding.textViewFirstNameError.visibility = View.VISIBLE
