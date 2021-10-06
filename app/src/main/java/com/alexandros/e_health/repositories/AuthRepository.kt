@@ -49,7 +49,7 @@ object AuthRepository {
                         userDataFromRegister.postValue(response.body())
 
                     }else{
-                        failureMessageFromRegister.postValue(response.errorBody()?.string())
+                        failureMessageFromRegister.postValue(response.message().toString())
                     }
                 }
                 override fun onFailure(call: Call<RegisterUserResponse>, t: Throwable) {
