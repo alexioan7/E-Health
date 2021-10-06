@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">E-Health</string>
-    <string name="filed_required">This filed is required</string>
+    <string name="field_required">This filed is required</string>
     <string name="HealthID_not_valid_error">Health Number Id is not valid</string>
     <string name="email_not_valid_error">Email is not valid</string>
     <string name="phone_number_not_valid_error">Phone Number is not valid</string>
     <string name="password_length_error">Password must be at least 8 characters</string>
     <string name="password_not_match_error">Passwords does not match</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_personalinfo">Personal Info</string>
+    <string name="title_diagnoses">Diagnoses</string>
+    <string name="title_prescriptions">Prescriptions</string>
 </resources>

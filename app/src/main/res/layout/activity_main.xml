@@ -7,8 +7,8 @@
     android:background="?android:attr/colorBackground"
     android:paddingLeft="32dp"
     android:paddingRight="32dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="0dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
     tools:context=".activities.MainActivity">
 
     <FrameLayout
