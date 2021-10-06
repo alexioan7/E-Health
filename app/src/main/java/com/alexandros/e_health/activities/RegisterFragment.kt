@@ -84,7 +84,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
             }
             if (error == 911){
                 binding.textViewHealthIdError.visibility = View.VISIBLE
-                binding.textViewHealthIdError.text = getString(R.string.filed_required)
+                binding.textViewHealthIdError.text = getString(R.string.field_required)
             }
             if (error == 920){
                 binding.textViewEmailError.visibility = View.VISIBLE
@@ -92,7 +92,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
             }
             if (error == 921){
                 binding.textViewEmailError.visibility = View.VISIBLE
-                binding.textViewEmailError.text = getString(R.string.filed_required)
+                binding.textViewEmailError.text = getString(R.string.field_required)
             }
             if (error == 930){
                 binding.textViewPhoneNumberError.visibility = View.VISIBLE
@@ -104,11 +104,11 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
             }
             if (error == 940){
                 binding.textViewFirstNameError.visibility = View.VISIBLE
-                binding.textViewFirstNameError.text = getString(R.string.filed_required)
+                binding.textViewFirstNameError.text = getString(R.string.field_required)
             }
             if (error == 950){
                 binding.textViewLastNameError.visibility = View.VISIBLE
-                binding.textViewLastNameError.text = getString(R.string.filed_required)
+                binding.textViewLastNameError.text = getString(R.string.field_required)
             }
             if (error == 960){
                 binding.textViewPasswordError.visibility = View.VISIBLE
