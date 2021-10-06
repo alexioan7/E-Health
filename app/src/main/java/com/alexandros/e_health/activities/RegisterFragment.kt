@@ -69,6 +69,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
             navRegister()
         })
 
+        binding.btnRegister.visibility = View.VISIBLE
+        binding.progressCircular.visibility = View.GONE
         viewmodel.getFailureMessageFromRegister().observe(requireActivity(), {
             Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
         })
