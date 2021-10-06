@@ -50,7 +50,7 @@
             android:id="@+id/txtHealthNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/input_bg"
             android:drawableLeft="@drawable/ic_person"
             android:drawablePadding="5dp"

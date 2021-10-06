@@ -1,11 +1,13 @@
 package com.alexandros.e_health.utils
 
-import android.content.Context
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 
 //extension function named toast to display toasts
 
-fun Context.toast(message:String){
-    Toast.makeText(this, message,Toast.LENGTH_LONG).show()
+
+
+fun toast(message:String, context: FragmentActivity?){
+    Toast.makeText(context,message, Toast.LENGTH_LONG).show()
 
 }
