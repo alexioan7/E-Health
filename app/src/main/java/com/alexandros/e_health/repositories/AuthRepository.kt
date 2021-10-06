@@ -50,8 +50,15 @@ object AuthRepository {
                         userDataFromRegister.postValue(response.body())
 
                     }else{
-                        val responseObj:ErrorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
-                        failureMessageFromRegister.postValue(responseObj.message)
+                        try{
+                            val responseObj:ErrorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
+                            failureMessageFromRegister.postValue(responseObj.message)
+                        }catch (e:Exception) {
+                            failureMessageFromRegister.postValue("Something Went Wrong")
+                        }
+
+
+
                     }
                 }
                 override fun onFailure(call: Call<RegisterUserResponse>, t: Throwable) {
