@@ -2,17 +2,18 @@ package com.alexandros.e_health.repositories
 
 import android.util.Log
 import com.alexandros.e_health.api.RetrofitBuilder
-import com.alexandros.e_health.api.responseModel.LoginBody
-import com.alexandros.e_health.api.responseModel.LoginUserResponse
-import com.alexandros.e_health.api.responseModel.RegisterBody
-import com.alexandros.e_health.api.responseModel.RegisterUserResponse
+import com.alexandros.e_health.api.responseModel.*
 import com.alexandros.e_health.utils.SingleLiveEvent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.google.gson.Gson;
+
+
 
 object AuthRepository {
     private const val TAG = "AuthRepository"
+    val gson = Gson()
 
     val userDataFromRegister: SingleLiveEvent<RegisterUserResponse> = SingleLiveEvent()
     val failureMessageFromRegister: SingleLiveEvent<String> = SingleLiveEvent()
@@ -49,8 +50,8 @@ object AuthRepository {
                         userDataFromRegister.postValue(response.body())
 
                     }else{
-
-                        failureMessageFromRegister.postValue(response.errorBody()?.string())
+                        val responseObj:ErrorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
+                        failureMessageFromRegister.postValue(responseObj.message)
                     }
                 }
                 override fun onFailure(call: Call<RegisterUserResponse>, t: Throwable) {
