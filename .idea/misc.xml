@@ -8,11 +8,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/drawable/ic_baseline_local_phone_24.xml" value="0.2677083333333333" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/drawable/ic_email.xml" value="0.2677083333333333" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/drawable/ic_person.xml" value="0.2677083333333333" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/drawable/ic_stethoscope.xml" value="0.2677083333333333" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_diagnoses.xml" value="0.259375" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_login.xml" value="0.23020833333333332" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_personalinfo.xml" value="0.33" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_prescriptions.xml" value="0.259375" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/mipmap-anydpi-v26/ic_stethoscope.xml" value="0.2677083333333333" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/mipmap-anydpi-v26/ic_stethoscope_round.xml" value="0.221875" />
         <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/activity_main.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/activity_main2.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/activity_test_actvity.xml" value="0.24895833333333334" />
