@@ -8,38 +8,29 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.alexandros.e_health.databinding.FragmentLoginBinding
 import com.alexandros.e_health.databinding.FragmentPersonalinfoBinding
+import com.alexandros.e_health.repositories.AuthRepository
+import com.alexandros.e_health.viewmodels.AuthScreenViewModel
 import com.alexandros.e_health.viewmodels.PersonalinfoViewModel
+import com.alexandros.e_health.viewmodels.ViewModelFactory
 
 class PersonalinfoFragment : Fragment() {
 
-    private lateinit var personalinfoViewModel: PersonalinfoViewModel
-    private var _binding: FragmentPersonalinfoBinding? = null
+    private lateinit var viewmodel: PersonalinfoViewModel
+    private var binding: FragmentPersonalinfoBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        personalinfoViewModel =
-            ViewModelProvider(this).get(PersonalinfoViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentPersonalinfoBinding.bind(view)
+        viewmodel = ViewModelProvider(requireActivity()).get(PersonalinfoViewModel::class.java)
 
-        _binding = FragmentPersonalinfoBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
+        //this will bind our data with the UI
 
-        val textView: TextView = binding.textHome
-        personalinfoViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+//        binding.viewmodel = viewmodel
     }
 }
