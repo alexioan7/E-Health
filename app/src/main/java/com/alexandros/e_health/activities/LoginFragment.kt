@@ -1,5 +1,6 @@
 package com.alexandros.e_health.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -56,6 +57,9 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
         Log.d("Login fragment", "Succeed")
 //        Toast.makeText(activity,"Login Succeed",Toast.LENGTH_LONG).show()
         toast("Login Succeed", activity)
+        val intent = Intent(activity, BottomNavigationActivity::class.java)
+
+        startActivity(intent)
     }
 
     override fun OnFailure(errorCode: MutableList<Int>) {
