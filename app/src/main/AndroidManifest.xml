@@ -13,6 +13,8 @@
         android:theme="@style/Theme.EHealth"
         android:usesCleartextTraffic="true">
 
+        <activity android:name=".activities.BottomNavigationActivity"/>
+
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
