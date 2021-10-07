@@ -8,38 +8,27 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.alexandros.e_health.databinding.FragmentPersonalinfoBinding
 import com.alexandros.e_health.databinding.FragmentPrescriptionsBinding
+import com.alexandros.e_health.viewmodels.PersonalinfoViewModel
 import com.alexandros.e_health.viewmodels.PrescriptionsViewModel
 
 class PrescriptionsFragment : Fragment() {
 
-    private lateinit var prescriptionsViewModel: PrescriptionsViewModel
-    private var _binding: FragmentPrescriptionsBinding? = null
+    private lateinit var viewmodel: PrescriptionsViewModel
+    private lateinit var binding: FragmentPrescriptionsBinding
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        prescriptionsViewModel =
-            ViewModelProvider(this).get(PrescriptionsViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentPrescriptionsBinding.bind(view)
+        viewmodel = ViewModelProvider(requireActivity()).get(PrescriptionsViewModel::class.java)
 
-        _binding = FragmentPrescriptionsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
+        //this will bind our data with the UI
 
-        val textView: TextView = binding.textNotifications
-        prescriptionsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+//        binding.viewmodel = viewmodel
     }
 }

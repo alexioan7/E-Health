@@ -17,9 +17,6 @@ class DiagnosesFragment : Fragment() {
         binding = FragmentDiagnosesBinding.bind(view)
         viewmodel = ViewModelProvider(requireActivity()).get(DiagnosesViewModel::class.java)
 
-        //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
-        //this will bind our data with the UI
-
         binding.diagnosesviewmodel = viewmodel
 
     }

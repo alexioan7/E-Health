@@ -18,18 +18,12 @@ import com.alexandros.e_health.viewmodels.ViewModelFactory
 class PersonalinfoFragment : Fragment() {
 
     private lateinit var viewmodel: PersonalinfoViewModel
-    private var binding: FragmentPersonalinfoBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private lateinit var binding: FragmentPersonalinfoBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPersonalinfoBinding.bind(view)
         viewmodel = ViewModelProvider(requireActivity()).get(PersonalinfoViewModel::class.java)
-
-        //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
-        //this will bind our data with the UI
 
 //        binding.viewmodel = viewmodel
     }
