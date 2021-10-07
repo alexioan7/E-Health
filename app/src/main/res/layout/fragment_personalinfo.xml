@@ -110,8 +110,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/bloodType"
                     android:layout_marginTop="62dp"
-                    android:drawablePadding="5dp"
                     android:includeFontPadding="false"
+                    android:drawableLeft="@drawable/ic_baseline_medical_services_24"
+                    android:drawablePadding="5dp"
                     android:text="Family doctor"
                     android:textSize="20sp" />
 
