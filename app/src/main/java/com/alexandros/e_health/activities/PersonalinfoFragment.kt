@@ -25,6 +25,6 @@ class PersonalinfoFragment : Fragment() {
         binding = FragmentPersonalinfoBinding.bind(view)
         viewmodel = ViewModelProvider(requireActivity()).get(PersonalinfoViewModel::class.java)
 
-//        binding.viewmodel = viewmodel
+        binding.personalinfoviewmodel = viewmodel
     }
 }

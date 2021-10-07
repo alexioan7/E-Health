@@ -29,6 +29,6 @@ class PrescriptionsFragment : Fragment() {
         //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
         //this will bind our data with the UI
 
-//        binding.viewmodel = viewmodel
+        binding.prescriptionsviewmodel = viewmodel
     }
 }
