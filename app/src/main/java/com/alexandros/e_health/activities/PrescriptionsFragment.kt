@@ -8,12 +8,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.alexandros.e_health.R
 import com.alexandros.e_health.databinding.FragmentPersonalinfoBinding
 import com.alexandros.e_health.databinding.FragmentPrescriptionsBinding
 import com.alexandros.e_health.viewmodels.PersonalinfoViewModel
 import com.alexandros.e_health.viewmodels.PrescriptionsViewModel
 
-class PrescriptionsFragment : Fragment() {
+class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
 
     private lateinit var viewmodel: PrescriptionsViewModel
     private lateinit var binding: FragmentPrescriptionsBinding

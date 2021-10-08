@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.alexandros.e_health.R
 import com.alexandros.e_health.databinding.FragmentLoginBinding
 import com.alexandros.e_health.databinding.FragmentPersonalinfoBinding
 import com.alexandros.e_health.repositories.AuthRepository
@@ -15,7 +16,7 @@ import com.alexandros.e_health.viewmodels.AuthScreenViewModel
 import com.alexandros.e_health.viewmodels.PersonalinfoViewModel
 import com.alexandros.e_health.viewmodels.ViewModelFactory
 
-class PersonalinfoFragment : Fragment() {
+class PersonalinfoFragment : Fragment(R.layout.fragment_personalinfo) {
 
     private lateinit var viewmodel: PersonalinfoViewModel
     private lateinit var binding: FragmentPersonalinfoBinding
