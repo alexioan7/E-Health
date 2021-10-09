@@ -2,7 +2,6 @@ package com.alexandros.e_health.viewmodels
 
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.alexandros.e_health.api.responseModel.RegisterUserResponse
 import com.alexandros.e_health.repositories.AuthRepository
@@ -95,6 +94,10 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
 
         if (id.isNullOrEmpty() || password.isNullOrEmpty()) {
             errorCodes.add(820)
+        }else {
+            if (!HealthIdValidator.isValid(id.toString())) {
+                errorCodes.add(910)
+            }
         }
 
         if (errorCodes.size==0){

@@ -4,10 +4,10 @@ import android.util.Log
 import com.alexandros.e_health.api.RetrofitBuilder
 import com.alexandros.e_health.api.responseModel.*
 import com.alexandros.e_health.utils.SingleLiveEvent
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.google.gson.Gson;
 
 
 
@@ -84,6 +84,7 @@ object AuthRepository {
                     response: Response<LoginUserResponse>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
+
                         Log.i(TAG, "onResponse: Response Successful")
 
                     }

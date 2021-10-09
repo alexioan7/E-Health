@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -56,7 +55,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
         //toast("Succeed login")
         Log.d("Login fragment", "Succeed")
 //        Toast.makeText(activity,"Login Succeed",Toast.LENGTH_LONG).show()
-        toast("Login Succeed", activity)
+        //toast("Login Succeed", activity)
         val intent = Intent(activity, BottomNavigationActivity::class.java)
 
         startActivity(intent)
@@ -66,7 +65,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
         //toast("Wrong Id and Password")
         Log.d("Login fragment", "Wrong Id or Password")
 //        Toast.makeText(activity,"Login Failed",Toast.LENGTH_LONG).show()
-        toast("Login Failed", activity)
+        toast("Wrong Health Id or Password", activity)
     }
 
 
