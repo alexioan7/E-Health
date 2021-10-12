@@ -1,6 +1,7 @@
 package com.alexandros.e_health.repositories
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.alexandros.e_health.api.RetrofitBuilder
 import com.alexandros.e_health.api.responseModel.*
 import com.alexandros.e_health.utils.SingleLiveEvent
@@ -8,8 +9,6 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-
 
 object AuthRepository {
     private const val TAG = "AuthRepository"
@@ -19,16 +18,14 @@ object AuthRepository {
     val failureMessageFromRegister: SingleLiveEvent<String> = SingleLiveEvent()
 
     val userDataFromLogin: SingleLiveEvent<LoginUserResponse> = SingleLiveEvent()
-    val failureMessageFromLogin: SingleLiveEvent<String> = SingleLiveEvent()
+    var statusFromLogin: String = ""
 
-
-     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
+    fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
     }
 
-    fun getDataFromLoginUser(): SingleLiveEvent<LoginUserResponse>{
+    fun getDataFromLoginUser(): SingleLiveEvent<LoginUserResponse> {
         return userDataFromLogin
-
     }
 
     fun requestToRegister(
@@ -55,18 +52,20 @@ object AuthRepository {
                         Log.i(TAG, "onResponse: Response Successful")
                         userDataFromRegister.postValue(response.body())
 
-                    }else{
-                        try{
-                            val responseObj:ErrorResponse = gson.fromJson(response.errorBody()?.string(), ErrorResponse::class.java)
+                    } else {
+                        try {
+                            val responseObj: ErrorResponse = gson.fromJson(
+                                response.errorBody()?.string(),
+                                ErrorResponse::class.java
+                            )
                             failureMessageFromRegister.postValue(responseObj.message)
-                        }catch (e:Exception) {
+                        } catch (e: Exception) {
                             failureMessageFromRegister.postValue("Something Went Wrong")
                         }
 
-
-
                     }
                 }
+
                 override fun onFailure(call: Call<RegisterUserResponse>, t: Throwable) {
                     Log.i(TAG, "onFailure: " + t.message)
                 }
@@ -90,7 +89,6 @@ object AuthRepository {
                     response: Response<LoginUserResponse>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
-
                         Log.i(TAG, "onResponse: Response Successful")
                         userDataFromLogin.postValue(response.body())
 
@@ -100,9 +98,11 @@ object AuthRepository {
                                 response.errorBody()?.string(),
                                 ErrorResponse::class.java
                             )
-                            failureMessageFromLogin.postValue(responseObj.message)
+                            statusFromLogin = responseObj.status
+                            Log.d("FAILURE MESSAGE", statusFromLogin.toString())
                         } catch (e: Exception) {
-                            failureMessageFromLogin.postValue("Something Went Wrong")
+                            statusFromLogin = "Something Went Wrong"
+                            Log.d("IN CATCH", statusFromLogin.toString())
                         }
                     }
                 }
@@ -110,8 +110,6 @@ object AuthRepository {
                 override fun onFailure(call: Call<LoginUserResponse>, t: Throwable) {
                     Log.i(TAG, "onFailure: " + t.message)
                 }
-
-
             })
 
 
