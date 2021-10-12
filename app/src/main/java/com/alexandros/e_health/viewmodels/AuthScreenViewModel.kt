@@ -3,6 +3,7 @@ package com.alexandros.e_health.viewmodels
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
+import com.alexandros.e_health.api.responseModel.LoginUserResponse
 import com.alexandros.e_health.api.responseModel.RegisterUserResponse
 import com.alexandros.e_health.repositories.AuthRepository
 import com.alexandros.e_health.utils.*
@@ -49,6 +50,14 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
 
     fun getFailureMessageFromRegister(): SingleLiveEvent<String>{
         return authRepo.failureMessageFromRegister
+    }
+
+    fun getLoginUserDataFromRepo():SingleLiveEvent<LoginUserResponse>{
+        return authRepo.getDataFromLoginUser()
+    }
+
+    fun getFailureMessageFromLogin(): SingleLiveEvent<String>{
+        return authRepo.failureMessageFromLogin
     }
 
      fun registerUser(
@@ -102,6 +111,7 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
 
         if (errorCodes.size==0){
             loginUser(id.toString(),password.toString())
+
             authListener?.OnSuccess()
         }else{
             authListener?.OnFailure(errorCodes)

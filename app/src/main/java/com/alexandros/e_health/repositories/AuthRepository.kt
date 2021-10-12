@@ -18,12 +18,18 @@ object AuthRepository {
     val userDataFromRegister: SingleLiveEvent<RegisterUserResponse> = SingleLiveEvent()
     val failureMessageFromRegister: SingleLiveEvent<String> = SingleLiveEvent()
 
+    val userDataFromLogin: SingleLiveEvent<LoginUserResponse> = SingleLiveEvent()
+    val failureMessageFromLogin: SingleLiveEvent<String> = SingleLiveEvent()
+
 
      fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
     }
 
+    fun getDataFromLoginUser(): SingleLiveEvent<LoginUserResponse>{
+        return userDataFromLogin
 
+    }
 
     fun requestToRegister(
         amka: String,
@@ -86,7 +92,18 @@ object AuthRepository {
                     if (response.isSuccessful && response.body() != null) {
 
                         Log.i(TAG, "onResponse: Response Successful")
+                        userDataFromLogin.postValue(response.body())
 
+                    } else {
+                        try {
+                            val responseObj: ErrorResponse = gson.fromJson(
+                                response.errorBody()?.string(),
+                                ErrorResponse::class.java
+                            )
+                            failureMessageFromLogin.postValue(responseObj.message)
+                        } catch (e: Exception) {
+                            failureMessageFromLogin.postValue("Something Went Wrong")
+                        }
                     }
                 }
 
