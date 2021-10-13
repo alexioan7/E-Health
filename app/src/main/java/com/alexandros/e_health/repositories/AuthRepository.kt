@@ -1,7 +1,6 @@
 package com.alexandros.e_health.repositories
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.alexandros.e_health.api.RetrofitBuilder
 import com.alexandros.e_health.api.responseModel.*
 import com.alexandros.e_health.utils.SingleLiveEvent
@@ -75,7 +74,8 @@ object AuthRepository {
 
     fun requestToLogin(
         amka: String,
-        password: String
+        password: String,
+        callback: () ->Unit
     ) {
         val dataSource = RetrofitBuilder()
 
@@ -91,6 +91,8 @@ object AuthRepository {
                     if (response.isSuccessful && response.body() != null) {
                         Log.i(TAG, "onResponse: Response Successful")
                         userDataFromLogin.postValue(response.body())
+                        statusFromLogin=""
+                        callback()
 
                     } else {
                         try {
@@ -100,15 +102,18 @@ object AuthRepository {
                             )
                             statusFromLogin = responseObj.status
                             Log.d("FAILURE MESSAGE", statusFromLogin.toString())
+                            callback()
                         } catch (e: Exception) {
                             statusFromLogin = "Something Went Wrong"
                             Log.d("IN CATCH", statusFromLogin.toString())
+                            callback()
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<LoginUserResponse>, t: Throwable) {
                     Log.i(TAG, "onFailure: " + t.message)
+                    callback()
                 }
             })
 

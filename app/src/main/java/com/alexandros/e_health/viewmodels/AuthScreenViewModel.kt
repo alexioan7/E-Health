@@ -2,7 +2,6 @@ package com.alexandros.e_health.viewmodels
 
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.alexandros.e_health.api.responseModel.LoginUserResponse
 import com.alexandros.e_health.api.responseModel.RegisterUserResponse
@@ -91,11 +90,22 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
 
     fun loginUser(
         id:String,
-        password: String
+        password: String,
+        errorCodes:MutableList<Int>
     ) {
         var repoId = id
         var repoPassword = password
-        authRepo.requestToLogin(repoId,repoPassword)
+        authRepo.requestToLogin(repoId,repoPassword,fun(){
+            Log.d("STATUS",getStatusFromLogin().toString())
+            if(getStatusFromLogin().toString() == "fail") {
+                authListener?.OnFailure(errorCodes)
+                Log.d("On Failure","failed")
+            }
+            else {
+                authListener?.OnSuccess()
+            }
+        })
+
     }
 
     fun onLoginButtonClick(view: View) {
@@ -111,16 +121,8 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
         }
 
         if (errorCodes.size==0){
-            loginUser(id.toString(),password.toString())
+            loginUser(id.toString(),password.toString(),errorCodes)
 
-            Log.d("STATUUS",getStatusFromLogin().toString())
-            if(getStatusFromLogin().toString() == "fail") {
-                authListener?.OnFailure(errorCodes)
-            }
-            else{
-                authListener?.OnSuccess()
-            }
-            authListener?.OnSuccess()
         }else{
             authListener?.OnFailure(errorCodes)
         }
