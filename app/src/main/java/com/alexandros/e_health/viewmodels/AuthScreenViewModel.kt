@@ -69,22 +69,7 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
          email: String,
          phoneNumber: String
     ) {
-        var repoId = id
-        var repoPassword = password
-        var repoConfirmPassword = confirmPassword
-        var repoFirstName = firstName
-        var repoLastname = lastName
-        var repoEmail = email
-        var repoPhoneNumber = phoneNumber
-        authRepo.requestToRegister(
-            repoId,
-            repoPassword,
-            repoConfirmPassword,
-            repoFirstName,
-            repoLastname,
-            repoEmail,
-            repoPhoneNumber
-        )
+        authRepo.requestToRegister(id, password, confirmPassword, firstName, lastName, email, phoneNumber)
 
     }
 
@@ -93,9 +78,7 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
         password: String,
         errorCodes:MutableList<Int>
     ) {
-        var repoId = id
-        var repoPassword = password
-        authRepo.requestToLogin(repoId,repoPassword,fun(){
+        authRepo.requestToLogin(id,password,fun(){
             Log.d("STATUS",getStatusFromLogin().toString())
             if(getStatusFromLogin().toString() == "fail") {
                 authListener?.OnFailure(errorCodes)
