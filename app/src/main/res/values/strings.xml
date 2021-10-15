@@ -10,4 +10,5 @@
     <string name="title_personalinfo">Personal Info</string>
     <string name="title_diagnoses">Diagnoses</string>
     <string name="title_prescriptions">Prescriptions</string>
+    <string name="title_appointments">Appointments</string>
 </resources>
