@@ -1,5 +1,6 @@
 package com.alexandros.e_health.api
 
+import android.content.SharedPreferences
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,10 +10,12 @@ class RetrofitBuilder {
     companion object {
         private const val BASE_URL = "http://52.174.109.99:8000/api/v1/"
     }
+//    private lateinit var authToken: String
 
-    fun getRetrofit():AuthApiInterface{
 
-       val interceptor = HttpLoggingInterceptor()
+    fun getRetrofit():ApiInterface{
+
+        val interceptor = HttpLoggingInterceptor()
         interceptor.level =HttpLoggingInterceptor.Level.BODY
 
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
@@ -21,6 +24,6 @@ class RetrofitBuilder {
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
-            .build().create(AuthApiInterface::class.java)
+            .build().create(ApiInterface::class.java)
     }
 }

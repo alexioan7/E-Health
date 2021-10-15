@@ -27,15 +27,7 @@ object AuthRepository {
         return userDataFromLogin
     }
 
-    fun requestToRegister(
-        amka: String,
-        password: String,
-        confirmPassword: String,
-        name: String,
-        surname: String,
-        email: String,
-        phoneNumber: String
-    ) {
+    fun requestToRegister(amka: String, password: String, confirmPassword: String, name: String, surname: String, email: String, phoneNumber: String) {
         val dataSource = RetrofitBuilder()
 
         Log.i(TAG, "registerUser: Call is started")

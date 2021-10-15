@@ -60,24 +60,11 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
         return authRepo.statusFromLogin
     }
 
-     fun registerUser(
-         id: String,
-         password: String,
-         confirmPassword: String,
-         firstName: String,
-         lastName: String,
-         email: String,
-         phoneNumber: String
-    ) {
+     fun registerUser(id: String, password: String, confirmPassword: String, firstName: String, lastName: String, email: String, phoneNumber: String) {
         authRepo.requestToRegister(id, password, confirmPassword, firstName, lastName, email, phoneNumber)
-
     }
 
-    fun loginUser(
-        id:String,
-        password: String,
-        errorCodes:MutableList<Int>
-    ) {
+    fun loginUser(id:String, password: String, errorCodes:MutableList<Int>) {
         authRepo.requestToLogin(id,password,fun(){
             Log.d("STATUS",getStatusFromLogin().toString())
             if(getStatusFromLogin().toString() == "fail") {
@@ -88,7 +75,6 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
                 authListener?.OnSuccess()
             }
         })
-
     }
 
     fun onLoginButtonClick(view: View) {
