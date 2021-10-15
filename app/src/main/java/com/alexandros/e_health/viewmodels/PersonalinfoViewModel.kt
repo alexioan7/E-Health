@@ -10,7 +10,8 @@ class PersonalinfoViewModel : ViewModel() {
     }
 
     var amka: String? = null
-    var name: String? = null
+    var firstname: String? = null
+    var surname: String? = null
     //register variables
     var email: String? = null
     var phoneNumber: String? = null

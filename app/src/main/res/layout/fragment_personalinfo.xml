@@ -59,7 +59,7 @@
                     android:id="@+id/email_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/name"
+                    android:layout_below="@id/firstname"
                     android:layout_marginTop="32dp"
                     android:drawableLeft="@drawable/ic_baseline_email_24"
                     android:drawablePadding="5dp"
@@ -112,12 +112,24 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/name"
+                    android:id="@+id/firstname"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/name_tag"
+                    android:ellipsize="end"
+                    android:text="@={personalinfoviewmodel.firstname}"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/surname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/name_tag"
-                    android:text="@={personalinfoviewmodel.name}"
+                    android:layout_toRightOf="@id/firstname"
+                    android:text="@={personalinfoviewmodel.surname}"
                     android:textSize="18sp" />
+
+
 
                 <TextView
                     android:id="@+id/email"
@@ -152,6 +164,7 @@
                     android:textSize="18sp" />
 
             </RelativeLayout>
+
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -165,6 +178,13 @@
             app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintStart_toStartOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="632dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
