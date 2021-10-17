@@ -24,9 +24,12 @@ class PersonalinfoViewModel(private val authRepo: AuthRepository) : ViewModel() 
     var familyDoctorFullName :String? = null
 
     fun getUserInfoFromRepo(): MutableLiveData<MyProfileResponse> {
-        authRepo.requestUserInfo()
         return authRepo.userInfoFromRemoteData
     }
 
+
+    fun requestUserInfo(){
+        authRepo.requestUserInfo()
+    }
 
 }
