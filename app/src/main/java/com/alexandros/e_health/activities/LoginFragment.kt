@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
 import com.alexandros.e_health.databinding.FragmentLoginBinding
 import com.alexandros.e_health.repositories.AuthRepository
+import com.alexandros.e_health.utils.SharedPreferencesUtil
 import com.alexandros.e_health.utils.toast
 import com.alexandros.e_health.viewmodels.AuthFunctions
 import com.alexandros.e_health.viewmodels.AuthScreenViewModel
@@ -59,7 +60,8 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
         Log.d("Login fragment", "Succeed")
 
         viewmodel.getLoginUserDataFromRepo().observe(requireActivity(),{
-            sharedPreferences.edit().putString("token", it?.token).apply()
+//            sharedPreferences.edit().putString("token", it?.token).apply()
+            SharedPreferencesUtil.saveAccessToken(it?.token.toString())
             val intent = Intent(activity, BottomNavigationActivity::class.java)
             startActivity(intent)
         })

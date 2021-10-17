@@ -17,6 +17,7 @@ import com.alexandros.e_health.repositories.AuthRepository
 import com.alexandros.e_health.viewmodels.AuthScreenViewModel
 import com.alexandros.e_health.viewmodels.PersonalinfoViewModel
 import com.alexandros.e_health.viewmodels.ViewModelFactory
+import java.lang.StringBuilder
 
 class PersonalinfoFragment : Fragment(R.layout.fragment_personalinfo) {
 
@@ -26,17 +27,28 @@ class PersonalinfoFragment : Fragment(R.layout.fragment_personalinfo) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPersonalinfoBinding.bind(view)
-        viewModel = ViewModelProvider(requireActivity()).get(PersonalinfoViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(),ViewModelFactory(AuthRepository)).get(PersonalinfoViewModel::class.java)
         binding.personalinfoviewmodel = viewModel
 
         viewModel.getUserInfoFromRepo().observe(requireActivity(), {
-            binding.personalinfoviewmodel.firstname = it.data.user.name
-            binding.personalinfoviewmodel.amka = it.data.user.amka
-            binding.personalinfoviewmodel.bloodType = it.data.user.bloodtype
-            binding.personalinfoviewmodel.email = it.data.user.email
-            binding.personalinfoviewmodel.surname = it.data.user.surname
-            binding.personalinfoviewmodel.phoneNumber = it.data.user.phoneNumber
-            binding.personalinfoviewmodel.familyDoctor = it.data.user.familyDoctor
+
+            binding.personalinfoviewmodel.apply {
+
+                this?.firstname = it?.data?.user?.name
+                this?.amka = it?.data?.user?.amka
+                this?.bloodType = it?.data?.user?.bloodtype
+                this?.email = it?.data?.user?.email
+                this?.surname = it?.data?.user?.surname
+                this?.phoneNumber = it?.data?.user?.phoneNumber
+                this?.familyDoctor =it?.data?.user?.familyDoctor
+                this?.familyDoctorFullName =  String.format("%s %s" ,it?.data?.user?.familyDoctor?.name.toString(), it?.data?.user?.familyDoctor?.surname.toString())
+
+
+
+            }
+
+           val familyDoctorStringName =  String.format("%s %s" ,it?.data?.user?.familyDoctor?.name.toString(), it?.data?.user?.familyDoctor?.surname.toString())
+
 
 
         })

@@ -1,6 +1,7 @@
 package com.alexandros.e_health.repositories
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.alexandros.e_health.api.RetrofitBuilder
 import com.alexandros.e_health.api.responseModel.*
 import com.alexandros.e_health.utils.SingleLiveEvent
@@ -18,6 +19,8 @@ object AuthRepository {
 
     val userDataFromLogin: SingleLiveEvent<LoginUserResponse> = SingleLiveEvent()
     var statusFromLogin: String = ""
+
+    val userInfoFromRemoteData: MutableLiveData<MyProfileResponse> = MutableLiveData()
 
     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
@@ -111,6 +114,31 @@ object AuthRepository {
 
 
     }
+
+
+    fun requestUserInfo() {
+        val dataSource = RetrofitBuilder()
+        Log.i(TAG, "My Profile response: Call is started")
+        dataSource.getRetrofit()
+            .getUserInfo()
+            .enqueue(object : Callback<MyProfileResponse> {
+                override fun onResponse(
+                    call: Call<MyProfileResponse>,
+                    response: Response<MyProfileResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(TAG, "onResponse: Response Successful")
+                        userInfoFromRemoteData.postValue(response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
+                    Log.i(TAG, "onFailure: " + t.message)
+                }
+            })
+
+    }
+
 }
 
 

@@ -22,14 +22,12 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
 
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var viewmodel: AuthScreenViewModel
-    private lateinit var sharedPreferences: SharedPreferences
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRegisterBinding.bind(view)
         viewmodel = ViewModelProvider(requireActivity(),ViewModelFactory(AuthRepository)).get(AuthScreenViewModel::class.java)
-        sharedPreferences = requireActivity().getSharedPreferences(requireActivity().packageName,Activity.MODE_PRIVATE)
         //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
         //this will bind our data with the UI
         binding.registerviewmodel = viewmodel
@@ -65,7 +63,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
             Log.i("VIEWMODEL", "OnSuccess: ${it?.token}")
             binding.progressCircular.visibility = View.GONE
             binding.btnRegister.visibility = View.VISIBLE
-            sharedPreferences.edit().putString("token",it?.token).apply()
             navRegister()
         })
 
