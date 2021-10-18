@@ -21,6 +21,7 @@ object AuthRepository {
     var statusFromLogin: String = ""
 
     val userInfoFromRemoteData: MutableLiveData<MyProfileResponse> = MutableLiveData()
+    val userPrescriptionsFromRemoteData: MutableLiveData<List<PrescriptionsUserResponse>>
 
     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
