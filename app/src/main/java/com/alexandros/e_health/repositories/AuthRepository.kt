@@ -140,32 +140,31 @@ object AuthRepository {
 
     }
 
-    fun requestUserPrescriptions(){
-        val dataSource=RetrofitBuilder()
-        Log.i(TAG,"Prescriptions Response: Call is started")
+    fun requestPrescriptions() {
+        val dataSource = RetrofitBuilder()
+        Log.i(AuthRepository.TAG, "Prescriptions response: Call is started")
         dataSource.getRetrofit()
             .getUserPrescriptions()
-            .enqueue(object : Callback<PrescriptionsUserResponse> {
-                override fun OnResponse(
-                    call: Call<PrescriptionsUserResponse>,
+            .enqueue(object : Callback<List<PrescriptionsUserResponse>> {
+                override fun onResponse(
+                    call: Call<List<PrescriptionsUserResponse>>,
                     response: Response<List<PrescriptionsUserResponse>>
-                ){
+                ) {
                     if (response.isSuccessful && response.body() != null) {
-                        Log.i(TAG, "onResponse: Response Successful")
+                        Log.i(AuthRepository.TAG, "onResponse: Response Successful")
                         userPrescriptionsFromRemoteData.postValue(response.body())
                     }
                 }
+
                 override fun onFailure(call: Call<List<PrescriptionsUserResponse>>, t: Throwable) {
-                    Log.i(TAG, "onFailure: " + t.message)
+                    Log.i(AuthRepository.TAG, "onFailure: " + t.message)
                 }
-
-
             })
-
 
     }
 
 }
+
 
 
 
