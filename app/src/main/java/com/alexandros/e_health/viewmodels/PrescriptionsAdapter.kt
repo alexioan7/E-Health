@@ -15,6 +15,7 @@ class PrescriptionsAdapter (
 
     override fun getItemCount()= prescription.size
 
+    //creates the view holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)=
         PrescriptionsViewHolder(
 
@@ -26,6 +27,7 @@ class PrescriptionsAdapter (
             )
         )
 
+    //binds the data to the view holder
     override fun onBindViewHolder(holder: PrescriptionsViewHolder, position: Int) {
         holder.recyclerviewPrescriptionsBinding.prescriptions=prescription[position]
     }

@@ -1,5 +1,6 @@
 package com.alexandros.e_health.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.alexandros.e_health.api.responseModel.Doctor
@@ -16,6 +17,10 @@ class PrescriptionsViewModel (private val authRepo: AuthRepository): ViewModel()
     val doctor: Doctor? = null
     val description: String? = null
     val active: Boolean = false
+
+    private val _prescriptions = MutableLiveData<List<PrescriptionsUserResponse>>()
+    val prescriptions: LiveData<List<PrescriptionsUserResponse>>
+        get() = _prescriptions
 
     fun getUserPrescriptionsFromRepo(): MutableLiveData<List<PrescriptionsUserResponse>> {
         return authRepo.userPrescriptionsFromRemoteData
