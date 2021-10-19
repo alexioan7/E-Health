@@ -9,7 +9,7 @@ import com.alexandros.e_health.api.responseModel.PrescriptionsUserResponse
 import com.alexandros.e_health.databinding.RecyclerviewPrescriptionsBinding
 
 class PrescriptionsAdapter (
-    private val prescription: List<PrescriptionsUserResponse>
+    private val prescription: ArrayList<PrescriptionsUserResponse>
 
 ) : RecyclerView.Adapter<PrescriptionsAdapter.PrescriptionsViewHolder>(){
 
@@ -30,7 +30,7 @@ class PrescriptionsAdapter (
 
     //binds the data to the view holder
     override fun onBindViewHolder(holder: PrescriptionsViewHolder, position: Int) {
-        holder.recyclerviewPrescriptionsBinding.prescriptions=prescription[position]
+        holder.bind(prescription.get(position))
     }
 
 
@@ -40,7 +40,18 @@ class PrescriptionsAdapter (
 
     ): RecyclerView.ViewHolder(recyclerviewPrescriptionsBinding.root){
 
+        fun bind(presc:PrescriptionsUserResponse){
 
+            recyclerviewPrescriptionsBinding.medicine.setText(presc.medicine)
+            recyclerviewPrescriptionsBinding.date.setText(presc.createdAt)
+            recyclerviewPrescriptionsBinding.hospitalPrefecture.setText(presc.hospital.prefecture)
+            recyclerviewPrescriptionsBinding.hospitalName.setText(presc.hospital.name)
+            recyclerviewPrescriptionsBinding.hospitalDepartment.setText(presc.hospital.department)
+            recyclerviewPrescriptionsBinding.doctorSurname.setText(presc.doctor.surname)
+            recyclerviewPrescriptionsBinding.doctorName.setText(presc.doctor.name)
+            recyclerviewPrescriptionsBinding.description.setText(presc.description)
+
+        }
 
     }
 }

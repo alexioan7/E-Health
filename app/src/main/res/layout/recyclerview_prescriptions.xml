@@ -60,9 +60,8 @@
                     app:srcCompat="?attr/actionModeShareDrawable"
                     android:layout_marginTop="12dp"
                     android:layout_marginStart="0dp"
-                    android:background=" "
-                    android:padding="5dp"
-                    />
+                    android:background="#362196F3"
+                    android:padding="5dp"/>
 
 
             </LinearLayout>
@@ -110,8 +109,7 @@
                     android:padding="5dp"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:visibility="@{prescriptions.dispensed? dispensed.VISIBLE : dispensed.INVISIBLE}">
+                    android:textColor="@android:color/holo_red_dark">
                 </TextView>
 
 
