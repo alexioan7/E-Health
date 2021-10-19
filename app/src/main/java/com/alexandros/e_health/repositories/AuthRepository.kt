@@ -153,11 +153,13 @@ object AuthRepository {
                     if (response.isSuccessful && response.body() != null) {
                         Log.i(AuthRepository.TAG, "onResponse: Response Successful")
                         userPrescriptionsFromRemoteData.postValue(response.body())
+
                     }
                 }
 
                 override fun onFailure(call: Call<PrescriptionsUserResponse>, t: Throwable) {
                     Log.i(AuthRepository.TAG, "onFailure: " + t.message)
+
                 }
             })
 

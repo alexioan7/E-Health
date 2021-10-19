@@ -18,16 +18,20 @@ class PrescriptionsViewModel (private val authRepo: AuthRepository): ViewModel()
     val description: String? = null
     val active: Boolean = false
 
-    private val _prescriptions = MutableLiveData<List<PrescriptionsUserResponse>>()
-    val prescriptions: LiveData<List<PrescriptionsUserResponse>>
+    private val _prescriptions = MutableLiveData<PrescriptionsUserResponse>()
+    val prescriptions: LiveData<PrescriptionsUserResponse>
         get() = _prescriptions
+
+
+     fun requestUserPrescriptions(){
+          authRepo.requestPrescriptions()
+
+          }
+
 
     fun getUserPrescriptionsFromRepo(): MutableLiveData<PrescriptionsUserResponse> {
         return authRepo.userPrescriptionsFromRemoteData
-    }
 
-    fun requestUserPrescriptions(){
-        authRepo.requestPrescriptions()
     }
 
 
