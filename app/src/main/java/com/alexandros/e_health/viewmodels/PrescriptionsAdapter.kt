@@ -38,5 +38,9 @@ class PrescriptionsAdapter (
 
         val recyclerviewPrescriptionsBinding: RecyclerviewPrescriptionsBinding
 
-    ): RecyclerView.ViewHolder(recyclerviewPrescriptionsBinding.root)
+    ): RecyclerView.ViewHolder(recyclerviewPrescriptionsBinding.root){
+
+
+
+    }
 }

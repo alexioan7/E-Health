@@ -1,25 +1,15 @@
 package com.alexandros.e_health.activities
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.MyProfileResponse
-import com.alexandros.e_health.databinding.FragmentLoginBinding
-import com.alexandros.e_health.databinding.FragmentPersonalinfoBinding
 import com.alexandros.e_health.databinding.FragmentPersonalinfotestBinding
 import com.alexandros.e_health.repositories.AuthRepository
-import com.alexandros.e_health.viewmodels.AuthScreenViewModel
 import com.alexandros.e_health.viewmodels.PersonalinfoViewModel
 import com.alexandros.e_health.viewmodels.ViewModelFactory
-import java.lang.StringBuilder
 
 class PersonalinfoFragment : Fragment(R.layout.fragment_personalinfotest) {
 
@@ -64,6 +54,7 @@ class PersonalinfoFragment : Fragment(R.layout.fragment_personalinfotest) {
             bloodType.text = it.data.user.bloodtype
             "${it.data.user.familyDoctor.name} ${it.data.user.familyDoctor.surname}".also { familyDoctor.text = it }
         }
+
 
 
 
