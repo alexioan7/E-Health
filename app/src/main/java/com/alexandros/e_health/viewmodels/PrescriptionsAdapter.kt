@@ -1,12 +1,12 @@
 package com.alexandros.e_health.viewmodels
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.PrescriptionDetails
-import com.alexandros.e_health.api.responseModel.PrescriptionsUserResponse
 import com.alexandros.e_health.databinding.RecyclerviewPrescriptionsBinding
 
 class PrescriptionsAdapter (
@@ -51,6 +51,9 @@ class PrescriptionsAdapter (
             recyclerviewPrescriptionsBinding.doctorSurname.setText(presc.doctor.surname)
             recyclerviewPrescriptionsBinding.doctorName.setText(presc.doctor.name)
             recyclerviewPrescriptionsBinding.description.setText(presc.description)
+            if(presc.dispensed){
+                recyclerviewPrescriptionsBinding.dispensed.visibility= View.VISIBLE
+            }
 
         }
 
