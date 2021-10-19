@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_personalinfo">
+
+    <fragment
+        android:id="@+id/navigation_personalinfo"
+        android:name="com.alexandros.e_health.activities.PersonalinfoFragment"
+        android:label="@string/title_personalinfo"
+        tools:layout="@layout/fragment_personalinfo" >
+        <action
+            android:id="@+id/action_navigation_personalinfo_to_navigation_diagnoses"
+            app:destination="@id/navigation_diagnoses" />
+        <action
+            android:id="@+id/action_navigation_personalinfo_to_navigation_prescriptions"
+            app:destination="@id/navigation_prescriptions" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_diagnoses"
+        android:name="com.alexandros.e_health.activities.DiagnosesFragment"
+        android:label="@string/title_diagnoses"
+        tools:layout="@layout/fragment_diagnoses" >
+        <action
+            android:id="@+id/action_navigation_diagnoses_to_navigation_personalinfo"
+            app:destination="@id/navigation_personalinfo" />
+        <action
+            android:id="@+id/action_navigation_diagnoses_to_navigation_prescriptions"
+            app:destination="@id/navigation_prescriptions" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_prescriptions"
+        android:name="com.alexandros.e_health.activities.PrescriptionsFragment"
+        android:label="@string/title_prescriptions"
+        tools:layout="@layout/fragment_prescriptions" >
+        <action
+            android:id="@+id/action_navigation_prescriptions_to_navigation_personalinfo"
+            app:destination="@id/navigation_personalinfo" />
+        <action
+            android:id="@+id/action_navigation_prescriptions_to_navigation_diagnoses"
+            app:destination="@id/navigation_diagnoses" />
+    </fragment>
+</navigation>

@@ -1,15 +1,13 @@
 package com.alexandros.e_health.api
 
 
-import com.alexandros.e_health.api.responseModel.LoginBody
-import com.alexandros.e_health.api.responseModel.LoginUserResponse
-import com.alexandros.e_health.api.responseModel.RegisterBody
-import com.alexandros.e_health.api.responseModel.RegisterUserResponse
+import com.alexandros.e_health.api.responseModel.*
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface AuthApiInterface {
+interface ApiInterface {
 
 
     @POST("users/signup")
@@ -21,5 +19,9 @@ interface AuthApiInterface {
     fun loginUser(
         @Body body: LoginBody
     ): Call<LoginUserResponse>
+
+
+    @GET("users/myProfile")
+    fun getUserInfo(): Call<MyProfileResponse>
 
 }

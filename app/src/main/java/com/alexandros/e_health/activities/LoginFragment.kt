@@ -1,15 +1,18 @@
 package com.alexandros.e_health.activities
 
+import android.app.Activity
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
 import com.alexandros.e_health.databinding.FragmentLoginBinding
 import com.alexandros.e_health.repositories.AuthRepository
+import com.alexandros.e_health.utils.SharedPreferencesUtil
 import com.alexandros.e_health.utils.toast
 import com.alexandros.e_health.viewmodels.AuthFunctions
 import com.alexandros.e_health.viewmodels.AuthScreenViewModel
@@ -19,11 +22,13 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var viewmodel: AuthScreenViewModel
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
         viewmodel = ViewModelProvider(requireActivity(),ViewModelFactory(AuthRepository)).get(AuthScreenViewModel::class.java)
+        sharedPreferences = requireActivity().getSharedPreferences(requireActivity().packageName, Activity.MODE_PRIVATE)
 
         //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
         //this will bind our data with the UI
@@ -52,17 +57,24 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
     }
 
     override fun OnSuccess() {
-        //toast("Succeed login")
         Log.d("Login fragment", "Succeed")
-//        Toast.makeText(activity,"Login Succeed",Toast.LENGTH_LONG).show()
-        toast("Login Succeed", activity)
+
+        viewmodel.getLoginUserDataFromRepo().observe(requireActivity(),{
+//            sharedPreferences.edit().putString("token", it?.token).apply()
+            SharedPreferencesUtil.saveAccessToken(it?.token.toString())
+            val intent = Intent(activity, BottomNavigationActivity::class.java)
+            startActivity(intent)
+        })
+
+//        val intent = Intent(activity, BottomNavigationActivity::class.java)
+//        startActivity(intent)
     }
 
     override fun OnFailure(errorCode: MutableList<Int>) {
         //toast("Wrong Id and Password")
         Log.d("Login fragment", "Wrong Id or Password")
 //        Toast.makeText(activity,"Login Failed",Toast.LENGTH_LONG).show()
-        toast("Login Failed", activity)
+        toast("Wrong Health Id or Password", activity)
     }
 
 

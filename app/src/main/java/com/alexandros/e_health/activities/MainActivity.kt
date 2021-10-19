@@ -1,26 +1,25 @@
 package com.alexandros.e_health.activities
 
-import android.app.Activity
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.alexandros.e_health.R
+import com.alexandros.e_health.utils.SharedPreferencesUtil
+
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var sharedPreferences:SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        sharedPreferences = this.getSharedPreferences(this.packageName, Activity.MODE_PRIVATE)
+        SharedPreferencesUtil.init(applicationContext)
+
 
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        clearPreferences()
+        SharedPreferencesUtil.clearPreferences()
 
     }
-    private fun clearPreferences() {
-        sharedPreferences.edit().clear().apply()
-    }
+
 }
