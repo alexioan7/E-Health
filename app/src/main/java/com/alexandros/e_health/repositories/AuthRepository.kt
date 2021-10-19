@@ -21,7 +21,7 @@ object AuthRepository {
     var statusFromLogin: String = ""
 
     val userInfoFromRemoteData: MutableLiveData<MyProfileResponse> = MutableLiveData()
-    val userPrescriptionsFromRemoteData: MutableLiveData<List<PrescriptionsUserResponse>> = MutableLiveData()
+    val userPrescriptionsFromRemoteData: MutableLiveData<PrescriptionsUserResponse> = MutableLiveData()
 
     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
@@ -145,10 +145,10 @@ object AuthRepository {
         Log.i(AuthRepository.TAG, "Prescriptions response: Call is started")
         dataSource.getRetrofit()
             .getUserPrescriptions()
-            .enqueue(object : Callback<List<PrescriptionsUserResponse>> {
+            .enqueue(object : Callback<PrescriptionsUserResponse> {
                 override fun onResponse(
-                    call: Call<List<PrescriptionsUserResponse>>,
-                    response: Response<List<PrescriptionsUserResponse>>
+                    call: Call<PrescriptionsUserResponse>,
+                    response: Response<PrescriptionsUserResponse>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
                         Log.i(AuthRepository.TAG, "onResponse: Response Successful")
@@ -156,7 +156,7 @@ object AuthRepository {
                     }
                 }
 
-                override fun onFailure(call: Call<List<PrescriptionsUserResponse>>, t: Throwable) {
+                override fun onFailure(call: Call<PrescriptionsUserResponse>, t: Throwable) {
                     Log.i(AuthRepository.TAG, "onFailure: " + t.message)
                 }
             })

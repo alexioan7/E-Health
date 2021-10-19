@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alexandros.e_health.R
+import com.alexandros.e_health.api.responseModel.PrescriptionDetails
 import com.alexandros.e_health.api.responseModel.PrescriptionsUserResponse
 import com.alexandros.e_health.databinding.RecyclerviewPrescriptionsBinding
 
 class PrescriptionsAdapter (
-    private val prescription: ArrayList<PrescriptionsUserResponse>
+    private val prescription: List<PrescriptionDetails>
 
 ) : RecyclerView.Adapter<PrescriptionsAdapter.PrescriptionsViewHolder>(){
 
@@ -40,13 +41,13 @@ class PrescriptionsAdapter (
 
     ): RecyclerView.ViewHolder(recyclerviewPrescriptionsBinding.root){
 
-        fun bind(presc:PrescriptionsUserResponse){
+        fun bind(presc:PrescriptionDetails){
 
             recyclerviewPrescriptionsBinding.medicine.setText(presc.medicine)
             recyclerviewPrescriptionsBinding.date.setText(presc.createdAt)
             recyclerviewPrescriptionsBinding.hospitalPrefecture.setText(presc.hospital.prefecture)
             recyclerviewPrescriptionsBinding.hospitalName.setText(presc.hospital.name)
-            recyclerviewPrescriptionsBinding.hospitalDepartment.setText(presc.hospital.department)
+            recyclerviewPrescriptionsBinding.hospitalDepartment.setText(presc.hospital.department?.get(0))
             recyclerviewPrescriptionsBinding.doctorSurname.setText(presc.doctor.surname)
             recyclerviewPrescriptionsBinding.doctorName.setText(presc.doctor.name)
             recyclerviewPrescriptionsBinding.description.setText(presc.description)

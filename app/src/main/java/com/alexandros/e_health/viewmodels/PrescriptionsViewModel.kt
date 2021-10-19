@@ -22,7 +22,7 @@ class PrescriptionsViewModel (private val authRepo: AuthRepository): ViewModel()
     val prescriptions: LiveData<List<PrescriptionsUserResponse>>
         get() = _prescriptions
 
-    fun getUserPrescriptionsFromRepo(): MutableLiveData<List<PrescriptionsUserResponse>> {
+    fun getUserPrescriptionsFromRepo(): MutableLiveData<PrescriptionsUserResponse> {
         return authRepo.userPrescriptionsFromRemoteData
     }
 
