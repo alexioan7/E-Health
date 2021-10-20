@@ -2,13 +2,18 @@ package com.alexandros.e_health.viewmodels
 
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.alexandros.e_health.api.responseModel.LoginUserResponse
 import com.alexandros.e_health.api.responseModel.RegisterUserResponse
 import com.alexandros.e_health.repositories.AuthRepository
 import com.alexandros.e_health.utils.*
 
 //ERROR CODES
+//810 -> HealthId must be 11 chars(Login)
+//811 -> HealthId must not be empty(Login)
+
+//820 -> Fill all fields
+
 //910 -> HealthId must be 11 chars
 //911 -> HealthId must not be empty
 
@@ -47,41 +52,29 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
         return authRepo.failureMessageFromRegister
     }
 
-     fun registerUser(
-         id: String,
-         password: String,
-         confirmPassword: String,
-         firstName: String,
-         lastName: String,
-         email: String,
-         phoneNumber: String
-    ) {
-        var repoId = id
-        var repoPassword = password
-        var repoConfirmPassword = confirmPassword
-        var repoFirstName = firstName
-        var repoLastname = lastName
-        var repoEmail = email
-        var repoPhoneNumber = phoneNumber
-        authRepo.requestToRegister(
-            repoId,
-            repoPassword,
-            repoConfirmPassword,
-            repoFirstName,
-            repoLastname,
-            repoEmail,
-            repoPhoneNumber
-        )
-
+    fun getLoginUserDataFromRepo():SingleLiveEvent<LoginUserResponse>{
+        return authRepo.getDataFromLoginUser()
     }
 
-    fun loginUser(
-        id:String,
-        password: String
-    ) {
-        var repoId = id
-        var repoPassword = password
-        authRepo.requestToLogin(repoId,repoPassword)
+    fun getStatusFromLogin(): String? {
+        return authRepo.statusFromLogin
+    }
+
+     fun registerUser(id: String, password: String, confirmPassword: String, firstName: String, lastName: String, email: String, phoneNumber: String) {
+        authRepo.requestToRegister(id, password, confirmPassword, firstName, lastName, email, phoneNumber)
+    }
+
+    fun loginUser(id:String, password: String, errorCodes:MutableList<Int>) {
+        authRepo.requestToLogin(id,password,fun(){
+            Log.d("STATUS",getStatusFromLogin().toString())
+            if(getStatusFromLogin().toString() == "fail") {
+                authListener?.OnFailure(errorCodes)
+                Log.d("On Failure","failed")
+            }
+            else {
+                authListener?.OnSuccess()
+            }
+        })
     }
 
     fun onLoginButtonClick(view: View) {
@@ -89,16 +82,19 @@ class AuthScreenViewModel(private val authRepo: AuthRepository) : ViewModel() {
         authListener?.OnStarted()
 
         if (id.isNullOrEmpty() || password.isNullOrEmpty()) {
-
-            //returns error to ui
-            authListener?.OnFailure(errorCodes)
-            return
-
+            errorCodes.add(820)
+        }else {
+            if (!HealthIdValidator.isValid(id.toString())) {
+                errorCodes.add(910)
+            }
         }
-        //success;authentication from backend
-        authListener?.OnSuccess()
-        loginUser(id.toString(),password.toString())
 
+        if (errorCodes.size==0){
+            loginUser(id.toString(),password.toString(),errorCodes)
+
+        }else{
+            authListener?.OnFailure(errorCodes)
+        }
 
     }
 
