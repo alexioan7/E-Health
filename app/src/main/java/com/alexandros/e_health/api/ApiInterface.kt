@@ -24,4 +24,7 @@ interface ApiInterface {
     @GET("users/myProfile")
     fun getUserInfo(): Call<MyProfileResponse>
 
+    @GET("prescriptions")
+    fun getUserPrescriptions(): Call<PrescriptionsUserResponse>
+
 }
