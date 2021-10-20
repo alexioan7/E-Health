@@ -55,6 +55,7 @@ class PrescriptionsAdapter (
                 recyclerviewPrescriptionsBinding.dispensed.visibility= View.VISIBLE
             }
 
+
         }
 
     }

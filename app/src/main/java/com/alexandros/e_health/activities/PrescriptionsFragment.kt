@@ -10,6 +10,7 @@ import com.alexandros.e_health.R
 import com.alexandros.e_health.RecyclerViewDecorations.TopSpacingItemDecoration
 import com.alexandros.e_health.api.responseModel.PrescriptionDetails
 import com.alexandros.e_health.databinding.FragmentPrescriptionsBinding
+import com.alexandros.e_health.databinding.RecyclerviewPrescriptionsBinding
 import com.alexandros.e_health.viewmodels.PrescriptionsAdapter
 import com.alexandros.e_health.viewmodels.PrescriptionsViewModel
 import kotlinx.android.synthetic.main.fragment_prescriptions.*
@@ -18,6 +19,8 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
 
     private lateinit var viewmodel: PrescriptionsViewModel
     private lateinit var binding: FragmentPrescriptionsBinding
+    private lateinit var recyclerviewPrescriptionsBinding: RecyclerviewPrescriptionsBinding
+
 
     private val presc = mutableListOf<PrescriptionDetails>()
 
@@ -30,8 +33,6 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
         viewmodel = ViewModelProvider(requireActivity()).get(PrescriptionsViewModel::class.java)
 
 
-        //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
-        //this will bind our data with the UI
 
 
 
@@ -46,14 +47,30 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
             }
         })
 
+//        recyclerviewPrescriptionsBinding.shareButton.setOnClickListener {
+//            popUpShare()
+//        }
 
 
-    }
+
+
+        }
+
+//    private fun popUpShare(){
+//        var popup= PopupMenu(requireActivity(), shareButton)
+//        popup.inflate(R.menu.pop_up_menu_share)
+//        popup.setOnMenuItemClickListener {
+//            Toast.makeText(requireActivity(),"Item" + it.title,Toast.LENGTH_SHORT)
+//            true
+//
+//        }
+
+
 
     private fun initRecyclerView(){
         recyclerview_prescriptions.apply {
             layoutManager = LinearLayoutManager(activity)
-           val topSpacingItemDecoration = TopSpacingItemDecoration(32)
+           val topSpacingItemDecoration = TopSpacingItemDecoration(16)
             addItemDecoration(topSpacingItemDecoration)
             adapter = PrescriptionsAdapter(presc)
         }
