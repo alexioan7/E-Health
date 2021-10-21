@@ -9,15 +9,25 @@ import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.PrescriptionDetails
 import com.alexandros.e_health.databinding.PrescriptionItemBinding
 import com.alexandros.e_health.utils.MongoDateAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.Channel.Factory.RENDEZVOUS
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.receiveAsFlow
 import java.time.format.DateTimeFormatter
 
 class PrescriptionsAdapter (
-    private val prescriptionDetails: List<PrescriptionDetails>
+    private val prescriptionDetails: List<PrescriptionDetails>,
+    private val coroutineScope: CoroutineScope
 
 ) : RecyclerView.Adapter<PrescriptionsAdapter.PrescriptionsViewHolder>(){
 
     override fun getItemCount()= prescriptionDetails.size
     private lateinit var binding: PrescriptionItemBinding
+
+    private val shareClicksChannel = Channel<PrescriptionDetails>(RENDEZVOUS)
+    val shareClicks: Flow<PrescriptionDetails> = shareClicksChannel.receiveAsFlow()
+
 
     //creates the view holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)=
@@ -29,6 +39,7 @@ class PrescriptionsAdapter (
                 parent,
                 false
             )
+        ,shareClicksChannel,coroutineScope
         )
 
     //binds the data to the view holder
@@ -39,7 +50,10 @@ class PrescriptionsAdapter (
 
     inner class PrescriptionsViewHolder(
 
-        val recyclerviewPrescriptionsBinding: PrescriptionItemBinding
+        val recyclerviewPrescriptionsBinding: PrescriptionItemBinding,
+        private val shareClicksChannel:Channel<PrescriptionDetails>,
+        private val coroutineScope: CoroutineScope
+
 
     ): RecyclerView.ViewHolder(recyclerviewPrescriptionsBinding.root){
 
@@ -59,7 +73,9 @@ class PrescriptionsAdapter (
             if(presc.dispensed){
                 recyclerviewPrescriptionsBinding.dispensed.visibility= View.VISIBLE
             }
-
+            recyclerviewPrescriptionsBinding.shareButton.setOnClickListener {
+                shareClicksChannel.offer(presc)
+            }
 
         }
 

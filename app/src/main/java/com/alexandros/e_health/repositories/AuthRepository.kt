@@ -24,6 +24,7 @@ object AuthRepository {
     val userPrescriptionsFromRemoteData: MutableLiveData<PrescriptionsUserResponse> = MutableLiveData()
     val userDiagnosesFromRemoteData: MutableLiveData<DiagnosesUserResponse> = MutableLiveData()
     val userAppointmentsFromRemoteData: MutableLiveData<UserApointmentsResponse> = MutableLiveData()
+    val hospitalsFromRemoteData: MutableLiveData<HospitalsUserResponse> =MutableLiveData()
 
     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
@@ -160,6 +161,31 @@ object AuthRepository {
                 }
 
                 override fun onFailure(call: Call<PrescriptionsUserResponse>, t: Throwable) {
+                    Log.i(AuthRepository.TAG, "onFailure: " + t.message)
+
+                }
+            })
+
+    }
+
+    fun requestHospitals() {
+        val dataSource = RetrofitBuilder()
+        Log.i(AuthRepository.TAG, "get Hospitals response: Call is started")
+        dataSource.getRetrofit()
+            .getShareHospitals()
+            .enqueue(object : Callback<HospitalsUserResponse> {
+                override fun onResponse(
+                    call: Call<HospitalsUserResponse>,
+                    response: Response<HospitalsUserResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(AuthRepository.TAG, "onResponse: Response Successful")
+                       hospitalsFromRemoteData.postValue(response.body())
+
+                    }
+                }
+
+                override fun onFailure(call: Call<HospitalsUserResponse>, t: Throwable) {
                     Log.i(AuthRepository.TAG, "onFailure: " + t.message)
 
                 }
