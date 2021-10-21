@@ -11,4 +11,5 @@ data class User(
     val password: String,
     val phoneNumber: String,
     val surname: String
+
 )
