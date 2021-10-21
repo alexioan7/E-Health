@@ -1,9 +1,11 @@
 package com.alexandros.e_health.api.responseModel
 
-data class Hospital(
-
+data class Department(
     val id: String,
     val name: String,
-    val prefecture: String,
+    val hospital: Hospital,
     val _v: Int
+
+
+
 )
