@@ -42,7 +42,7 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
             Log.d("PRESCRIPTIONS!!",it.data.prescriptions.toString())
             val prescriptions = it.data.prescriptions
             prescriptions.forEach {it2 ->
-                presc.add(PrescriptionDetails(it2.dispensed, it2.createdAt, it2._id, it2.hospital, it2.user, it2.doctor, it2.medicine, it2.description, it2.active))
+                presc.add(PrescriptionDetails()
                 initRecyclerView()
             }
         })

@@ -45,9 +45,9 @@ class PrescriptionsAdapter (
 
             recyclerviewPrescriptionsBinding.medicine.setText(presc.medicine)
             recyclerviewPrescriptionsBinding.date.setText(presc.createdAt)
-            recyclerviewPrescriptionsBinding.hospitalPrefecture.setText(presc.hospital.prefecture)
-            recyclerviewPrescriptionsBinding.hospitalName.setText(presc.hospital.name)
-            recyclerviewPrescriptionsBinding.hospitalDepartment.setText(presc.hospital.department?.get(0))
+            recyclerviewPrescriptionsBinding.hospitalPrefecture.setText(presc.department.hospital.prefecture)
+            recyclerviewPrescriptionsBinding.hospitalName.setText(presc.department.hospital.name)
+            recyclerviewPrescriptionsBinding.hospitalDepartment.setText(presc.department.name)
             recyclerviewPrescriptionsBinding.doctorSurname.setText(presc.doctor.surname)
             recyclerviewPrescriptionsBinding.doctorName.setText(presc.doctor.name)
             recyclerviewPrescriptionsBinding.description.setText(presc.description)
