@@ -8,7 +8,7 @@ import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.Appointment
 import kotlinx.android.synthetic.main.apointment_card_layout.view.*
 
-class AppointmentsAdapterAdapter( private val appointments: List<Appointment>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AppointmentsAdapter( private val appointments: List<Appointment>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AppointmentViewHolder(
