@@ -1,13 +1,17 @@
 package com.alexandros.e_health.viewmodels
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.PrescriptionDetails
 import com.alexandros.e_health.databinding.RecyclerviewPrescriptionsBinding
+import com.alexandros.e_health.utils.MongoDateAdapter
+import java.time.format.DateTimeFormatter
 
 class PrescriptionsAdapter (
     private val prescription: List<PrescriptionDetails>
@@ -41,10 +45,13 @@ class PrescriptionsAdapter (
 
     ): RecyclerView.ViewHolder(recyclerviewPrescriptionsBinding.root){
 
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(presc:PrescriptionDetails){
 
+            val prescDate = MongoDateAdapter(presc.createdAt).dateToLocalZone()
+
             recyclerviewPrescriptionsBinding.medicine.setText(presc.medicine)
-            recyclerviewPrescriptionsBinding.date.setText(presc.createdAt)
+            recyclerviewPrescriptionsBinding.date.setText(prescDate?.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
             recyclerviewPrescriptionsBinding.hospitalPrefecture.setText(presc.department.hospital.prefecture)
             recyclerviewPrescriptionsBinding.hospitalName.setText(presc.department.hospital.name)
             recyclerviewPrescriptionsBinding.hospitalDepartment.setText(presc.department.name)
