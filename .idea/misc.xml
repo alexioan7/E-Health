@@ -33,13 +33,19 @@
         <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/fragment_register.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/activity_bottom_navigation.xml" value="0.23177083333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/apointment_card.xml" value="0.28804347826086957" />
+        <entry key="app/src/main/res/layout/apointment_card_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_appointments.xml" value="0.28804347826086957" />
+        <entry key="app/src/main/res/layout/fragment_diagnoses.xml" value="0.28804347826086957" />
         <entry key="app/src/main/res/layout/fragment_personalinfo.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_personalinfotest.xml" value="0.2109375" />
+        <entry key="app/src/main/res/layout/fragment_prescriptions.xml" value="0.3052536231884058" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.14351851851851852" />
+        <entry key="app/src/main/res/layout/recyclerview_prescriptions.xml" value="0.3052536231884058" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

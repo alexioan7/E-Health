@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_navigation_personalinfo_to_navigation_prescriptions"
             app:destination="@id/navigation_prescriptions" />
+        <action
+            android:id="@+id/action_navigation_personalinfo_to_navigation_appointments"
+            app:destination="@id/navigation_appointments" />
     </fragment>
 
     <fragment
@@ -29,6 +32,9 @@
         <action
             android:id="@+id/action_navigation_diagnoses_to_navigation_prescriptions"
             app:destination="@id/navigation_prescriptions" />
+        <action
+            android:id="@+id/action_navigation_diagnoses_to_navigation_appointments"
+            app:destination="@id/navigation_appointments" />
     </fragment>
 
     <fragment
@@ -42,5 +48,23 @@
         <action
             android:id="@+id/action_navigation_prescriptions_to_navigation_diagnoses"
             app:destination="@id/navigation_diagnoses" />
+        <action
+            android:id="@+id/action_navigation_prescriptions_to_navigation_appointments"
+            app:destination="@id/navigation_appointments" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_appointments"
+        android:name="com.alexandros.e_health.activities.AppointmentsFragment"
+        android:label="AppointmentsFragment"
+        tools:layout="@layout/fragment_appointments">
+        <action
+            android:id="@+id/action_appointmentsFragment_to_navigation_prescriptions"
+            app:destination="@id/navigation_prescriptions" />
+        <action
+            android:id="@+id/action_appointmentsFragment_to_navigation_diagnoses"
+            app:destination="@id/navigation_diagnoses" />
+        <action
+            android:id="@+id/action_appointmentsFragment_to_navigation_personalinfo"
+            app:destination="@id/navigation_personalinfo" />
     </fragment>
 </navigation>

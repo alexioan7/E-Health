@@ -27,4 +27,12 @@ interface ApiInterface {
     @GET("prescriptions")
     fun getUserPrescriptions(): Call<PrescriptionsUserResponse>
 
+    @GET("appointments")
+    fun getUserAppointments(): Call<UserApointmentsResponse>
+
+
+
+
+
+
 }
