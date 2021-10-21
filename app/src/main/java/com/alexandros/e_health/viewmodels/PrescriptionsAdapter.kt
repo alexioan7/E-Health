@@ -45,7 +45,7 @@ class PrescriptionsAdapter (
 
     ): RecyclerView.ViewHolder(recyclerviewPrescriptionsBinding.root){
 
-        @RequiresApi(Build.VERSION_CODES.O)
+
         fun bind(presc:PrescriptionDetails){
 
             val prescDate = MongoDateAdapter(presc.createdAt).dateToLocalZone()

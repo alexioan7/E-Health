@@ -30,7 +30,7 @@ class MongoDateAdapter (mongoDate: String){
         return mongoDate.substring(14,16).toInt()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     fun dateToLocalZone(): ZonedDateTime? {
         var date = LocalDateTime.of(
             this.getYear(),
