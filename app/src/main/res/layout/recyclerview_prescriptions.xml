@@ -8,7 +8,6 @@
         <variable
             name="prescriptions"
             type="com.alexandros.e_health.api.responseModel.PrescriptionsUserResponse" />
-
     </data>
 
     <androidx.cardview.widget.CardView
