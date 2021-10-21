@@ -49,6 +49,7 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
 //                initRecyclerView()
 //            }
             val adapter2= PrescriptionsAdapter(presc,lifecycleScope)
+            binding.recyclerviewPrescriptions.adapter=adapter2
 
             adapter2.shareClicks.onEach {
                 toast("Test for click channel",requireActivity())

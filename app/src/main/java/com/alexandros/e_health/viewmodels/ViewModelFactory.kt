@@ -18,6 +18,9 @@ class ViewModelFactory(private val repository: AuthRepository) : ViewModelProvid
             modelClass.isAssignableFrom(PrescriptionsViewModel::class.java) -> {
                 modelClass.cast(PrescriptionsViewModel(repository)) as T
             }
+            modelClass.isAssignableFrom(PrescriptionsShareViewModel::class.java) -> {
+                modelClass.cast(PrescriptionsShareViewModel(repository)) as T
+            }
             modelClass.isAssignableFrom(AppointmentsViewModel::class.java) -> {
                 modelClass.cast(AppointmentsViewModel(repository)) as T
             }
