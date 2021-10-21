@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/recyclerview_prescriptions" />
+            tools:listitem="@layout/prescription_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

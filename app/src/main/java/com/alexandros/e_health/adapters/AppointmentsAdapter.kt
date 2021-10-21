@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.Appointment
-import kotlinx.android.synthetic.main.apointment_card_layout.view.*
+import kotlinx.android.synthetic.main.apointment_item.view.*
 
 class AppointmentsAdapter( private val appointments: List<Appointment>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AppointmentViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.apointment_card_layout, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.apointment_item, parent, false)
         )
     }
 

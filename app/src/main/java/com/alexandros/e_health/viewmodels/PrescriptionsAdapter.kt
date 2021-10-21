@@ -1,15 +1,13 @@
 package com.alexandros.e_health.viewmodels
 
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.PrescriptionDetails
-import com.alexandros.e_health.databinding.RecyclerviewPrescriptionsBinding
+import com.alexandros.e_health.databinding.PrescriptionItemBinding
 import com.alexandros.e_health.utils.MongoDateAdapter
 import java.time.format.DateTimeFormatter
 
@@ -19,15 +17,15 @@ class PrescriptionsAdapter (
 ) : RecyclerView.Adapter<PrescriptionsAdapter.PrescriptionsViewHolder>(){
 
     override fun getItemCount()= prescriptionDetails.size
-    private lateinit var binding: RecyclerviewPrescriptionsBinding
+    private lateinit var binding: PrescriptionItemBinding
 
     //creates the view holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)=
         PrescriptionsViewHolder(
 
-            DataBindingUtil.inflate<RecyclerviewPrescriptionsBinding>(
+            DataBindingUtil.inflate<PrescriptionItemBinding>(
                 LayoutInflater.from(parent.context),
-                R.layout.recyclerview_prescriptions,
+                R.layout.prescription_item,
                 parent,
                 false
             )
@@ -41,7 +39,7 @@ class PrescriptionsAdapter (
 
     inner class PrescriptionsViewHolder(
 
-        val recyclerviewPrescriptionsBinding: RecyclerviewPrescriptionsBinding
+        val recyclerviewPrescriptionsBinding: PrescriptionItemBinding
 
     ): RecyclerView.ViewHolder(recyclerviewPrescriptionsBinding.root){
 

@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.DiagnosisDetails
-import kotlinx.android.synthetic.main.layout_diagnosis.view.*
+import kotlinx.android.synthetic.main.diagnosis_item.view.*
 
 class DiagnosesAdapter( private val diagnoses: List<DiagnosisDetails>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return DiagnosesViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.layout_diagnosis, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.diagnosis_item, parent, false)
         )
     }
 

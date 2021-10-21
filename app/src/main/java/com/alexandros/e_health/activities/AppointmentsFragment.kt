@@ -22,7 +22,7 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
     private lateinit var viewmodel: AppointmentsViewModel
     private lateinit var binding: FragmentAppointmentsBinding
 
-    private val appointments = mutableListOf<Appointment>()
+    private lateinit var appointments : List<Appointment>
     // This property is only valid between onCreateView and
     // onDestroyView.
 
@@ -42,24 +42,26 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
         viewmodel.getUserAppointmentsromRepo().observe(requireActivity(), {
             Log.d("APPOINTMENTS!!", it.data.appointments.toString())
             val prescriptions = it.data.appointments
-            prescriptions.forEach { it2 ->
-                appointments.add(
-                    Appointment(
-                        it2._id,
-                        it2.active,
-                        it2.date,
-                        it2.department,
-                        it2.id,
-                        it2.user
-                    )
-                )
-                initRecyclerView()
-            }
+            appointments = prescriptions
+            initRecyclerView()
+//            prescriptions.forEach { it2 ->
+//                appointments.add(
+//                    Appointment(
+//                        it2._id,
+//                        it2.active,
+//                        it2.date,
+//                        it2.department,
+//                        it2.id,
+//                        it2.user
+//                    )
+//                )
+//                initRecyclerView()
+//            }
         })
     }
 
     private fun initRecyclerView() {
-        recyclerview_appointments.apply {
+        binding.recyclerviewAppointments.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = AppointmentsAdapter(appointments)
         }
