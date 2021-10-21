@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexandros.e_health.R
-import com.alexandros.e_health.RecyclerViewDecorations.TopSpacingItemDecoration
 import com.alexandros.e_health.adapters.DiagnosesAdapter
 import com.alexandros.e_health.api.responseModel.DiagnosisDetails
 import com.alexandros.e_health.api.responseModel.PrescriptionDetails
@@ -49,8 +48,6 @@ class DiagnosesFragment : Fragment(R.layout.fragment_diagnoses) {
     private fun initRecyclerView(){
         recyclerview_diagnoses.apply {
             layoutManager = LinearLayoutManager(activity)
-            val topSpacingItemDecoration = TopSpacingItemDecoration(16)
-            addItemDecoration(topSpacingItemDecoration)
             adapter = DiagnosesAdapter(diagnoses)
         }
     }

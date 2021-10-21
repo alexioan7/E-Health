@@ -41,6 +41,7 @@
         <entry key="app/src/main/res/layout/fragment_personalinfotest.xml" value="0.2109375" />
         <entry key="app/src/main/res/layout/fragment_prescriptions.xml" value="0.3052536231884058" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.14351851851851852" />
+        <entry key="app/src/main/res/layout/layout_diagnosis.xml" value="0.321875" />
         <entry key="app/src/main/res/layout/recyclerview_prescriptions.xml" value="0.3052536231884058" />
       </map>
     </option>

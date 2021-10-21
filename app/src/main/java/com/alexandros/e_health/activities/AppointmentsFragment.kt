@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexandros.e_health.R
-import com.alexandros.e_health.RecyclerViewDecorations.TopSpacingItemDecoration
 import com.alexandros.e_health.adapters.AppointmentsAdapter
 import com.alexandros.e_health.api.responseModel.Appointment
 import com.alexandros.e_health.databinding.FragmentAppointmentsBinding
@@ -30,7 +29,9 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAppointmentsBinding.bind(view)
-        viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(AppointmentsViewModel::class.java)
+        viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(
+            AppointmentsViewModel::class.java
+        )
 
         //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
         //this will bind our data with the UI
@@ -39,20 +40,27 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
         viewmodel.requestUserAppointments()
 
         viewmodel.getUserAppointmentsromRepo().observe(requireActivity(), {
-            Log.d("APPOINTMENTS!!",it.data.appointments.toString())
+            Log.d("APPOINTMENTS!!", it.data.appointments.toString())
             val prescriptions = it.data.appointments
-            prescriptions.forEach {it2 ->
-                appointments.add(Appointment(it2._id, it2.active, it2.date, it2.department, it2.id, it2.user))
+            prescriptions.forEach { it2 ->
+                appointments.add(
+                    Appointment(
+                        it2._id,
+                        it2.active,
+                        it2.date,
+                        it2.department,
+                        it2.id,
+                        it2.user
+                    )
+                )
                 initRecyclerView()
             }
         })
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
         recyclerview_appointments.apply {
             layoutManager = LinearLayoutManager(activity)
-//            val topSpacingItemDecoration = TopSpacingItemDecoration(16)
-//            addItemDecoration(topSpacingItemDecoration)
             adapter = AppointmentsAdapter(appointments)
         }
     }
