@@ -48,19 +48,15 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
 //                presc.add(PrescriptionDetails(it2.dispensed, it2.createdAt, it2._id,it2.department,it2.user,it2.doctor,it2.medicine,it2.description,it2._v,it2.active,it2.id))
 //                initRecyclerView()
 //            }
+            val adapter2= PrescriptionsAdapter(presc,lifecycleScope)
+
+            adapter2.shareClicks.onEach {
+                toast("Test for click channel",requireActivity())
+                findNavController().navigate(R.id.action_prescriptionsFragment_to_prescriptionsShareFragment)
+
+            }.launchIn(lifecycleScope)
         })
 
-        val adapter2= PrescriptionsAdapter(presc,lifecycleScope)
-        binding.recyclerviewPrescriptions.adapter=adapter2
-        val layoutManager = LinearLayoutManager(activity)
-        binding.recyclerviewPrescriptions.layoutManager=layoutManager
-
-
-        adapter2.shareClicks.onEach {
-            toast("Test for click channel",requireActivity())
-            findNavController().navigate(R.id.action_prescriptionsFragment_to_prescriptionsShareFragment)
-
-        }.launchIn(lifecycleScope)
     }
 
 
@@ -68,7 +64,7 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
     private fun initRecyclerView() {
         binding.recyclerviewPrescriptions.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = PrescriptionsAdapter(presc)
+            adapter = PrescriptionsAdapter(presc,lifecycleScope)
         }
     }
 }
