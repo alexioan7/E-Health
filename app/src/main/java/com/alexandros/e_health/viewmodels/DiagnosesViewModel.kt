@@ -3,11 +3,29 @@ package com.alexandros.e_health.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.alexandros.e_health.api.responseModel.*
+import com.alexandros.e_health.repositories.AuthRepository
 
-class DiagnosesViewModel : ViewModel() {
+class DiagnosesViewModel(private val authRepo: AuthRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is diagnoses Fragment"
+    val createdAt: String? = null
+    val hospital: Hospital? = null
+    val doctor: Doctor? = null
+    val description: String? = null
+
+    private val _diagnoses = MutableLiveData<DiagnosesUserResponse>()
+    val diagnoses: LiveData<DiagnosesUserResponse>
+        get() = _diagnoses
+
+
+    fun requestUserDiagnoses() {
+        authRepo.requestDiagnoses()
+
     }
-    val text: LiveData<String> = _text
+
+
+    fun getUserDiagnosesFromRepo(): MutableLiveData<DiagnosesUserResponse> {
+        return authRepo.userDiagnosesFromRemoteData
+
+    }
 }

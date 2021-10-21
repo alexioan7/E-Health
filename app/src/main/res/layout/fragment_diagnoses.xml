@@ -4,30 +4,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+
+
     <data>
         <variable
             name="diagnosesviewmodel"
             type="com.alexandros.e_health.viewmodels.DiagnosesViewModel" />
+
     </data>
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activities.DiagnosesFragment">
+        android:layout_height="625dp"
+        tools:context=".activities.PerscriptionsFragment">
 
-        <TextView
-            android:id="@+id/text_dashboard"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_diagnoses"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:text="Diagnoses Fragment"
+            android:layout_height="630dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/layout_diagnosis" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

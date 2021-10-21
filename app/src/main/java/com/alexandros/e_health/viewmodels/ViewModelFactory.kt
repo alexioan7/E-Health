@@ -21,6 +21,9 @@ class ViewModelFactory(private val repository: AuthRepository) : ViewModelProvid
             modelClass.isAssignableFrom(AppointmentsViewModel::class.java) -> {
                 modelClass.cast(AppointmentsViewModel(repository)) as T
             }
+            modelClass.isAssignableFrom(DiagnosesViewModel::class.java) -> {
+                modelClass.cast(DiagnosesViewModel(repository)) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
