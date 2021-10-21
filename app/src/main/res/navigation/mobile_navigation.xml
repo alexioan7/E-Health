@@ -51,7 +51,19 @@
         <action
             android:id="@+id/action_navigation_prescriptions_to_navigation_appointments"
             app:destination="@id/navigation_appointments" />
+        <action
+            android:id="@+id/action_prescriptionsFragment_to_prescriptionsShareFragment"
+            app:destination="@id/prescriptionsShareFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/prescriptionsShareFragment"
+        android:name="com.alexandros.e_health.activities.PrescriptionsShareFragment"
+        android:label="PrescriptionsShareFragment" >
+        <action
+            android:id="@+id/action_prescriptionsShareFragment_to_prescriptionsFragment"
+            app:destination="@id/navigation_prescriptions" />
+    </fragment>
+
     <fragment
         android:id="@+id/navigation_appointments"
         android:name="com.alexandros.e_health.activities.AppointmentsFragment"

@@ -1,3 +1,5 @@
 package com.alexandros.e_health.api.responseModel
 
-data class HospitalsData()
+data class HospitalsData(
+    val hospitals: List<HospitalsDetails>
+)
