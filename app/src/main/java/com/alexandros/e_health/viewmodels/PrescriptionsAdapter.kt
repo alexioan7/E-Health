@@ -10,11 +10,11 @@ import com.alexandros.e_health.api.responseModel.PrescriptionDetails
 import com.alexandros.e_health.databinding.RecyclerviewPrescriptionsBinding
 
 class PrescriptionsAdapter (
-    private val prescription: List<PrescriptionDetails>
+    private val prescriptionDetails: List<PrescriptionDetails>
 
 ) : RecyclerView.Adapter<PrescriptionsAdapter.PrescriptionsViewHolder>(){
 
-    override fun getItemCount()= prescription.size
+    override fun getItemCount()= prescriptionDetails.size
     private lateinit var binding: RecyclerviewPrescriptionsBinding
 
     //creates the view holder
@@ -31,7 +31,7 @@ class PrescriptionsAdapter (
 
     //binds the data to the view holder
     override fun onBindViewHolder(holder: PrescriptionsViewHolder, position: Int) {
-        holder.bind(prescription.get(position))
+        holder.bind(prescriptionDetails.get(position))
     }
 
 
