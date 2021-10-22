@@ -53,19 +53,16 @@
             app:destination="@id/navigation_appointments" />
         <action
             android:id="@+id/action_prescriptionsFragment_to_prescriptionsShareFragment"
-            app:destination="@id/prescriptionsShareFragment"
-            app:popUpTo="@+id/prescriptionsShareFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/prescriptionsShareFragment" />
     </fragment>
     <fragment
         android:id="@+id/prescriptionsShareFragment"
         android:name="com.alexandros.e_health.activities.PrescriptionsShareFragment"
-        android:label="PrescriptionsShareFragment" >
+        android:label="PrescriptionsShareFragment"
+        tools:layout="@layout/fragment_prescriptions_share">
         <action
             android:id="@+id/action_prescriptionsShareFragment_to_prescriptionsFragment"
-            app:destination="@id/navigation_prescriptions"
-            app:popUpTo="@+id/prescriptionsFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/navigation_prescriptions"/>
     </fragment>
 
     <fragment

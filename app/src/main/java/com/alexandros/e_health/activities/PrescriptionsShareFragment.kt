@@ -38,8 +38,14 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
             val arrayAdapter: ArrayAdapter<*>
             var myHospitalList=binding.hospitalsList
-            arrayAdapter= ArrayAdapter(requireActivity(),android.R.layout.simple_list_item_checked,arrayOfHospitals)
-            myHospitalList.adapter=arrayAdapter
+            try{
+                arrayAdapter= ArrayAdapter(requireActivity(),android.R.layout.simple_list_item_checked,arrayOfHospitals)
+                myHospitalList.adapter=arrayAdapter
+            }catch (e:Exception){
+                Log.d("ArrayAdapter", e.toString())
+            }
+
+
 
             binding.backToPrescriptions.setOnClickListener{
                 findNavController().navigate(R.id.action_prescriptionsShareFragment_to_prescriptionsFragment)
