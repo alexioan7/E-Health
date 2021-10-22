@@ -1,4 +1,4 @@
-package com.alexandros.e_health.viewmodels
+package com.alexandros.e_health.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -65,10 +65,10 @@ class PrescriptionsAdapter (
             recyclerviewPrescriptionsBinding.medicine.setText(presc.medicine)
             recyclerviewPrescriptionsBinding.date.setText(prescDate?.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
             recyclerviewPrescriptionsBinding.hospitalPrefecture.setText(presc.department.hospital.prefecture)
-            recyclerviewPrescriptionsBinding.hospitalName.setText(presc.department.hospital.name)
-            recyclerviewPrescriptionsBinding.hospitalDepartment.setText(presc.department.name)
-            recyclerviewPrescriptionsBinding.doctorSurname.setText(presc.doctor.surname)
-            recyclerviewPrescriptionsBinding.doctorName.setText(presc.doctor.name)
+            recyclerviewPrescriptionsBinding.hospitalName.setText(presc.department.hospital.name+","+presc.department.name)
+            recyclerviewPrescriptionsBinding.hospitalDepartment.setText("Department: "+presc.department.name)
+            //recyclerviewPrescriptionsBinding.doctorSurname.setText("Dr "+presc.doctor.surname)
+            recyclerviewPrescriptionsBinding.doctorName.setText("Dr "+presc.doctor.name+" "+presc.doctor.surname)
             recyclerviewPrescriptionsBinding.description.setText(presc.description)
             if(presc.dispensed){
                 recyclerviewPrescriptionsBinding.dispensed.visibility= View.VISIBLE

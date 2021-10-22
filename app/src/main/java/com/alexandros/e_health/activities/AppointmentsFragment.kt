@@ -12,10 +12,7 @@ import com.alexandros.e_health.api.responseModel.Appointment
 import com.alexandros.e_health.databinding.FragmentAppointmentsBinding
 import com.alexandros.e_health.repositories.AuthRepository
 import com.alexandros.e_health.viewmodels.AppointmentsViewModel
-import com.alexandros.e_health.viewmodels.PrescriptionsAdapter
 import com.alexandros.e_health.viewmodels.ViewModelFactory
-import kotlinx.android.synthetic.main.fragment_appointments.*
-import kotlinx.android.synthetic.main.fragment_prescriptions.*
 
 class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.HospitalsDetails
 import com.alexandros.e_health.databinding.FragmentPrescriptionsShareBinding
@@ -35,14 +36,23 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
             }
 
+            val arrayAdapter: ArrayAdapter<*>
+            var myHospitalList=binding.hospitalsList
+            arrayAdapter= ArrayAdapter(requireActivity(),android.R.layout.simple_list_item_checked,arrayOfHospitals)
+            myHospitalList.adapter=arrayAdapter
+
+            binding.backToPrescriptions.setOnClickListener{
+                findNavController().navigate(R.id.action_prescriptionsShareFragment_to_prescriptionsFragment)
+            }
+
+//            requireActivity().onBackPressedDispatcher.addCallback{
+//                findNavController().navigate(R.id.action_prescriptionsShareFragment_to_prescriptionsFragment)
+//            }
+
 
 
         })
 
-        val arrayAdapter: ArrayAdapter<*>
-        var myHospitalList=binding.hospitalsList
-        arrayAdapter= ArrayAdapter(requireActivity(),android.R.layout.simple_list_item_checked,arrayOfHospitals)
-        myHospitalList.adapter=arrayAdapter
 
 
     }

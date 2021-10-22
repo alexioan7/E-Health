@@ -41,7 +41,7 @@
         android:id="@+id/navigation_prescriptions"
         android:name="com.alexandros.e_health.activities.PrescriptionsFragment"
         android:label="@string/title_prescriptions"
-        tools:layout="@layout/fragment_prescriptions" >
+        tools:layout="@layout/fragment_prescriptions">
         <action
             android:id="@+id/action_navigation_prescriptions_to_navigation_personalinfo"
             app:destination="@id/navigation_personalinfo" />
@@ -53,7 +53,9 @@
             app:destination="@id/navigation_appointments" />
         <action
             android:id="@+id/action_prescriptionsFragment_to_prescriptionsShareFragment"
-            app:destination="@id/prescriptionsShareFragment" />
+            app:destination="@id/prescriptionsShareFragment"
+            app:popUpTo="@+id/prescriptionsShareFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/prescriptionsShareFragment"
@@ -61,7 +63,9 @@
         android:label="PrescriptionsShareFragment" >
         <action
             android:id="@+id/action_prescriptionsShareFragment_to_prescriptionsFragment"
-            app:destination="@id/navigation_prescriptions" />
+            app:destination="@id/navigation_prescriptions"
+            app:popUpTo="@+id/prescriptionsFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment

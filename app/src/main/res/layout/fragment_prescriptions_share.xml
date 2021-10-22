@@ -29,10 +29,21 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.942"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hospitals_list"
-        app:layout_constraintVertical_bias="0.005" />
+        app:layout_constraintVertical_bias="0.038" />
+
+    <TextView
+        android:id="@+id/back_to_prescriptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="Back to prescriptions"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.06" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

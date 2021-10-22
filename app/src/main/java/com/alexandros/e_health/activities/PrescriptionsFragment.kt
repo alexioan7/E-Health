@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.PrescriptionDetails
 import com.alexandros.e_health.databinding.FragmentPrescriptionsBinding
-import com.alexandros.e_health.utils.toast
-import com.alexandros.e_health.viewmodels.PrescriptionsAdapter
+import com.alexandros.e_health.adapters.PrescriptionsAdapter
 import com.alexandros.e_health.viewmodels.PrescriptionsViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -52,7 +51,7 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
             binding.recyclerviewPrescriptions.adapter=adapter2
 
             adapter2.shareClicks.onEach {
-                toast("Test for click channel",requireActivity())
+                //toast("Test for click channel",requireActivity())
                 findNavController().navigate(R.id.action_prescriptionsFragment_to_prescriptionsShareFragment)
 
             }.launchIn(lifecycleScope)
