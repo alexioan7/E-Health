@@ -85,7 +85,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
     }
 
     override fun OnSuccessPrescriptionShare(hospitalName: String) {
-        toast("You successfully shared your prescription to" + hospitalName, activity)
+        toast("You successfully shared your prescription to $hospitalName", activity)
     }
 
     override fun OnFailurePrescriptionShare(){
