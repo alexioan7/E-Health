@@ -10,9 +10,11 @@ import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.HospitalsDetails
 import com.alexandros.e_health.databinding.FragmentPrescriptionsShareBinding
+import com.alexandros.e_health.repositories.AuthRepository
 import com.alexandros.e_health.utils.toast
 import com.alexandros.e_health.viewmodels.AuthFunctionsSharePrescriptions
 import com.alexandros.e_health.viewmodels.PrescriptionsShareViewModel
+import com.alexandros.e_health.viewmodels.ViewModelFactory
 
 class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share) ,AuthFunctionsSharePrescriptions{
 
@@ -23,8 +25,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPrescriptionsShareBinding.bind(view)
-        viewmodel =
-            ViewModelProvider(requireActivity()).get(PrescriptionsShareViewModel::class.java)
+        viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(PrescriptionsShareViewModel::class.java)
         val arrayOfHospitals = ArrayList<String>()
         //val arrayOfHospitalPrefectures=ArrayList<String>()
 
