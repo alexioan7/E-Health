@@ -10,7 +10,7 @@ import com.alexandros.e_health.repositories.AuthRepository
 class PrescriptionsShareViewModel(private val authRepo: AuthRepository): ViewModel() {
 
 
-    var authListener: AuthFunctionsSharePrescriptions? = null
+    var authListenerpresc: AuthFunctionsSharePrescriptions? = null
 
     private val _hospitals=MutableLiveData<HospitalsUserResponse>()
     val hospitals: LiveData<HospitalsUserResponse>
@@ -40,12 +40,12 @@ class PrescriptionsShareViewModel(private val authRepo: AuthRepository): ViewMod
         authRepo.requestSharePrescriptions(hospitalID,prescriptionsID,fun(){
             if(getStatusFromSharePrescriptions()=="fail"){
                 Log.d("ON FAILED","Share prescription failed")
-                authListener?.OnFailurePrescriptionShare()
+                authListenerpresc?.onFailurePrescriptionShare()
 
                 //Toast.makeText(, "Something went wrong",Toast.LENGTH_LONG).show()
 
             }else{
-                authListener?.OnSuccessPrescriptionShare(hospitalName)
+                authListenerpresc?.onSuccessPrescriptionShare(hospitalName)
                 Log.d("On Success","Share prescription succeed")
             }
 

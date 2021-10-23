@@ -28,6 +28,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(PrescriptionsShareViewModel::class.java)
         val arrayOfHospitals = ArrayList<String>()
         //val arrayOfHospitalPrefectures=ArrayList<String>()
+        viewmodel.authListenerpresc=this
 
         viewmodel.requestHospitals()
         viewmodel.getHospitalsFromRepo().observe(requireActivity(), {
@@ -69,7 +70,9 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
                 binding.sharebutton.setOnClickListener {
                     viewmodel.onShareButtonClick(hospital_name,hospital_id,prescription_id.toString())
+
                 }
+
 
             }
 
@@ -85,11 +88,13 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
     }
 
-    override fun OnSuccessPrescriptionShare(hospitalName: String) {
-        toast("You successfully shared your prescription to $hospitalName", activity)
+    override fun onSuccessPrescriptionShare(hospitalName: String) {
+       Log.d("In success","In onsuccssPrescriptionShare")
+        toast("You successfully shared your prescription with $hospitalName", activity)
+        //Toast.makeText(activity, "You successfully shared your prescription with $hospitalName", Toast.LENGTH_SHORT).show()
     }
 
-    override fun OnFailurePrescriptionShare(){
+    override fun onFailurePrescriptionShare(){
         toast("Something went wrong",activity)
     }
 

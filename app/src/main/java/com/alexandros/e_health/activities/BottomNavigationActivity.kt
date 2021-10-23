@@ -41,6 +41,7 @@ class BottomNavigationActivity : AppCompatActivity() {
         prescriptionsShareViewModel= ViewModelProvider(this, ViewModelFactory(AuthRepository)).get(PrescriptionsShareViewModel::class.java)
 
         binding.personalinfoviewmodel = viewModel
+
         prescriptionsBinding.prescriptionsviewmodel = prescriptionsViewModel
 
 
