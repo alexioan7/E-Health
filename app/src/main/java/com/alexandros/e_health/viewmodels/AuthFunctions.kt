@@ -5,4 +5,5 @@ interface AuthFunctions {
     fun OnStarted()
     fun OnSuccess()
     fun OnFailure(errorCode: MutableList<Int>)
+
 }

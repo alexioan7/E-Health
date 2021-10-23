@@ -19,12 +19,14 @@ object AuthRepository {
 
     val userDataFromLogin: SingleLiveEvent<LoginUserResponse> = SingleLiveEvent()
     var statusFromLogin: String = ""
+    var statusFromSharePrescriptions: String = " "
 
     val userInfoFromRemoteData: MutableLiveData<MyProfileResponse> = MutableLiveData()
     val userPrescriptionsFromRemoteData: MutableLiveData<PrescriptionsUserResponse> = MutableLiveData()
     val userDiagnosesFromRemoteData: MutableLiveData<DiagnosesUserResponse> = MutableLiveData()
     val userAppointmentsFromRemoteData: MutableLiveData<UserApointmentsResponse> = MutableLiveData()
     val hospitalsFromRemoteData: MutableLiveData<HospitalsUserResponse> =MutableLiveData()
+    val prescriptionsShareResponse: SingleLiveEvent<PrescriptionsShareResponse> = SingleLiveEvent()
 
     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
@@ -192,6 +194,54 @@ object AuthRepository {
             })
 
     }
+
+    fun requestSharePrescriptions(hospital: String, prescription: String, callback: () -> Unit){
+        val dataSource = RetrofitBuilder()
+
+        Log.i(TAG, "Share prescriptions: Call started")
+        val body = PrescriptionsShareBody(hospital,prescription)
+        dataSource.getRetrofit()
+            .sharePrescriptions(body)
+            .enqueue(object : Callback<PrescriptionsShareResponse> {
+                override fun onResponse(
+                    call: Call<PrescriptionsShareResponse>,
+                    response: Response<PrescriptionsShareResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(TAG, "onResponse: Response Successful")
+                        prescriptionsShareResponse.postValue(response.body())
+                        statusFromSharePrescriptions=""
+                        callback()
+
+                    } else {
+                        try {
+                            val responseObj: ErrorResponse = gson.fromJson(
+                                response.errorBody()?.string(),
+                                ErrorResponse::class.java
+                            )
+                            statusFromSharePrescriptions = responseObj.status
+                            Log.d("FAILURE MESSAGE", statusFromSharePrescriptions.toString())
+                            callback()
+                        } catch (e: Exception) {
+                            statusFromSharePrescriptions = "Something Went Wrong"
+                            Log.d("IN CATCH", statusFromSharePrescriptions.toString())
+                            callback()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<PrescriptionsShareResponse>, t: Throwable) {
+                    Log.i(TAG, "onFailure: " + t.message)
+                    callback()
+                }
+            })
+
+
+    }
+
+
+
+
 
     fun requestDiagnoses() {
         val dataSource = RetrofitBuilder()

@@ -30,6 +30,11 @@ interface ApiInterface {
     @GET("hospitals")
     fun getShareHospitals(): Call<HospitalsUserResponse>
 
+    @POST("sharePrescriptions")
+    fun sharePrescriptions(
+        @Body body: PrescriptionsShareBody
+    ): Call<PrescriptionsShareResponse>
+
     @GET("diagnoses")
     fun getUserDiagnoses(): Call<DiagnosesUserResponse>
 

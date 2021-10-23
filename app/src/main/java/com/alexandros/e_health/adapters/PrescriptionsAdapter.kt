@@ -1,7 +1,7 @@
 package com.alexandros.e_health.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +9,7 @@ import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.PrescriptionDetails
 import com.alexandros.e_health.databinding.PrescriptionItemBinding
 import com.alexandros.e_health.utils.MongoDateAdapter
+import kotlinx.android.synthetic.main.prescription_item.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.RENDEZVOUS
@@ -70,8 +71,14 @@ class PrescriptionsAdapter (
             //recyclerviewPrescriptionsBinding.doctorSurname.setText("Dr "+presc.doctor.surname)
             recyclerviewPrescriptionsBinding.doctorName.setText("Dr "+presc.doctor.name+" "+presc.doctor.surname)
             recyclerviewPrescriptionsBinding.description.setText(presc.description)
+
+            if(!presc.dispensed && !presc.active){
+                recyclerviewPrescriptionsBinding.dispensed.setTextColor(Color.RED)
+                recyclerviewPrescriptionsBinding.dispensed.setText("Expired")
+            }
             if(presc.dispensed){
-                recyclerviewPrescriptionsBinding.dispensed.visibility= View.VISIBLE
+                recyclerviewPrescriptionsBinding.dispensed.setTextColor(Color.BLUE)
+                recyclerviewPrescriptionsBinding.dispensed.dispensed.setText("Dispensed")
             }
             recyclerviewPrescriptionsBinding.shareButton.setOnClickListener {
                 shareClicksChannel.offer(presc)

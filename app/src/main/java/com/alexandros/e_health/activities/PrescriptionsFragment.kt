@@ -3,15 +3,16 @@ package com.alexandros.e_health.activities
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexandros.e_health.R
+import com.alexandros.e_health.adapters.PrescriptionsAdapter
 import com.alexandros.e_health.api.responseModel.PrescriptionDetails
 import com.alexandros.e_health.databinding.FragmentPrescriptionsBinding
-import com.alexandros.e_health.adapters.PrescriptionsAdapter
 import com.alexandros.e_health.viewmodels.PrescriptionsViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -41,6 +42,7 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
         viewmodel.getUserPrescriptionsFromRepo().observe(requireActivity(), {
             Log.d("PRESCRIPTIONS!!", it.data.prescriptions.toString())
             val prescriptions = it.data.prescriptions
+
             presc = prescriptions
             initRecyclerView()
 //            prescriptions.forEach {it2 ->
@@ -52,7 +54,9 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
 
             adapter2.shareClicks.onEach {
                 //toast("Test for click channel",requireActivity())
-                findNavController().navigate(R.id.action_prescriptionsFragment_to_prescriptionsShareFragment)
+                val bundle= bundleOf("prescriptionID" to it._id)
+
+                findNavController().navigate(R.id.action_prescriptionsFragment_to_prescriptionsShareFragment,bundle)
 
             }.launchIn(lifecycleScope)
         })

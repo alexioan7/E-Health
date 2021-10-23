@@ -57,7 +57,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
     override fun OnStarted() {
         Log.d("Login fragment", "Login...")
 //        Toast.makeText(activity, "Login", Toast.LENGTH_LONG).show()
-        toast("Login...", activity)
+       toast("Login...", activity)
 
     }
 

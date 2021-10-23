@@ -13,14 +13,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/listview_share_prescriptions"
+        tools:listitem="@layout/prescription_share_item"
         android:layout_margin="10dp"
         android:padding="10dp"
-        android:divider="@android:color/darker_gray"/>
+        android:divider="@android:color/darker_gray"
+        android:listSelector="#362196F3"
+        android:choiceMode="singleChoice"/>
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/sharebutton"
         android:layout_width="135dp"
         android:layout_height="59dp"
         android:backgroundTint="#362196F3"
@@ -42,7 +44,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/sharebutton"
         app:layout_constraintVertical_bias="0.06" />
 
 
