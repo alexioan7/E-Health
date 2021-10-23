@@ -34,9 +34,6 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
         viewmodel = ViewModelProvider(requireActivity()).get(PrescriptionsViewModel::class.java)
 
 
-
-
-
         viewmodel.requestUserPrescriptions()
 
         viewmodel.getUserPrescriptionsFromRepo().observe(requireActivity(), {
@@ -55,6 +52,7 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
             adapter2.shareClicks.onEach {
                 //toast("Test for click channel",requireActivity())
                 val bundle= bundleOf("prescriptionID" to it._id)
+
 
                 findNavController().navigate(R.id.action_prescriptionsFragment_to_prescriptionsShareFragment,bundle)
 

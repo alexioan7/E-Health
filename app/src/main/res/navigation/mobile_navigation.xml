@@ -35,6 +35,24 @@
         <action
             android:id="@+id/action_navigation_diagnoses_to_navigation_appointments"
             app:destination="@id/navigation_appointments" />
+        <action
+            android:id="@+id/action_diagnosesFragment_to_diagnosesShareFragment"
+            app:destination="@id/diagnosesShareFragment" >
+            <argument
+                android:name="diagnosisID"
+                app:argType="string"
+                android:defaultValue="1" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/diagnosesShareFragment"
+        android:name="com.alexandros.e_health.activities.DiagnosesShareFragment"
+        android:label="DiagnosesShareFragment"
+        tools:layout="@layout/fragment_diagnoses_share">
+        <action
+            android:id="@+id/action_diagnosesShareFragment_to_diagnosesFragment"
+            app:destination="@id/navigation_diagnoses"/>
     </fragment>
 
     <fragment
@@ -66,10 +84,6 @@
         android:name="com.alexandros.e_health.activities.PrescriptionsShareFragment"
         android:label="PrescriptionsShareFragment"
         tools:layout="@layout/fragment_prescriptions_share">
-        <argument
-            android:name="prescriptionID"
-            app:argType="string"
-            android:defaultValue="0" />
         <action
             android:id="@+id/action_prescriptionsShareFragment_to_prescriptionsFragment"
             app:destination="@id/navigation_prescriptions"/>

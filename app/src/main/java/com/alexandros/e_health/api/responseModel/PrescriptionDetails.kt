@@ -1,5 +1,6 @@
 package com.alexandros.e_health.api.responseModel
 
+
 data class PrescriptionDetails (
     val dispensed: Boolean,
     val createdAt: String,

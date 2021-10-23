@@ -9,27 +9,26 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.HospitalsDetails
-import com.alexandros.e_health.databinding.FragmentPrescriptionsShareBinding
+import com.alexandros.e_health.databinding.FragmentDiagnosesShareBinding
 import com.alexandros.e_health.repositories.AuthRepository
 import com.alexandros.e_health.utils.toast
-import com.alexandros.e_health.viewmodels.AuthFunctionsSharePrescriptions
-import com.alexandros.e_health.viewmodels.PrescriptionsShareViewModel
+import com.alexandros.e_health.viewmodels.AuthFunctionsShareDiagnoses
+import com.alexandros.e_health.viewmodels.DiagnosesShareViewModel
 import com.alexandros.e_health.viewmodels.ViewModelFactory
 
-class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share) ,AuthFunctionsSharePrescriptions{
+class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthFunctionsShareDiagnoses{
 
-    private lateinit var binding: FragmentPrescriptionsShareBinding
-    private lateinit var viewmodel: PrescriptionsShareViewModel
+    private lateinit var binding: FragmentDiagnosesShareBinding
+    private lateinit var viewmodel: DiagnosesShareViewModel
     private val hosp = mutableListOf<HospitalsDetails>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentPrescriptionsShareBinding.bind(view)
-        viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(PrescriptionsShareViewModel::class.java)
+        binding = FragmentDiagnosesShareBinding.bind(view)
+        viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(DiagnosesShareViewModel::class.java)
         val arrayOfHospitals = ArrayList<String>()
-        val arrayOfSharedPrescriptions = ArrayList<String>()
         //val arrayOfHospitalPrefectures=ArrayList<String>()
-        viewmodel.authListenerpresc=this
+        viewmodel.authListenerdiag=this
 
         viewmodel.requestHospitals()
         viewmodel.getHospitalsFromRepo().observe(requireActivity(), {
@@ -47,45 +46,30 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
             var arrayAdapter: ArrayAdapter<*>
             var myHospitalList = binding.hospitalsList
-
-            //for the list with the shared prescriptions
-//            var arrayAdapterShared: ArrayAdapter<*>
-//            var mySharedPrescriptions=binding.sharedPrescriptionsList
-//            //arrayAdapter= ArrayAdapter(requireActivity(),android.R.layout.simple_list_item_checked,arrayOfHospitals)
-//            arrayAdapterShared= ArrayAdapter(
-//                requireActivity(),
-//                android.R.layout.simple_list_item_1,
-//                arrayOfSharedPrescriptions
-//
-//            )
-//            mySharedPrescriptions.adapter=arrayAdapterShared
+            //arrayAdapter= ArrayAdapter(requireActivity(),android.R.layout.simple_list_item_checked,arrayOfHospitals)
             try {
                 arrayAdapter = ArrayAdapter(
                     requireActivity(),
                     android.R.layout.simple_list_item_checked,
                     arrayOfHospitals
                 )
-
                 myHospitalList.adapter = arrayAdapter
-
             } catch (e: Exception) {
                 Log.d("ArrayAdapter", e.toString())
             }
 
-            val prescid = arguments?.getString("prescriptionID")
-            Log.d("Prescription id:", "$prescid")
+            val diagid = arguments?.getString("diagnosisID")
+            Log.d("Diagnosis id:", "$diagid")
 
             binding.hospitalsList.setOnItemClickListener { parent, view, position, id ->
                 val element = parent.getItemAtPosition(position)
                 Log.d("Item in hospitals", "$element")
                 var hospital_id = hosp[position]._id
-                var prescription_id = prescid
+                var diagnosis_id = diagid
                 var hospital_name=hosp[position].name
 
                 binding.sharebutton.setOnClickListener {
-                    viewmodel.onShareButtonClick(hospital_name,hospital_id,prescription_id.toString())
-
-
+                    viewmodel.onShareButtonClick(hospital_name,hospital_id,diagnosis_id.toString())
 
                 }
 
@@ -95,7 +79,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
 
             binding.backToPrescriptions.setOnClickListener {
-                findNavController().navigate(R.id.action_prescriptionsShareFragment_to_prescriptionsFragment)
+                findNavController().navigate(R.id.action_diagnosesShareFragment_to_diagnosesFragment)
             }
 
 
@@ -104,13 +88,13 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
     }
 
-    override fun onSuccessPrescriptionShare(hospitalName: String) {
-       Log.d("In success","In onsuccssPrescriptionShare")
-        toast("You successfully shared your prescription with $hospitalName", activity)
+    override fun onSuccessDiagnosesShare(hospitalName: String)  {
+        Log.d("In success","In onsuccssPrescriptionShare")
+        toast("You have successfully shared your diagnosis with $hospitalName", activity)
         //Toast.makeText(activity, "You successfully shared your prescription with $hospitalName", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onFailurePrescriptionShare(){
+    override fun onFailureDiagnosesShare(){
         toast("Something went wrong",activity)
     }
 

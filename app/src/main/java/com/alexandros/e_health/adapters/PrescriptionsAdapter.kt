@@ -69,7 +69,7 @@ class PrescriptionsAdapter (
             recyclerviewPrescriptionsBinding.hospitalName.setText(presc.department.hospital.name+","+presc.department.name)
             recyclerviewPrescriptionsBinding.hospitalDepartment.setText("Department: "+presc.department.name)
             //recyclerviewPrescriptionsBinding.doctorSurname.setText("Dr "+presc.doctor.surname)
-            recyclerviewPrescriptionsBinding.doctorName.setText("Dr "+presc.doctor.name+" "+presc.doctor.surname)
+            recyclerviewPrescriptionsBinding.doctorName.setText("Dr "+presc.doctor.surname+" "+presc.doctor.name)
             recyclerviewPrescriptionsBinding.description.setText(presc.description)
 
             if(!presc.dispensed && !presc.active){

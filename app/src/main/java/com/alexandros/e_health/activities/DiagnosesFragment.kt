@@ -3,8 +3,11 @@ package com.alexandros.e_health.activities
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexandros.e_health.R
 import com.alexandros.e_health.adapters.DiagnosesAdapter
@@ -12,8 +15,9 @@ import com.alexandros.e_health.api.responseModel.DiagnosisDetails
 import com.alexandros.e_health.databinding.FragmentDiagnosesBinding
 import com.alexandros.e_health.repositories.AuthRepository
 import com.alexandros.e_health.viewmodels.DiagnosesViewModel
-
 import com.alexandros.e_health.viewmodels.ViewModelFactory
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class DiagnosesFragment : Fragment(R.layout.fragment_diagnoses) {
 
@@ -39,6 +43,17 @@ class DiagnosesFragment : Fragment(R.layout.fragment_diagnoses) {
 //                diagnoses.add(DiagnosisDetails(it2.createdAt, it2._id, it2.department, it2.user, it2.doctor, it2.description))
 //                initRecyclerView()
 //            }
+
+            val adapter2= DiagnosesAdapter(diagnoses,lifecycleScope)
+            binding.recyclerviewDiagnoses.adapter=adapter2
+
+            adapter2.shareClicks.onEach {
+                //toast("Test for click channel",requireActivity())
+                val bundle= bundleOf("diagnosisID" to it._id)
+
+                findNavController().navigate(R.id.action_diagnosesFragment_to_diagnosesShareFragment,bundle)
+
+            }.launchIn(lifecycleScope)
         })
 
 
@@ -47,7 +62,7 @@ class DiagnosesFragment : Fragment(R.layout.fragment_diagnoses) {
     private fun initRecyclerView(){
         binding.recyclerviewDiagnoses.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = DiagnosesAdapter(diagnoses)
+            adapter = DiagnosesAdapter(diagnoses,lifecycleScope)
         }
     }
 }
