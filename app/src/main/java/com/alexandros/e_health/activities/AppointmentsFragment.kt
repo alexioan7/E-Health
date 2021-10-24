@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexandros.e_health.R
 import com.alexandros.e_health.adapters.AppointmentsAdapter
@@ -58,6 +59,10 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
 //                initRecyclerView()
 //            }
         })
+
+        binding.createAppointmentButton.setOnClickListener {
+            goToCreateAppointmentFragment()
+        }
     }
 
     private fun initRecyclerView() {
@@ -65,5 +70,10 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
             layoutManager = LinearLayoutManager(activity)
             adapter = AppointmentsAdapter(appointments)
         }
+    }
+
+
+    private fun goToCreateAppointmentFragment() {
+        findNavController().navigate(R.id.action_navigation_appointments_to_createAppointmentFragment)
     }
 }
