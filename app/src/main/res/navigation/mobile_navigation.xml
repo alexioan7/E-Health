@@ -66,5 +66,17 @@
         <action
             android:id="@+id/action_appointmentsFragment_to_navigation_personalinfo"
             app:destination="@id/navigation_personalinfo" />
+        <action
+            android:id="@+id/action_navigation_appointments_to_createAppointmentFragment"
+            app:destination="@id/navigation_create_appointment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_create_appointment"
+        android:name="com.alexandros.e_health.activities.CreateAppointmentFragment"
+        android:label="fragment_create_appointment"
+        tools:layout="@layout/fragment_create_appointment" >
+        <action
+            android:id="@+id/action_createAppointmentFragment_to_navigation_appointments"
+            app:destination="@id/navigation_appointments" />
     </fragment>
 </navigation>

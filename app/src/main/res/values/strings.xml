@@ -12,4 +12,15 @@
     <string name="title_prescriptions">Prescriptions</string>
     <string name="title_appointments">Appointments</string>
 
+    <string-array name="Prefectures">
+        <item>Attica</item>
+        <item>Thessaloniki</item>
+        <item>Pella</item>
+        <item>Rodopi</item>
+        <item>Rethymno</item>
+        <item>Magnesia</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
