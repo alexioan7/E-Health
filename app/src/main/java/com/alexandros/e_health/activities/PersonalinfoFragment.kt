@@ -52,6 +52,7 @@ class PersonalinfoFragment : Fragment(R.layout.fragment_personalinfotest) {
             email.text = it.data.user.email
             phoneNumber.text = it.data.user.phoneNumber
             bloodType.text = it.data.user.bloodtype
+            welcomeText.text="Welcome, ${it.data.user.name}"
             "${it.data.user.familyDoctor.name} ${it.data.user.familyDoctor.surname}".also { familyDoctor.text = it }
         }
 
