@@ -3,7 +3,6 @@ package com.alexandros.e_health.activities
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -51,8 +50,11 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions) {
 
             adapter2.shareClicks.onEach {
                 //toast("Test for click channel",requireActivity())
-                val bundle= bundleOf("prescriptionID" to it._id)
+                //val bundle= bundleOf("prescriptionID" to it._id)
 
+                val bundle = Bundle()
+                bundle.putString("prescriptionID",it._id)
+                bundle.putString("prescriptionName",it.medicine)
 
                 findNavController().navigate(R.id.action_prescriptionsFragment_to_prescriptionsShareFragment,bundle)
 

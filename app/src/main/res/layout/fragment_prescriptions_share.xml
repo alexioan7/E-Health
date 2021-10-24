@@ -6,21 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/welcome_prescription_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:textSize="18sp"
+        android:text="Please select a hospital you want to share your prescription with"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <ListView
         android:id="@+id/hospitals_list"
         android:layout_width="415dp"
         android:layout_height="301dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/prescription_share_item"
         android:layout_margin="10dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
+        android:layout_marginTop="4dp"
+        android:choiceMode="singleChoice"
         android:divider="@android:color/darker_gray"
         android:listSelector="#362196F3"
-        android:choiceMode="singleChoice"/>
-
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_prescription_share"
+        tools:listitem="@layout/prescription_share_item" />
 
     <Button
         android:id="@+id/sharebutton"
@@ -32,9 +44,10 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hospitals_list"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.145" />
 
     <TextView
         android:id="@+id/back_to_prescriptions"

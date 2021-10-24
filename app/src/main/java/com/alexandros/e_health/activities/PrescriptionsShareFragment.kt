@@ -74,6 +74,9 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
             val prescid = arguments?.getString("prescriptionID")
             Log.d("Prescription id:", "$prescid")
+            val prescname=arguments?.getString("prescriptionName")
+            Log.d("Prescription name:", "$prescname")
+
 
             binding.hospitalsList.setOnItemClickListener { parent, view, position, id ->
                 val element = parent.getItemAtPosition(position)
