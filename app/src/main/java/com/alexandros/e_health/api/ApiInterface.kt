@@ -6,6 +6,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiInterface {
 
@@ -37,6 +38,9 @@ interface ApiInterface {
 
     @GET("diagnoses")
     fun getUserDiagnoses(): Call<DiagnosesUserResponse>
+
+    @GET("diagnoses")
+    fun getUserDiagnosesFromDate(@Query("createdAt[gt]") date:String):  Call<DiagnosesUserResponse>
 
     @POST("shareDiagnoses")
     fun shareDiagnoses(

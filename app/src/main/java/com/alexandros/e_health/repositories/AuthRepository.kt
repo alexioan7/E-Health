@@ -274,6 +274,31 @@ object AuthRepository {
 
     }
 
+    fun requestDiagnosesFromDate(date: String) {
+        val dataSource = RetrofitBuilder()
+        Log.i(TAG, "Diagnoses response: Call is started")
+        dataSource.getRetrofit()
+            .getUserDiagnosesFromDate(date)
+            .enqueue(object : Callback<DiagnosesUserResponse> {
+                override fun onResponse(
+                    call: Call<DiagnosesUserResponse>,
+                    response: Response<DiagnosesUserResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(AuthRepository.TAG, "onResponse: Response Successful")
+                        userDiagnosesFromRemoteData.postValue(response.body())
+
+                    }
+                }
+
+                override fun onFailure(call: Call<DiagnosesUserResponse>, t: Throwable) {
+                    Log.i(AuthRepository.TAG, "onFailure: " + t.message)
+                }
+
+            })
+
+    }
+
     fun requestShareDiagnoses(hospital: String, diagnosis: String, callback: () -> Unit){
         val dataSource = RetrofitBuilder()
 

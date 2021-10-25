@@ -15,7 +15,8 @@
         android:usesCleartextTraffic="true">
 
 
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.MainActivity"
+                  android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +25,8 @@
         </activity>
         <activity
             android:name=".activities.BottomNavigationActivity"
-            android:configChanges="uiMode"/>
+            android:configChanges="uiMode"
+            android:screenOrientation="portrait" />
 
 
     </application>
