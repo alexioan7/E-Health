@@ -20,7 +20,7 @@
             android:id="@+id/perfecture_selection_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="Please select your preferred hospital"
             android:textAlignment="textStart"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -30,7 +30,6 @@
             android:id="@+id/hospitals_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/Prefectures"
             android:spinnerMode="dropdown" />
 
         <TextView
