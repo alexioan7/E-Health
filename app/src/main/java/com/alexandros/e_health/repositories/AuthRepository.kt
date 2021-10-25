@@ -19,11 +19,16 @@ object AuthRepository {
 
     val userDataFromLogin: SingleLiveEvent<LoginUserResponse> = SingleLiveEvent()
     var statusFromLogin: String = ""
+    var statusFromSharePrescriptions: String = " "
+    var statusFromShareDiagnoses: String=" "
 
     val userInfoFromRemoteData: MutableLiveData<MyProfileResponse> = MutableLiveData()
     val userPrescriptionsFromRemoteData: MutableLiveData<PrescriptionsUserResponse> = MutableLiveData()
     val userDiagnosesFromRemoteData: MutableLiveData<DiagnosesUserResponse> = MutableLiveData()
     val userAppointmentsFromRemoteData: MutableLiveData<UserApointmentsResponse> = MutableLiveData()
+    val hospitalsFromRemoteData: MutableLiveData<HospitalsUserResponse> =MutableLiveData()
+    val prescriptionsShareResponse: SingleLiveEvent<PrescriptionsShareResponse> = SingleLiveEvent()
+    val diagnosisShareResponse: SingleLiveEvent<DiagnosesShareResponse> = SingleLiveEvent()
 
     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
@@ -167,6 +172,79 @@ object AuthRepository {
 
     }
 
+    fun requestHospitals() {
+        val dataSource = RetrofitBuilder()
+        Log.i(AuthRepository.TAG, "get Hospitals response: Call is started")
+        dataSource.getRetrofit()
+            .getShareHospitals()
+            .enqueue(object : Callback<HospitalsUserResponse> {
+                override fun onResponse(
+                    call: Call<HospitalsUserResponse>,
+                    response: Response<HospitalsUserResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(AuthRepository.TAG, "onResponse: Response Successful")
+                       hospitalsFromRemoteData.postValue(response.body())
+
+                    }
+                }
+
+                override fun onFailure(call: Call<HospitalsUserResponse>, t: Throwable) {
+                    Log.i(AuthRepository.TAG, "onFailure: " + t.message)
+
+                }
+            })
+
+    }
+
+    fun requestSharePrescriptions(hospital: String, prescription: String, callback: () -> Unit){
+        val dataSource = RetrofitBuilder()
+
+        Log.i(TAG, "Share prescriptions: Call started")
+        val body = PrescriptionsShareBody(hospital,prescription)
+        dataSource.getRetrofit()
+            .sharePrescriptions(body)
+            .enqueue(object : Callback<PrescriptionsShareResponse> {
+                override fun onResponse(
+                    call: Call<PrescriptionsShareResponse>,
+                    response: Response<PrescriptionsShareResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(TAG, "onResponse: Response Successful")
+                        prescriptionsShareResponse.postValue(response.body())
+                        statusFromSharePrescriptions=""
+                        callback()
+
+                    } else {
+                        try {
+                            val responseObj: ErrorResponse = gson.fromJson(
+                                response.errorBody()?.string(),
+                                ErrorResponse::class.java
+                            )
+                            statusFromSharePrescriptions = responseObj.status
+                            Log.d("FAILURE MESSAGE", statusFromSharePrescriptions.toString())
+                            callback()
+                        } catch (e: Exception) {
+                            statusFromSharePrescriptions = "Something Went Wrong"
+                            Log.d("IN CATCH", statusFromSharePrescriptions.toString())
+                            callback()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<PrescriptionsShareResponse>, t: Throwable) {
+                    Log.i(TAG, "onFailure: " + t.message)
+                    callback()
+                }
+            })
+
+
+    }
+
+
+
+
+
     fun requestDiagnoses() {
         val dataSource = RetrofitBuilder()
         Log.i(TAG, "Diagnoses response: Call is started")
@@ -189,6 +267,75 @@ object AuthRepository {
                 }
 
             })
+
+    }
+
+    fun requestDiagnosesFromDate(date: String) {
+        val dataSource = RetrofitBuilder()
+        Log.i(TAG, "Diagnoses response: Call is started")
+        dataSource.getRetrofit()
+            .getUserDiagnosesFromDate(date)
+            .enqueue(object : Callback<DiagnosesUserResponse> {
+                override fun onResponse(
+                    call: Call<DiagnosesUserResponse>,
+                    response: Response<DiagnosesUserResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(AuthRepository.TAG, "onResponse: Response Successful")
+                        userDiagnosesFromRemoteData.postValue(response.body())
+
+                    }
+                }
+
+                override fun onFailure(call: Call<DiagnosesUserResponse>, t: Throwable) {
+                    Log.i(AuthRepository.TAG, "onFailure: " + t.message)
+                }
+
+            })
+
+    }
+
+    fun requestShareDiagnoses(hospital: String, diagnosis: String, callback: () -> Unit){
+        val dataSource = RetrofitBuilder()
+
+        Log.i(TAG, "Share diagnoses: Call started")
+        val body = DiagnosesShareBody(hospital,diagnosis)
+        dataSource.getRetrofit()
+            .shareDiagnoses(body)
+            .enqueue(object : Callback<DiagnosesShareResponse> {
+                override fun onResponse(
+                    call: Call<DiagnosesShareResponse>,
+                    response: Response<DiagnosesShareResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(TAG, "onResponse: Response Successful")
+                        diagnosisShareResponse.postValue(response.body())
+                        statusFromShareDiagnoses=""
+                        callback()
+
+                    } else {
+                        try {
+                            val responseObj: ErrorResponse = gson.fromJson(
+                                response.errorBody()?.string(),
+                                ErrorResponse::class.java
+                            )
+                            statusFromShareDiagnoses= responseObj.status
+                            Log.d("FAILURE MESSAGE", statusFromShareDiagnoses.toString())
+                            callback()
+                        } catch (e: Exception) {
+                            statusFromShareDiagnoses= "Something Went Wrong"
+                            Log.d("IN CATCH", statusFromShareDiagnoses.toString())
+                            callback()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<DiagnosesShareResponse>, t: Throwable) {
+                    Log.i(TAG, "onFailure: " + t.message)
+                    callback()
+                }
+            })
+
 
     }
 
