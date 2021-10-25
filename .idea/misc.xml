@@ -8,6 +8,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/E-Health/app/src/main/res/layout/apointment_item.xml" value="0.264945652173913" />
+        <entry key="..\:/AndroidProjects/E-Health/app/src/main/res/layout/diagnosis_item.xml" value="0.264945652173913" />
+        <entry key="..\:/AndroidProjects/E-Health/app/src/main/res/layout/fragment_create_appointment.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidProjects/E-Health/app/src/main/res/layout/fragment_diagnoses.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidProjects/E-Health/app/src/main/res/layout/fragment_personalinfo.xml" value="0.264945652173913" />
+        <entry key="..\:/AndroidProjects/E-Health/app/src/main/res/layout/fragment_personalinfotest.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidProjects/E-Health/app/src/main/res/layout/fragment_prescriptions.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidProjects/E-Health/app/src/main/res/layout/fragment_register.xml" value="0.20520833333333333" />
+        <entry key="..\:/AndroidProjects/E-Health/app/src/main/res/layout/prescription_share_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.3125" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/drawable/ic_baseline_local_phone_24.xml" value="0.2677083333333333" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/drawable/ic_email.xml" value="0.2677083333333333" />

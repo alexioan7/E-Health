@@ -32,6 +32,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
         //the loginviewmodel is the variable from the activity_main.xml (sth like object of type loginScreenViewmodel)
         //this will bind our data with the UI
         binding.registerviewmodel = viewmodel
+
         viewmodel.authListener = this
         binding.tvLogin.setOnClickListener {
             navRegister()

@@ -19,7 +19,7 @@ object AuthRepository {
 
     val userDataFromLogin: SingleLiveEvent<LoginUserResponse> = SingleLiveEvent()
     var statusFromLogin: String = ""
-    var statusFromSharePrescriptions: String = " "
+    var statusFromSharePrescriptions: ErrorResponse? = null
     var statusFromShareDiagnoses: String=" "
 
     val userInfoFromRemoteData: MutableLiveData<MyProfileResponse> = MutableLiveData()
@@ -29,6 +29,8 @@ object AuthRepository {
     val hospitalsFromRemoteData: MutableLiveData<HospitalsUserResponse> =MutableLiveData()
     val prescriptionsShareResponse: SingleLiveEvent<PrescriptionsShareResponse> = SingleLiveEvent()
     val diagnosisShareResponse: SingleLiveEvent<DiagnosesShareResponse> = SingleLiveEvent()
+    val failureMessageFromSharePrescriptions: SingleLiveEvent<String> = SingleLiveEvent()
+    val failureMessageFromShareDiagnoses: SingleLiveEvent<String> = SingleLiveEvent()
 
     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
@@ -212,7 +214,7 @@ object AuthRepository {
                     if (response.isSuccessful && response.body() != null) {
                         Log.i(TAG, "onResponse: Response Successful")
                         prescriptionsShareResponse.postValue(response.body())
-                        statusFromSharePrescriptions=""
+                        statusFromSharePrescriptions=null
                         callback()
 
                     } else {
@@ -221,12 +223,14 @@ object AuthRepository {
                                 response.errorBody()?.string(),
                                 ErrorResponse::class.java
                             )
-                            statusFromSharePrescriptions = responseObj.status
-                            Log.d("FAILURE MESSAGE", statusFromSharePrescriptions.toString())
+                            statusFromSharePrescriptions = responseObj
+                            //failureMessageFromSharePrescriptions.postValue(responseObj.message)
+                            //Log.d("FAILURE MESSAGE", statusFromSharePrescriptions.toString())
                             callback()
                         } catch (e: Exception) {
-                            statusFromSharePrescriptions = "Something Went Wrong"
+                            statusFromSharePrescriptions = ErrorResponse("Error", "Something went wrong")
                             Log.d("IN CATCH", statusFromSharePrescriptions.toString())
+                            failureMessageFromSharePrescriptions.postValue("Something Went Wrong")
                             callback()
                         }
                     }
@@ -321,10 +325,12 @@ object AuthRepository {
                             )
                             statusFromShareDiagnoses= responseObj.status
                             Log.d("FAILURE MESSAGE", statusFromShareDiagnoses.toString())
+                            failureMessageFromShareDiagnoses.postValue(responseObj.message)
                             callback()
                         } catch (e: Exception) {
                             statusFromShareDiagnoses= "Something Went Wrong"
                             Log.d("IN CATCH", statusFromShareDiagnoses.toString())
+                            failureMessageFromShareDiagnoses.postValue("Something went wrong")
                             callback()
                         }
                     }

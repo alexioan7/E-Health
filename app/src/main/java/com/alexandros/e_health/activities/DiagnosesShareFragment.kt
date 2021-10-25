@@ -94,8 +94,8 @@ class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthF
         //Toast.makeText(activity, "You successfully shared your prescription with $hospitalName", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onFailureDiagnosesShare(){
-        toast("Something went wrong",activity)
+    override fun onFailureDiagnosesShare(failuremessage: String){
+        toast("$failuremessage",activity)
     }
 
 

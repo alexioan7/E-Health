@@ -24,12 +24,13 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding = FragmentPrescriptionsShareBinding.bind(view)
         viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(PrescriptionsShareViewModel::class.java)
         val arrayOfHospitals = ArrayList<String>()
         val arrayOfSharedPrescriptions = ArrayList<String>()
         //val arrayOfHospitalPrefectures=ArrayList<String>()
-        viewmodel.authListenerpresc=this
+        viewmodel.authListenerpresc = this
 
         viewmodel.requestHospitals()
         viewmodel.getHospitalsFromRepo().observe(requireActivity(), {
@@ -111,8 +112,8 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         //Toast.makeText(activity, "You successfully shared your prescription with $hospitalName", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onFailurePrescriptionShare(){
-        toast("Something went wrong",activity)
+    override fun onFailurePrescriptionShare(failuremessage: String){
+        toast("$failuremessage",activity)
     }
 
 

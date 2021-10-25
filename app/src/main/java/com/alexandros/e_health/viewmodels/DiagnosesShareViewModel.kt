@@ -40,7 +40,7 @@ class DiagnosesShareViewModel(private val authRepo: AuthRepository): ViewModel()
         authRepo.requestShareDiagnoses(hospitalID,diagnosisID,fun(){
             if(getStatusFromShareDiagnoses()=="fail"){
                 Log.d("ON FAILED","Share diagnoses failed")
-                authListenerdiag?.onFailureDiagnosesShare()
+                authListenerdiag?.onFailureDiagnosesShare(authRepo.failureMessageFromShareDiagnoses.toString())
 
                 //Toast.makeText(, "Something went wrong",Toast.LENGTH_LONG).show()
 
