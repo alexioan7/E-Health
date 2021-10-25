@@ -13,17 +13,27 @@
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/drawable/ic_email.xml" value="0.2677083333333333" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/drawable/ic_person.xml" value="0.2677083333333333" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/drawable/ic_stethoscope.xml" value="0.2677083333333333" />
-        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.33" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.25" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/diagnoses_share_item.xml" value="0.2677083333333333" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/diagnosis_item.xml" value="0.33" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_appointments.xml" value="0.29635416666666664" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_diagnoses.xml" value="0.259375" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_diagnoses_share.xml" value="0.2677083333333333" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_login.xml" value="0.23020833333333332" />
-        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_personalinfo.xml" value="0.33" />
-        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_personalinfotest.xml" value="0.19479166666666667" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_personalinfo.xml" value="0.25" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_personalinfotest.xml" value="0.25" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_prescriptions.xml" value="0.259375" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_prescriptions_share.xml" value="0.22" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/fragment_register.xml" value="0.24270833333333333" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/listview_share_prescriptions.xml" value="0.25" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/pop_up_menu_share.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/prescription_item.xml" value="0.33" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/prescription_share_item.xml" value="0.25" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/prescriptions_share_fragment.xml" value="0.20364583333333333" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/layout/recyclerview_prescriptions.xml" value="0.33" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/menu/bottom_nav_menu.xml" value="0.29635416666666664" />
+        <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/menu/pop_up_menu_share.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/mipmap-anydpi-v26/ic_stethoscope.xml" value="0.2677083333333333" />
         <entry key="..\:/Users/dimit/StudioProjects/E-Health/app/src/main/res/mipmap-anydpi-v26/ic_stethoscope_round.xml" value="0.221875" />
         <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/activity_main.xml" value="0.24895833333333334" />
@@ -33,17 +43,9 @@
         <entry key="..\:/Users/kotch/AndroidStudioProjects/E-Health/app/src/main/res/layout/fragment_register.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/activity_bottom_navigation.xml" value="0.23177083333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/apointment_card.xml" value="0.28804347826086957" />
-        <entry key="app/src/main/res/layout/apointment_card_layout.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_appointments.xml" value="0.28804347826086957" />
-        <entry key="app/src/main/res/layout/fragment_diagnoses.xml" value="0.28804347826086957" />
         <entry key="app/src/main/res/layout/fragment_personalinfo.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_personalinfotest.xml" value="0.2109375" />
-        <entry key="app/src/main/res/layout/fragment_prescriptions.xml" value="0.3052536231884058" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.14351851851851852" />
-        <entry key="app/src/main/res/layout/layout_diagnosis.xml" value="0.321875" />
-        <entry key="app/src/main/res/layout/prescription_item.xml" value="0.37604166666666666" />
-        <entry key="app/src/main/res/layout/recyclerview_prescriptions.xml" value="0.3052536231884058" />
       </map>
     </option>
   </component>

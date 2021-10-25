@@ -35,13 +35,31 @@
         <action
             android:id="@+id/action_navigation_diagnoses_to_navigation_appointments"
             app:destination="@id/navigation_appointments" />
+        <action
+            android:id="@+id/action_diagnosesFragment_to_diagnosesShareFragment"
+            app:destination="@id/diagnosesShareFragment" >
+            <argument
+                android:name="diagnosisID"
+                app:argType="string"
+                android:defaultValue="1" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/diagnosesShareFragment"
+        android:name="com.alexandros.e_health.activities.DiagnosesShareFragment"
+        android:label="DiagnosesShareFragment"
+        tools:layout="@layout/fragment_diagnoses_share">
+        <action
+            android:id="@+id/action_diagnosesShareFragment_to_diagnosesFragment"
+            app:destination="@id/navigation_diagnoses"/>
     </fragment>
 
     <fragment
         android:id="@+id/navigation_prescriptions"
         android:name="com.alexandros.e_health.activities.PrescriptionsFragment"
         android:label="@string/title_prescriptions"
-        tools:layout="@layout/fragment_prescriptions" >
+        tools:layout="@layout/fragment_prescriptions">
         <action
             android:id="@+id/action_navigation_prescriptions_to_navigation_personalinfo"
             app:destination="@id/navigation_personalinfo" />
@@ -51,7 +69,26 @@
         <action
             android:id="@+id/action_navigation_prescriptions_to_navigation_appointments"
             app:destination="@id/navigation_appointments" />
+        <action
+
+            android:id="@+id/action_prescriptionsFragment_to_prescriptionsShareFragment"
+            app:destination="@id/prescriptionsShareFragment">
+        <argument
+            android:name="prescriptionID"
+            app:argType="string"
+            android:defaultValue="1" />
+        </action>
     </fragment>
+    <fragment
+        android:id="@+id/prescriptionsShareFragment"
+        android:name="com.alexandros.e_health.activities.PrescriptionsShareFragment"
+        android:label="PrescriptionsShareFragment"
+        tools:layout="@layout/fragment_prescriptions_share">
+        <action
+            android:id="@+id/action_prescriptionsShareFragment_to_prescriptionsFragment"
+            app:destination="@id/navigation_prescriptions"/>
+    </fragment>
+
     <fragment
         android:id="@+id/navigation_appointments"
         android:name="com.alexandros.e_health.activities.AppointmentsFragment"
