@@ -30,8 +30,4 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
 
 
 
-
-
-
-
 }
