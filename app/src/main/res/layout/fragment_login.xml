@@ -76,17 +76,17 @@
 
         <Button
             android:id="@+id/btnlogin"
-            android:onClick="@{loginviewmodel::onLoginButtonClick}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="#104685"
+            android:onClick="@{loginviewmodel::onLoginButtonClick}"
             android:text="Log in"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewError" />
 
         <TextView
             android:id="@+id/textViewGoToRegister"
@@ -106,6 +106,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/textViewError"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:textColor="#ff0000"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

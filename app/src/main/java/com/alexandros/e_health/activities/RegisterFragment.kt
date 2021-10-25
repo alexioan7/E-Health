@@ -17,6 +17,7 @@ import com.alexandros.e_health.repositories.AuthRepository
 import com.alexandros.e_health.viewmodels.AuthFunctions
 import com.alexandros.e_health.viewmodels.AuthScreenViewModel
 import com.alexandros.e_health.viewmodels.ViewModelFactory
+import java.time.Duration
 
 class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
 
@@ -43,7 +44,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
     }
 
     override fun OnStarted() {
-
+        Toast.makeText(requireContext(),"Register...", Toast.LENGTH_LONG).show()
+        binding.btnRegister.setEnabled(false)
         binding.textViewHealthIdError.visibility = View.INVISIBLE
         binding.textViewEmailError.visibility = View.INVISIBLE
         binding.textViewPhoneNumberError.visibility = View.INVISIBLE
@@ -56,24 +58,19 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
 
     override fun OnSuccess() {
         Log.d("RegisterFragment", "Succeed..")
-        binding.btnRegister.visibility = View.GONE
-        binding.progressCircular.visibility = View.VISIBLE
         //Log.i("VIEWMODEL", viewmodel.getRegisteredUserDataFromRepo().value?.status.toString())
         viewmodel.getRegisteredUserDataFromRepo().observe(requireActivity(), {
             Log.i("VIEWMODEL", "OnSuccess: ${it?.token}")
-            binding.progressCircular.visibility = View.GONE
-            binding.btnRegister.visibility = View.VISIBLE
             navRegister()
         })
-
-        binding.btnRegister.visibility = View.VISIBLE
-        binding.progressCircular.visibility = View.GONE
         viewmodel.getFailureMessageFromRegister().observe(requireActivity(), {
             Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
         })
+        binding.btnRegister.setEnabled(true)
     }
 
     override fun OnFailure(errorCodes: MutableList<Int>) {
+        binding.btnRegister.setEnabled(true)
         for(error in errorCodes) {
             if (error == 910) {
                 binding.textViewHealthIdError.visibility = View.VISIBLE
