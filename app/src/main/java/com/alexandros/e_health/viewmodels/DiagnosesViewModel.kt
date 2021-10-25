@@ -23,6 +23,10 @@ class DiagnosesViewModel(private val authRepo: AuthRepository) : ViewModel() {
 
     }
 
+    fun requestUserDiagnosesFromDate(date:String){
+        authRepo.requestDiagnosesFromDate(date)
+    }
+
 
     fun getUserDiagnosesFromRepo(): MutableLiveData<DiagnosesUserResponse> {
         return authRepo.userDiagnosesFromRemoteData
