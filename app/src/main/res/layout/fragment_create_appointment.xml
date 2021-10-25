@@ -20,17 +20,15 @@
             android:id="@+id/perfecture_selection_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="Please select hospital"
             android:textAlignment="textStart"
             android:textSize="20sp"
-            android:textStyle="bold"
-            tools:text="Please select your prefecture" />
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/hospitals_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/Prefectures"
             android:spinnerMode="dropdown" />
 
         <TextView
@@ -38,17 +36,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="TextView"
+            android:text="Please select department"
             android:textAlignment="textStart"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="Please select your hospital" />
+             />
 
         <Spinner
             android:id="@+id/department_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/Prefectures"
             android:spinnerMode="dropdown" />
 
         <TextView
@@ -56,17 +53,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="TextView"
+            android:text="Please select available date"
             android:textAlignment="textStart"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="Please select your date" />
+             />
 
         <Spinner
             android:id="@+id/date_selection_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/Prefectures"
             android:spinnerMode="dropdown" />
 
         <Button

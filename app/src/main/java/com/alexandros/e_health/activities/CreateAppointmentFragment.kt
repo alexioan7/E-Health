@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.alexandros.e_health.R
+import com.alexandros.e_health.api.responseModel.Department
 import com.alexandros.e_health.api.responseModel.HospitalsDetails
 import com.alexandros.e_health.databinding.FragmentCreateAppointmentBinding
 import com.alexandros.e_health.repositories.AuthRepository
@@ -19,24 +20,28 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
     private lateinit var viewModel: CreateAppointmentViewModel
     private lateinit var binding: FragmentCreateAppointmentBinding
 
-    private var hospitalList= mutableListOf<HospitalsDetails>()
+    private var hospitalList = mutableListOf<HospitalsDetails>()
+    private var hospitalDepartmentsList = mutableListOf<Department>()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCreateAppointmentBinding.bind(view)
-        viewModel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(CreateAppointmentViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(
+            CreateAppointmentViewModel::class.java
+        )
         val arrayOfHospitals = ArrayList<String>()
 
-       viewModel.requestHospitals()
-        viewModel.getHospitalsFromRepo().observe(requireActivity(),{
-            val hospitals=it.data.hospitals
-            hospitals.forEach{it2->
+        viewModel.requestHospitals()
+        viewModel.getHospitalsFromRepo().observe(requireActivity(), {
+            val hospitals = it.data.hospitals
+            hospitals.forEach { it2 ->
                 hospitalList.add(HospitalsDetails(it2._id, it2.name, it2.prefecture))
-                arrayOfHospitals.add(it2.name+ ", "+it2.prefecture)
+                arrayOfHospitals.add(it2.name + ", " + it2.prefecture)
 
             }
-            var arrayHospitlasAdapter:ArrayAdapter<*>
-            var myHospitalList=binding.hospitalsSpinner
+            var arrayHospitlasAdapter: ArrayAdapter<*>
+            var myHospitalList = binding.hospitalsSpinner
             try {
                 arrayHospitlasAdapter = ArrayAdapter(
                     requireActivity(),
@@ -50,23 +55,62 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
                 Log.d("ArrayAdapter", e.toString())
             }
 
-            binding.hospitalsSpinner.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
-                override fun onNothingSelected(adapterView: AdapterView<*>?) {
+            binding.hospitalsSpinner.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(adapterView: AdapterView<*>?) {
 
+                    }
+
+                    override fun onItemSelected(
+                        adapterView: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        val hospital_id = hospitalList[position]._id
+                        val hospital_name = hospitalList[position].name
+                        var arrayOfHospitalDepartments = ArrayList<String>()
+                        var arrayHospitalDepartmentsAdapter: ArrayAdapter<*>
+                        var hospitalDepartmentsSpinner = binding.departmentSpinner
+                        viewModel.requestHospitalDepartments(hospital_id)
+                        viewModel.getHospitalDepartmentsFromRepo().observe(requireActivity(), {
+                            val hospitaldepartments = it.data.departments
+                            hospitaldepartments.forEach { it2 ->
+                                hospitalDepartmentsList.add(
+                                    Department(
+                                        it2.__v,
+                                        it2._id,
+                                        it2.hospital,
+                                        it2.name
+                                    )
+                                )
+                                arrayOfHospitalDepartments.add(it2.name)
+
+                            }
+
+                            try {
+                                arrayHospitalDepartmentsAdapter = ArrayAdapter(
+                                    requireActivity(),
+                                    android.R.layout.simple_spinner_dropdown_item,
+                                    arrayOfHospitalDepartments
+                                )
+
+                                hospitalDepartmentsSpinner.adapter = arrayHospitalDepartmentsAdapter
+
+
+                            } catch (e: Exception) {
+                                Log.d("ArrayAdapter", e.toString())
+                            }
+                        }
+
+
+                        )
+
+
+                    }
                 }
-
-                override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    val hospital_id=hospitalList[position]._id
-
-                }
-            }
 
 
         })
     }
-
-
-
-
-
 }

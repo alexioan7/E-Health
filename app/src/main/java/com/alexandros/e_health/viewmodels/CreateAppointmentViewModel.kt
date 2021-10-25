@@ -3,6 +3,7 @@ package com.alexandros.e_health.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.alexandros.e_health.api.responseModel.HospitalDepartmentsResponse
 import com.alexandros.e_health.api.responseModel.HospitalsUserResponse
 import com.alexandros.e_health.repositories.AuthRepository
 
@@ -21,6 +22,14 @@ class CreateAppointmentViewModel(private val authRepo: AuthRepository) : ViewMod
 
     fun getHospitalsFromRepo(): MutableLiveData<HospitalsUserResponse> {
         return authRepo.hospitalsFromRemoteData
+    }
+
+    fun requestHospitalDepartments(id: String){
+        authRepo.requestHospitalDepartments(id)
+    }
+
+    fun getHospitalDepartmentsFromRepo(): MutableLiveData<HospitalDepartmentsResponse>{
+        return authRepo.hospitalDepartmentFromRemoteData
     }
 
 }
