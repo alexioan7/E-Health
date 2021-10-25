@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:textSize="18sp"
         android:text="Please select a hospital you want to share your prescription with"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +47,7 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hospitals_list"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintVertical_bias="0.085" />
 
     <TextView
         android:id="@+id/back_to_prescriptions"
@@ -60,5 +60,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sharebutton"
         app:layout_constraintVertical_bias="0.06" />
+
+    <TextView
+        android:id="@+id/textview_shared_prescriptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="You have shared your prescription with:"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_to_prescriptions" />
+
+<!--    <ListView-->
+<!--        android:id="@+id/list_with_shared_hospitals"-->
+<!--        android:layout_width="395dp"-->
+<!--        android:layout_height="169dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textview_shared_prescriptions"-->
+<!--        tools:listitem="@layout/prescription_share_item" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

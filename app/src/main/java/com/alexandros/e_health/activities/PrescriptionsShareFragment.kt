@@ -49,16 +49,10 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
             var myHospitalList = binding.hospitalsList
 
             //for the list with the shared prescriptions
-//            var arrayAdapterShared: ArrayAdapter<*>
-//            var mySharedPrescriptions=binding.sharedPrescriptionsList
-//            //arrayAdapter= ArrayAdapter(requireActivity(),android.R.layout.simple_list_item_checked,arrayOfHospitals)
-//            arrayAdapterShared= ArrayAdapter(
-//                requireActivity(),
-//                android.R.layout.simple_list_item_1,
-//                arrayOfSharedPrescriptions
-//
-//            )
-//            mySharedPrescriptions.adapter=arrayAdapterShared
+           var arrayAdapterShared: ArrayAdapter<*>
+           //var mySharedPrescriptions=binding.listWithSharedHospitals
+//            arrayAdapter= ArrayAdapter(requireActivity(),android.R.layout.simple_list_item_checked,arrayOfHospitals)
+
             try {
                 arrayAdapter = ArrayAdapter(
                     requireActivity(),
@@ -67,6 +61,11 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
                 )
 
                 myHospitalList.adapter = arrayAdapter
+//                arrayAdapterShared= ArrayAdapter(
+//                    requireActivity(),
+//                    android.R.layout.simple_list_item_1,
+//                    arrayOfSharedPrescriptions
+//                )
 
             } catch (e: Exception) {
                 Log.d("ArrayAdapter", e.toString())
@@ -87,7 +86,6 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
                 binding.sharebutton.setOnClickListener {
                     viewmodel.onShareButtonClick(hospital_name,hospital_id,prescription_id.toString())
-
 
 
                 }
