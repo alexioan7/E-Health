@@ -111,8 +111,8 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         //Toast.makeText(activity, "You successfully shared your prescription with $hospitalName", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onFailurePrescriptionShare(){
-        toast("You have already shared your prescription with this hospital",activity)
+    override fun onFailurePrescriptionShare(failuremessage: String){
+        toast("$failuremessage",activity)
     }
 
 

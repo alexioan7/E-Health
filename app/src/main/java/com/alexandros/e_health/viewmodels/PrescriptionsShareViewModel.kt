@@ -40,7 +40,7 @@ class PrescriptionsShareViewModel(private val authRepo: AuthRepository): ViewMod
         authRepo.requestSharePrescriptions(hospitalID,prescriptionsID,fun(){
             if(getStatusFromSharePrescriptions()=="fail"){
                 Log.d("ON FAILED","Share prescription failed")
-                authListenerpresc?.onFailurePrescriptionShare()
+                authListenerpresc?.onFailurePrescriptionShare(authRepo.failureMessageFromSharePrescriptions.toString())
 
                 //Toast.makeText(, "Something went wrong",Toast.LENGTH_LONG).show()
 

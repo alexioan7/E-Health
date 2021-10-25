@@ -29,6 +29,8 @@ object AuthRepository {
     val hospitalsFromRemoteData: MutableLiveData<HospitalsUserResponse> =MutableLiveData()
     val prescriptionsShareResponse: SingleLiveEvent<PrescriptionsShareResponse> = SingleLiveEvent()
     val diagnosisShareResponse: SingleLiveEvent<DiagnosesShareResponse> = SingleLiveEvent()
+    val failureMessageFromSharePrescriptions: SingleLiveEvent<String> = SingleLiveEvent()
+    val failureMessageFromShareDiagnoses: SingleLiveEvent<String> = SingleLiveEvent()
 
     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
@@ -222,11 +224,13 @@ object AuthRepository {
                                 ErrorResponse::class.java
                             )
                             statusFromSharePrescriptions = responseObj.status
+                            failureMessageFromSharePrescriptions.postValue(responseObj.message)
                             Log.d("FAILURE MESSAGE", statusFromSharePrescriptions.toString())
                             callback()
                         } catch (e: Exception) {
-                            statusFromSharePrescriptions = "Something Went Wrong"
+                            statusFromSharePrescriptions = "fail"
                             Log.d("IN CATCH", statusFromSharePrescriptions.toString())
+                            failureMessageFromSharePrescriptions.postValue("Something Went Wrong")
                             callback()
                         }
                     }
@@ -296,10 +300,12 @@ object AuthRepository {
                             )
                             statusFromShareDiagnoses= responseObj.status
                             Log.d("FAILURE MESSAGE", statusFromShareDiagnoses.toString())
+                            failureMessageFromShareDiagnoses.postValue(responseObj.message)
                             callback()
                         } catch (e: Exception) {
                             statusFromShareDiagnoses= "Something Went Wrong"
                             Log.d("IN CATCH", statusFromShareDiagnoses.toString())
+                            failureMessageFromShareDiagnoses.postValue("Something went wrong")
                             callback()
                         }
                     }
