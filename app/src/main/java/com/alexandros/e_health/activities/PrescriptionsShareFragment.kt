@@ -112,7 +112,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
     }
 
     override fun onFailurePrescriptionShare(){
-        toast("Something went wrong",activity)
+        toast("You have already shared your prescription with this hospital",activity)
     }
 
 
