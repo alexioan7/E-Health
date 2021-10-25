@@ -27,7 +27,7 @@
             tools:text="Please select your prefecture" />
 
         <Spinner
-            android:id="@+id/prefectures_spinner"
+            android:id="@+id/hospitals_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/Prefectures"
@@ -45,7 +45,7 @@
             tools:text="Please select your hospital" />
 
         <Spinner
-            android:id="@+id/hospital_spinner"
+            android:id="@+id/department_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/Prefectures"
