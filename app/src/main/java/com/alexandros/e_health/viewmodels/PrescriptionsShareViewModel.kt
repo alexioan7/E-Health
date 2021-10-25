@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.alexandros.e_health.api.responseModel.ErrorResponse
 import com.alexandros.e_health.api.responseModel.HospitalsUserResponse
 import com.alexandros.e_health.repositories.AuthRepository
 
@@ -32,15 +33,18 @@ class PrescriptionsShareViewModel(private val authRepo: AuthRepository): ViewMod
 //        authRepo.requestSharePrescriptions()
 //    }
 
-    fun getStatusFromSharePrescriptions(): String{
+    fun getStatusFromSharePrescriptions(): ErrorResponse?{
         return authRepo.statusFromSharePrescriptions
     }
 
     fun sharePrescriptions(hospitalName: String,hospitalID: String, prescriptionsID: String){
         authRepo.requestSharePrescriptions(hospitalID,prescriptionsID,fun(){
-            if(getStatusFromSharePrescriptions()=="fail"){
+            if(getStatusFromSharePrescriptions() !=null){
                 Log.d("ON FAILED","Share prescription failed")
-                authListenerpresc?.onFailurePrescriptionShare(authRepo.failureMessageFromSharePrescriptions.toString())
+                authRepo.statusFromSharePrescriptions?.let {
+                    authListenerpresc?.onFailurePrescriptionShare(
+                        it.message)
+                }
 
                 //Toast.makeText(, "Something went wrong",Toast.LENGTH_LONG).show()
 

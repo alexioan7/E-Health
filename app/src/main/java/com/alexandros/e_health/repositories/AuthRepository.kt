@@ -19,7 +19,7 @@ object AuthRepository {
 
     val userDataFromLogin: SingleLiveEvent<LoginUserResponse> = SingleLiveEvent()
     var statusFromLogin: String = ""
-    var statusFromSharePrescriptions: String = " "
+    var statusFromSharePrescriptions: ErrorResponse? = null
     var statusFromShareDiagnoses: String=" "
 
     val userInfoFromRemoteData: MutableLiveData<MyProfileResponse> = MutableLiveData()
@@ -214,7 +214,7 @@ object AuthRepository {
                     if (response.isSuccessful && response.body() != null) {
                         Log.i(TAG, "onResponse: Response Successful")
                         prescriptionsShareResponse.postValue(response.body())
-                        statusFromSharePrescriptions=""
+                        statusFromSharePrescriptions=null
                         callback()
 
                     } else {
@@ -223,12 +223,12 @@ object AuthRepository {
                                 response.errorBody()?.string(),
                                 ErrorResponse::class.java
                             )
-                            statusFromSharePrescriptions = responseObj.status
-                            failureMessageFromSharePrescriptions.postValue(responseObj.message)
-                            Log.d("FAILURE MESSAGE", statusFromSharePrescriptions.toString())
+                            statusFromSharePrescriptions = responseObj
+                            //failureMessageFromSharePrescriptions.postValue(responseObj.message)
+                            //Log.d("FAILURE MESSAGE", statusFromSharePrescriptions.toString())
                             callback()
                         } catch (e: Exception) {
-                            statusFromSharePrescriptions = "fail"
+                            statusFromSharePrescriptions = ErrorResponse("Error", "Something went wrong")
                             Log.d("IN CATCH", statusFromSharePrescriptions.toString())
                             failureMessageFromSharePrescriptions.postValue("Something Went Wrong")
                             callback()
