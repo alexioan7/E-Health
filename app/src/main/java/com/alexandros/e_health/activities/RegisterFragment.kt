@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
 import com.alexandros.e_health.databinding.FragmentRegisterBinding
 import com.alexandros.e_health.repositories.AuthRepository
+import com.alexandros.e_health.utils.toast
 import com.alexandros.e_health.viewmodels.AuthFunctions
 import com.alexandros.e_health.viewmodels.AuthScreenViewModel
 import com.alexandros.e_health.viewmodels.ViewModelFactory
@@ -51,7 +52,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
         binding.textViewLastNameError.visibility = View.INVISIBLE
         binding.textViewPasswordError.visibility = View.INVISIBLE
         binding.textViewPasswordConfirmError.visibility = View.INVISIBLE
-
+        Log.d("register fragment", "Signing up...")
+//        Toast.makeText(activity, "Login", Toast.LENGTH_LONG).show()
+        toast("Sign up...", activity)
     }
 
     override fun OnSuccess() {
