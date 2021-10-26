@@ -77,7 +77,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
         Log.d("Login fragment", "Wrong Id or Password")
         binding.textViewError.visibility = View.VISIBLE
         binding.textViewError.setText("Wrong Health Identification Number or Password.")
-        //toast("Wrong Health Id or Password", activity)
+        toast("Wrong Health Id or Password", activity)
     }
 
 
