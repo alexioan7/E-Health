@@ -93,6 +93,7 @@ class DiagnosesFragment : Fragment(R.layout.fragment_diagnoses), DatePickerDialo
     }
 
     private fun clearFilter(){
+        binding.textViewErrorMessage.visibility = View.INVISIBLE
         binding.buttonClear.visibility = View.INVISIBLE
         binding.TextViewFilter.setText("")
 
@@ -117,6 +118,7 @@ class DiagnosesFragment : Fragment(R.layout.fragment_diagnoses), DatePickerDialo
     }
 
     override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
+        binding.textViewErrorMessage.visibility = View.INVISIBLE
         binding.buttonClear.visibility = View.VISIBLE
         binding.TextViewFilter.setText(p3.toString() + "/" + (p2+1).toString() + "/" + p1.toString() )
         viewmodel.requestUserDiagnosesFromDate(p1.toString() + "-" + (p2+1).toString() + "-" + p3.toString())
@@ -137,6 +139,14 @@ class DiagnosesFragment : Fragment(R.layout.fragment_diagnoses), DatePickerDialo
                 findNavController().navigate(R.id.action_diagnosesFragment_to_diagnosesShareFragment,bundle)
 
             }.launchIn(lifecycleScope)
+        })
+
+        viewmodel.getFailureMessageFromDiagnoses().observe(requireActivity(), {
+            diagnoses = emptyList<DiagnosisDetails>()
+            binding.textViewErrorMessage.visibility = View.VISIBLE
+            binding.textViewErrorMessage.text = it.toString()
+            updateAdapter()
+
         })
     }
 
