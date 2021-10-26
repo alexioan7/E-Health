@@ -7,6 +7,7 @@ import com.alexandros.e_health.api.responseModel.Doctor
 import com.alexandros.e_health.api.responseModel.Hospital
 import com.alexandros.e_health.api.responseModel.PrescriptionsUserResponse
 import com.alexandros.e_health.repositories.AuthRepository
+import com.alexandros.e_health.utils.SingleLiveEvent
 
 class PrescriptionsViewModel (private val authRepo: AuthRepository): ViewModel() {
 
@@ -25,13 +26,20 @@ class PrescriptionsViewModel (private val authRepo: AuthRepository): ViewModel()
 
      fun requestUserPrescriptions(){
           authRepo.requestPrescriptions()
-
-          }
+    }
 
 
     fun getUserPrescriptionsFromRepo(): MutableLiveData<PrescriptionsUserResponse> {
         return authRepo.userPrescriptionsFromRemoteData
 
+    }
+
+    fun requestUserPrescriptionsFromDate(date:String){
+        authRepo.requestPrescriptionsFromDate(date)
+    }
+
+    fun getFailureMessageFromPrescriptions(): SingleLiveEvent<String> {
+        return authRepo.failureMessageFromPrescriptions
     }
 
 

@@ -24,6 +24,7 @@ object AuthRepository {
 
     val userInfoFromRemoteData: MutableLiveData<MyProfileResponse> = MutableLiveData()
     val userPrescriptionsFromRemoteData: MutableLiveData<PrescriptionsUserResponse> = MutableLiveData()
+    val failureMessageFromPrescriptions: SingleLiveEvent<String> = SingleLiveEvent()
     val userDiagnosesFromRemoteData: MutableLiveData<DiagnosesUserResponse> = MutableLiveData()
     val failureMessageFromDiagnoses: SingleLiveEvent<String> = SingleLiveEvent()
     val userAppointmentsFromRemoteData: MutableLiveData<UserApointmentsResponse> = MutableLiveData()
@@ -176,6 +177,40 @@ object AuthRepository {
                     Log.i(AuthRepository.TAG, "onFailure: " + t.message)
 
                 }
+            })
+    }
+
+    fun requestPrescriptionsFromDate(date: String) {
+        val dataSource = RetrofitBuilder()
+        Log.i(TAG, "Prescriptions response: Call is started")
+        dataSource.getRetrofit()
+            .getUserPrescriptionsFromDate(date)
+            .enqueue(object : Callback<PrescriptionsUserResponse> {
+                override fun onResponse(
+                    call: Call<PrescriptionsUserResponse>,
+                    response: Response<PrescriptionsUserResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(AuthRepository.TAG, "onResponse: Response Successful")
+                        userPrescriptionsFromRemoteData.postValue(response.body())
+                    }else {
+                        try {
+                            val responseObj: ErrorResponse = gson.fromJson(
+                                response.errorBody()?.string(),
+                                ErrorResponse::class.java
+                            )
+                            failureMessageFromPrescriptions.postValue(responseObj.message)
+                        } catch (e: Exception) {
+                            failureMessageFromPrescriptions.postValue("Something Went Wrong")
+                        }
+
+                    }
+                }
+
+                override fun onFailure(call: Call<PrescriptionsUserResponse>, t: Throwable) {
+                    Log.i(AuthRepository.TAG, "onFailure: " + t.message)
+                }
+
             })
 
     }
