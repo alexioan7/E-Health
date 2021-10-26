@@ -20,32 +20,15 @@
         android:background="?android:attr/colorBackground"
         tools:context=".activities.MainActivity">
 
-        <TextView
-            android:id="@+id/appname"
-            android:layout_width="246dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="64dp"
-            android:text="e-Health"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="152dp"
-            android:layout_height="90dp"
-            android:layout_marginTop="32dp"
-            android:src="@drawable/healthcare_logo"
+            android:layout_width="252dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/logo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appname" />
-
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:text="@={loginviewmodel.id}"
@@ -53,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
-            android:background="@drawable/input_bg"
+            android:background="@drawable/input_bg_selector"
             android:drawableLeft="@drawable/ic_person"
             android:drawablePadding="5dp"
             android:ems="10"
@@ -74,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/input_bg"
+            android:background="@drawable/input_bg_selector"
             android:drawableLeft="@drawable/ic_key"
             android:drawablePadding="5dp"
             android:ems="10"
@@ -93,24 +76,25 @@
 
         <Button
             android:id="@+id/btnlogin"
-            android:onClick="@{loginviewmodel::onLoginButtonClick}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@color/black"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#104685"
+            android:onClick="@{loginviewmodel::onLoginButtonClick}"
             android:text="Log in"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewError" />
 
         <TextView
             android:id="@+id/textViewGoToRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Dont have an Account"
+            android:textColor="#104685"
+            android:text="Dont have an Account? Register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -122,6 +106,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/textViewError"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:textColor="#ff0000"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
