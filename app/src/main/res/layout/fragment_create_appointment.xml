@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,16 +9,95 @@
     tools:context=".activities.CreateAppointmentFragment">
 
 
-    <Spinner
-        android:id="@+id/prefectures_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/Prefectures"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/perfecture_selection_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please select hospital"
+            android:textAlignment="textStart"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/hospitals_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:id="@+id/hospital_selection_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Please select department"
+            android:textAlignment="textStart"
+            android:textSize="20sp"
+            android:textStyle="bold"
+             />
+
+        <Spinner
+            android:id="@+id/department_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:id="@+id/date_selection_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Please select available date"
+            android:textAlignment="textStart"
+            android:textSize="20sp"
+            android:textStyle="bold"
+             />
+
+        <TextView
+            android:id="@+id/selected_date_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#362196F3 "
+            android:drawableStart="@drawable/ic_calendar"
+            android:drawablePadding="5dp"
+            android:textAlignment="textStart"
+            android:clickable="true"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+
+
+        <TextView
+            android:id="@+id/timeslot_selection_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Please select available timeslot"
+            android:textAlignment="textStart"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+        <Spinner
+            android:id="@+id/time_selection_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown" />
+
+        <Button
+            android:id="@+id/confirm_appointment_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="Confirm" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
