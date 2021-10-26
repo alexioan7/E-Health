@@ -212,6 +212,7 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
             viewModel.requestToCreateAppointment(selectedDate,selectedTimeslot,selectedDepartmentId)
             viewModel.getResponseDataFromCreateAppointment().observe(requireActivity(),{
                 if(it?.status == "success"){
+                    Toast.makeText(requireContext(), "Appointment confirmed", Toast.LENGTH_SHORT).show()
                     goToAppointmentFragment()
                 }else{
 
