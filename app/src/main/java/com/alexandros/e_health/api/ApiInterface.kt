@@ -28,6 +28,9 @@ interface ApiInterface {
     @GET("prescriptions")
     fun getUserPrescriptions(): Call<PrescriptionsUserResponse>
 
+    @GET("prescriptions")
+    fun getUserPrescriptionsFromDate(@Query("createdAt[gt]") date:String):  Call<PrescriptionsUserResponse>
+
     @GET("hospitals")
     fun getShareHospitals(): Call<HospitalsUserResponse>
 
