@@ -21,7 +21,8 @@ object AuthRepository {
     var statusFromLogin: String = ""
     var statusFromSharePrescriptions: ErrorResponse? = null
     var statusFromHospitalByPresc: ErrorResponse? = null
-    var statusFromShareDiagnoses: String=" "
+    var statusFromHospitalByDiag: ErrorResponse? = null
+    var statusFromShareDiagnoses: ErrorResponse? = null
 
     val userInfoFromRemoteData: MutableLiveData<MyProfileResponse> = MutableLiveData()
     val userPrescriptionsFromRemoteData: MutableLiveData<PrescriptionsUserResponse> = MutableLiveData()
@@ -33,6 +34,7 @@ object AuthRepository {
     val failureMessageFromSharePrescriptions: SingleLiveEvent<String> = SingleLiveEvent()
     val failureMessageFromShareDiagnoses: SingleLiveEvent<String> = SingleLiveEvent()
     val hospitalsByPrescFromRemoteData: MutableLiveData<HospitalsUserResponse> = MutableLiveData()
+    val hospitalsByDiagFromRemoteData: MutableLiveData<HospitalsUserResponse> = MutableLiveData()
 
     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
@@ -273,6 +275,32 @@ object AuthRepository {
 
     }
 
+    fun requestHospitalsByDiag(diagId: String, callback: () -> Unit) {
+        val dataSource = RetrofitBuilder()
+        Log.i(TAG, "Hospitals response by diagnosis: Call is started")
+        dataSource.getRetrofit()
+            .getHospitalsByDiag(diagId)
+            .enqueue(object : Callback<HospitalsUserResponse> {
+                override fun onResponse(
+                    call: Call<HospitalsUserResponse>,
+                    response: Response<HospitalsUserResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(AuthRepository.TAG, "onResponse: Response Successful")
+                        hospitalsByDiagFromRemoteData.postValue(response.body())
+                        callback()
+                    }
+                }
+
+                override fun onFailure(call: Call<HospitalsUserResponse>, t: Throwable) {
+                    Log.i(AuthRepository.TAG, "onFailure: " + t.message)
+                    callback()
+                }
+
+            })
+
+    }
+
 
 
     fun requestDiagnoses() {
@@ -328,7 +356,7 @@ object AuthRepository {
     fun requestShareDiagnoses(hospital: String, diagnosis: String, callback: () -> Unit){
         val dataSource = RetrofitBuilder()
 
-        Log.i(TAG, "Share diagnoses: Call started")
+        Log.i(TAG, "Share prescriptions: Call started")
         val body = DiagnosesShareBody(hospital,diagnosis)
         dataSource.getRetrofit()
             .shareDiagnoses(body)
@@ -339,8 +367,8 @@ object AuthRepository {
                 ) {
                     if (response.isSuccessful && response.body() != null) {
                         Log.i(TAG, "onResponse: Response Successful")
-                        diagnosisShareResponse.postValue(response.body())
-                        statusFromShareDiagnoses=""
+                       diagnosisShareResponse.postValue(response.body())
+                        statusFromShareDiagnoses=null
                         callback()
 
                     } else {
@@ -349,14 +377,14 @@ object AuthRepository {
                                 response.errorBody()?.string(),
                                 ErrorResponse::class.java
                             )
-                            statusFromShareDiagnoses= responseObj.status
-                            Log.d("FAILURE MESSAGE", statusFromShareDiagnoses.toString())
-                            failureMessageFromShareDiagnoses.postValue(responseObj.message)
+                            statusFromShareDiagnoses = responseObj
+                            //failureMessageFromSharePrescriptions.postValue(responseObj.message)
+                            //Log.d("FAILURE MESSAGE", statusFromSharePrescriptions.toString())
                             callback()
                         } catch (e: Exception) {
-                            statusFromShareDiagnoses= "Something Went Wrong"
+                            statusFromShareDiagnoses = ErrorResponse("Error", "Something went wrong")
                             Log.d("IN CATCH", statusFromShareDiagnoses.toString())
-                            failureMessageFromShareDiagnoses.postValue("Something went wrong")
+                            failureMessageFromShareDiagnoses.postValue("Something Went Wrong")
                             callback()
                         }
                     }

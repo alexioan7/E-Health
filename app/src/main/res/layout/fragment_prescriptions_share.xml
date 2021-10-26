@@ -44,10 +44,10 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hospitals_list"
-        app:layout_constraintVertical_bias="0.085" />
+        app:layout_constraintVertical_bias="0.027" />
 
     <TextView
         android:id="@+id/back_to_prescriptions"
@@ -74,11 +74,10 @@
 
     <ListView
         android:id="@+id/hospitalsByPrescList"
-        android:layout_width="395dp"
-        android:layout_height="169dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="412dp"
+        android:layout_height="171dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_shared_prescriptions"
         tools:listitem="@layout/prescription_share_item" />

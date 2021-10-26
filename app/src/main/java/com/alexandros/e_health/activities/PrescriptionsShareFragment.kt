@@ -19,7 +19,7 @@ import com.alexandros.e_health.viewmodels.AuthFunctionsSharePrescriptions
 import com.alexandros.e_health.viewmodels.PrescriptionsShareViewModel
 import com.alexandros.e_health.viewmodels.ViewModelFactory
 
-class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share) ,AuthFunctionsSharePrescriptions, AuthFunctionsHospitalByPresc{
+class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share) ,AuthFunctionsSharePrescriptions, AuthFunctionsHospitalByPresc {
 
     private lateinit var binding: FragmentPrescriptionsShareBinding
     private lateinit var viewmodel: PrescriptionsShareViewModel
@@ -32,10 +32,12 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         super.onViewCreated(view, savedInstanceState)
         val prescid = arguments?.getString("prescriptionID")
         Log.d("Prescription id:", "$prescid")
-        val prescname=arguments?.getString("prescriptionName")
+        val prescname = arguments?.getString("prescriptionName")
         Log.d("Prescription name:", "$prescname")
         binding = FragmentPrescriptionsShareBinding.bind(view)
-        viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(PrescriptionsShareViewModel::class.java)
+        viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(
+            PrescriptionsShareViewModel::class.java
+        )
 
 
         viewmodel.authListenerpresc = this
@@ -51,7 +53,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
             Log.d("Prescription id", it.data.hospitals.toString())
 
             var myHospitalByPrescList = binding.hospitalsByPrescList
-            try{
+            try {
                 arrayAdapterShared = ArrayAdapter(
                     requireActivity(),
                     android.R.layout.simple_list_item_1,
@@ -61,6 +63,8 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
             } catch (e: Exception) {
                 Log.d("ArrayAdapter", e.toString())
             }
+
+            Log.d("arrayd of shared prescriptions",arrayOfSharedPrescriptions.toString())
         })
 
         viewmodel.requestHospitals()
@@ -70,7 +74,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
             hosp.addAll(it.data.hospitals)
             hosp.removeAll(arrayOfSharedPrescriptions)
-            Log.d("hosp1", hosp[0]._id)
+//            Log.d("hosp1", hosp[0]._id)
 
             var myHospitalList = binding.hospitalsList
 
@@ -95,10 +99,16 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
                 Log.d("Item in hospitals", "$element")
                 var hospital_id = hosp[position]._id
                 var prescription_id = prescid
-                var hospital_name=hosp[position].name
+                var hospital_name = hosp[position].name
+                Log.d("Hospital id","$hospital_id")
+                Log.d("Prescription id","$prescid")
 
                 binding.sharebutton.setOnClickListener {
-                    viewmodel.onShareButtonClick(hospital_name,hospital_id,prescription_id.toString())
+                    viewmodel.onShareButtonClick(
+                        hospital_name,
+                        hospital_id,
+                        prescription_id.toString()
+                    )
                 }
             }
             binding.backToPrescriptions.setOnClickListener {
@@ -110,13 +120,14 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
     }
 
     override fun onSuccessPrescriptionShare(hospitalName: String) {
-       Log.d("In success","In onsuccssPrescriptionShare")
+        Log.d("In success", "In onsuccssPrescriptionShare")
         toast("You successfully shared your prescription with $hospitalName", activity)
+        arrayAdapterShared.notifyDataSetChanged()
         //Toast.makeText(activity, "You successfully shared your prescription with $hospitalName", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onFailurePrescriptionShare(failuremessage: String){
-        toast("$failuremessage",activity)
+    override fun onFailurePrescriptionShare(failuremessage: String) {
+        toast("$failuremessage", activity)
     }
 
     override fun onSuccessHospitalsByPresc(responseList: MutableLiveData<HospitalsUserResponse>) {
@@ -129,6 +140,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         hosp.clear()
         arrayOfSharedPrescriptions.clear()
     }
+
 
 
 
