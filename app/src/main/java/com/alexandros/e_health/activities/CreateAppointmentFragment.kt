@@ -22,6 +22,7 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
 
     private var hospitalList = mutableListOf<HospitalsDetails>()
     private var hospitalDepartmentsList = mutableListOf<Department>()
+    private lateinit  var arrayHospitalDepartmentsAdapter: ArrayAdapter<*>
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,13 +43,27 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
             }
             var arrayHospitlasAdapter: ArrayAdapter<*>
             var myHospitalList = binding.hospitalsSpinner
+
+            var arrayOfHospitalDepartments = mutableListOf<String>()
+            var hospitalDepartmentsSpinner = binding.departmentSpinner
+
+
+
             try {
                 arrayHospitlasAdapter = ArrayAdapter(
                     requireActivity(),
                     android.R.layout.simple_spinner_dropdown_item,
                     arrayOfHospitals
                 )
+
                 myHospitalList.adapter = arrayHospitlasAdapter
+                arrayHospitalDepartmentsAdapter = ArrayAdapter(
+                    requireActivity(),
+                    android.R.layout.simple_spinner_dropdown_item,
+                    arrayOfHospitalDepartments
+
+                )
+                hospitalDepartmentsSpinner.adapter = arrayHospitalDepartmentsAdapter
 
 
             } catch (e: Exception) {
@@ -69,11 +84,17 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
                     ) {
                         val hospital_id = hospitalList[position]._id
                         val hospital_name = hospitalList[position].name
-                        var arrayOfHospitalDepartments = ArrayList<String>()
-                        var arrayHospitalDepartmentsAdapter: ArrayAdapter<*>
-                        var hospitalDepartmentsSpinner = binding.departmentSpinner
+//                        var arrayOfHospitalDepartments = mutableListOf<String>()
+//                        var arrayHospitalDepartmentsAdapter: ArrayAdapter<*>
+
+
+
+                        Log.d("Hospital Departments List",hospitalDepartmentsList.toString())
                         viewModel.requestHospitalDepartments(hospital_id)
                         viewModel.getHospitalDepartmentsFromRepo().observe(requireActivity(), {
+
+                            arrayOfHospitalDepartments.clear()
+                            hospitalDepartmentsList.clear()
                             val hospitaldepartments = it.data.departments
                             hospitaldepartments.forEach { it2 ->
                                 hospitalDepartmentsList.add(
@@ -88,19 +109,23 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
 
                             }
 
-                            try {
-                                arrayHospitalDepartmentsAdapter = ArrayAdapter(
-                                    requireActivity(),
-                                    android.R.layout.simple_spinner_dropdown_item,
-                                    arrayOfHospitalDepartments
-                                )
+                            arrayHospitalDepartmentsAdapter.notifyDataSetChanged()
 
-                                hospitalDepartmentsSpinner.adapter = arrayHospitalDepartmentsAdapter
+//                            try {
+//                                arrayHospitalDepartmentsAdapter = ArrayAdapter(
+//                                    requireActivity(),
+//                                    android.R.layout.simple_spinner_dropdown_item,
+//                                    arrayOfHospitalDepartments
+//
+//                                )
 
 
-                            } catch (e: Exception) {
-                                Log.d("ArrayAdapter", e.toString())
-                            }
+
+
+//                            } catch (e: Exception) {
+//                                Log.d("ArrayAdapter", e.toString())
+//
+//                            }
                         }
 
 
