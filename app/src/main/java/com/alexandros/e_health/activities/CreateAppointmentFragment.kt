@@ -57,13 +57,7 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
                 )
 
                 myHospitalList.adapter = arrayHospitlasAdapter
-                arrayHospitalDepartmentsAdapter = ArrayAdapter(
-                    requireActivity(),
-                    android.R.layout.simple_spinner_dropdown_item,
-                    arrayOfHospitalDepartments
 
-                )
-                hospitalDepartmentsSpinner.adapter = arrayHospitalDepartmentsAdapter
 
 
             } catch (e: Exception) {
@@ -85,31 +79,39 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
                         val hospital_id = hospitalList[position]._id
                         val hospital_name = hospitalList[position].name
 //                        var arrayOfHospitalDepartments = mutableListOf<String>()
-//                        var arrayHospitalDepartmentsAdapter: ArrayAdapter<*>
-
-
+//                        var arrayHospitalDepartmentsAdapter: ArrayAdapter<*
 
                         Log.d("Hospital Departments List",hospitalDepartmentsList.toString())
                         viewModel.requestHospitalDepartments(hospital_id)
                         viewModel.getHospitalDepartmentsFromRepo().observe(requireActivity(), {
 
-                            arrayOfHospitalDepartments.clear()
-                            hospitalDepartmentsList.clear()
                             val hospitaldepartments = it.data.departments
-                            hospitaldepartments.forEach { it2 ->
-                                hospitalDepartmentsList.add(
-                                    Department(
-                                        it2.__v,
-                                        it2._id,
-                                        it2.hospital,
-                                        it2.name
-                                    )
+//                            hospitaldepartments.forEach { it2 ->
+//                                hospitalDepartmentsList.add(
+//                                    Department(
+//                                        it2.__v,
+//                                        it2._id,
+//                                        it2.hospital,
+//                                        it2.name
+//                                    )
+//                                )
+//                                arrayOfHospitalDepartments.add(it2.name)
+//
+//                            }
+
+                            try {
+                                arrayHospitalDepartmentsAdapter = ArrayAdapter(
+                                    requireActivity(),
+                                    android.R.layout.simple_spinner_dropdown_item,
+                                    hospitaldepartments
+
                                 )
-                                arrayOfHospitalDepartments.add(it2.name)
+                                hospitalDepartmentsSpinner.adapter = arrayHospitalDepartmentsAdapter
+                            }catch (e: Exception){
+                                Log.d("ArrayAdapter", e.toString())
+                        }
 
-                            }
 
-                            arrayHospitalDepartmentsAdapter.notifyDataSetChanged()
 
 //                            try {
 //                                arrayHospitalDepartmentsAdapter = ArrayAdapter(
