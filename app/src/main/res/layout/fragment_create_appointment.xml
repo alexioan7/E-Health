@@ -59,8 +59,34 @@
             android:textStyle="bold"
              />
 
+        <TextView
+            android:id="@+id/selected_date_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#362196F3 "
+            android:drawableStart="@drawable/ic_calendar"
+            android:drawablePadding="5dp"
+            android:textAlignment="textStart"
+            android:clickable="true"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+
+
+        <TextView
+            android:id="@+id/timeslot_selection_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Please select available timeslot"
+            android:textAlignment="textStart"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
         <Spinner
-            android:id="@+id/date_selection_spinner"
+            android:id="@+id/time_selection_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown" />

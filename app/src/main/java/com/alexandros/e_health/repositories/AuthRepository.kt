@@ -27,10 +27,13 @@ object AuthRepository {
     val userDiagnosesFromRemoteData: MutableLiveData<DiagnosesUserResponse> = MutableLiveData()
     val userAppointmentsFromRemoteData: MutableLiveData<UserApointmentsResponse> = MutableLiveData()
     val hospitalsFromRemoteData: MutableLiveData<HospitalsUserResponse> =MutableLiveData()
-    val hospitalDepartmentFromRemoteData: MutableLiveData<HospitalDepartmentsResponse> =
-        MutableLiveData()
+    val hospitalDepartmentFromRemoteData: MutableLiveData<HospitalDepartmentsResponse> = MutableLiveData()
+    val timeslotsFromRemoteData: MutableLiveData<TimeslotsResponse> = MutableLiveData()
     val prescriptionsShareResponse: SingleLiveEvent<PrescriptionsShareResponse> = SingleLiveEvent()
     val diagnosisShareResponse: SingleLiveEvent<DiagnosesShareResponse> = SingleLiveEvent()
+
+    val appointmentData: SingleLiveEvent<CreateAppointmentResponse> = SingleLiveEvent()
+    val failureMessageFromCreateAppointment: SingleLiveEvent<String> = SingleLiveEvent()
 
     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
@@ -391,6 +394,68 @@ object AuthRepository {
 
 
 
+
+    }
+
+    fun requestTimeslots(id:String, date:String) {
+        val dataSource = RetrofitBuilder()
+        Log.i(AuthRepository.TAG, "get Timeslots response: Call is started")
+        dataSource.getRetrofit()
+            .getAvailableTimeslots(id, date)
+            .enqueue(object : Callback<TimeslotsResponse> {
+                override fun onResponse(
+                    call: Call<TimeslotsResponse>,
+                    response: Response<TimeslotsResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(AuthRepository.TAG, "onResponse: Response Successful")
+                        timeslotsFromRemoteData.postValue(response.body())
+
+                    }
+                }
+
+                override fun onFailure(call: Call<TimeslotsResponse>, t: Throwable) {
+                    Log.i(AuthRepository.TAG, "onFailure: " + t.message)
+
+                }
+            })
+
+    }
+
+    fun requestToCreateAppointmentFromRemoteData(date: String, timeslots:String, department: String) {
+        val dataSource = RetrofitBuilder()
+
+        Log.i(TAG, "createAppointment: Call is started")
+        val body = CreateAppointmentBody(date, timeslots, department)
+        dataSource.getRetrofit()
+            .creteAppointment(body)
+            .enqueue(object : Callback<CreateAppointmentResponse> {
+                override fun onResponse(
+                    call: Call<CreateAppointmentResponse>,
+                    response: Response<CreateAppointmentResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(TAG, "onResponse: Response Successful")
+                        appointmentData.postValue(response.body())
+
+                    } else {
+                        try {
+                            val responseObj: ErrorResponse = gson.fromJson(
+                                response.errorBody()?.string(),
+                                ErrorResponse::class.java
+                            )
+                            failureMessageFromCreateAppointment.postValue(responseObj.message)
+                        } catch (e: Exception) {
+                            failureMessageFromCreateAppointment.postValue("Something Went Wrong")
+                        }
+
+                    }
+                }
+
+                override fun onFailure(call: Call<CreateAppointmentResponse>, t: Throwable) {
+                    Log.i(TAG, "onFailure: " + t.message)
+                }
+            })
 
     }
 

@@ -53,7 +53,13 @@ interface ApiInterface {
     @GET("departments")
     fun getHospitalDepartments(@Query("hospital") id: String): Call<HospitalDepartmentsResponse>
 
+    @GET("appointments/available")
+    fun getAvailableTimeslots(@Query("department") id: String ,@Query("date") date: String): Call<TimeslotsResponse>
 
+    @POST("appointments")
+    fun creteAppointment(
+        @Body body: CreateAppointmentBody
+    ): Call<CreateAppointmentResponse>
 
 
 
