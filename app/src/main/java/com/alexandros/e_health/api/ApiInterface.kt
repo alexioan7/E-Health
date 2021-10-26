@@ -50,6 +50,12 @@ interface ApiInterface {
     @GET("appointments")
     fun getUserAppointments(): Call<UserApointmentsResponse>
 
+    @GET("hospitals")
+    fun getHospitalsByPresc(@Query("presc") prescId: String) : Call<HospitalsUserResponse>
+
+    @GET("hospitals")
+    fun getHospitalsByDiag(@Query("diag") prescId: String) : Call<HospitalsUserResponse>
+
 
 
 

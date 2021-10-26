@@ -5,52 +5,84 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.alexandros.e_health.R
 import com.alexandros.e_health.api.responseModel.HospitalsDetails
+import com.alexandros.e_health.api.responseModel.HospitalsUserResponse
 import com.alexandros.e_health.databinding.FragmentPrescriptionsShareBinding
 import com.alexandros.e_health.repositories.AuthRepository
 import com.alexandros.e_health.utils.toast
+import com.alexandros.e_health.viewmodels.AuthFunctionsHospitalByPresc
 import com.alexandros.e_health.viewmodels.AuthFunctionsSharePrescriptions
 import com.alexandros.e_health.viewmodels.PrescriptionsShareViewModel
 import com.alexandros.e_health.viewmodels.ViewModelFactory
 
-class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share) ,AuthFunctionsSharePrescriptions{
+class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share) ,AuthFunctionsSharePrescriptions, AuthFunctionsHospitalByPresc{
 
     private lateinit var binding: FragmentPrescriptionsShareBinding
     private lateinit var viewmodel: PrescriptionsShareViewModel
     private val hosp = mutableListOf<HospitalsDetails>()
+    private var hospByPresc = mutableListOf<HospitalsDetails>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val prescid = arguments?.getString("prescriptionID")
+        Log.d("Prescription id:", "$prescid")
+        val prescname=arguments?.getString("prescriptionName")
+        Log.d("Prescription name:", "$prescname")
         binding = FragmentPrescriptionsShareBinding.bind(view)
         viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(PrescriptionsShareViewModel::class.java)
         val arrayOfHospitals = ArrayList<String>()
         val arrayOfSharedPrescriptions = ArrayList<String>()
         //val arrayOfHospitalPrefectures=ArrayList<String>()
         viewmodel.authListenerpresc = this
+        viewmodel.authHospitalListenerpresc = this
 
         viewmodel.requestHospitals()
         viewmodel.getHospitalsFromRepo().observe(requireActivity(), {
+
             Log.d("HOSPITALS", it.data.hospitals.toString())
+
             val hospitals = it.data.hospitals
             hospitals.forEach { it2 ->
                 hosp.add(HospitalsDetails(it2._id, it2.name, it2.prefecture))
                 arrayOfHospitals.add(it2.name + "," + it2.prefecture)
-
-
             }
 
             Log.d("hosp1", hosp[0]._id)
+
+            if (prescid != null) {
+                viewmodel.requestHospitalsBySharedPrescriptions(prescid)
+            }
+
+            viewmodel.getHospitalsByPresc().observe(requireActivity(), {
+                var hospitalsByPresc = it.data.hospitals
+
+                hospitalsByPresc.forEach { it2 ->
+                    arrayOfSharedPrescriptions.add(it2.name + "," + it2.prefecture)
+                }
+
+                var arrayAdapterShared: ArrayAdapter<*>
+                var myHospitalByPrescList = binding.hospitalsByPrescList
+
+                arrayAdapterShared = ArrayAdapter(
+                    requireActivity(),
+                    android.R.layout.simple_list_item_1,
+                    arrayOfSharedPrescriptions
+                )
+
+                myHospitalByPrescList.adapter = arrayAdapterShared
+
+            })
 
 
             var arrayAdapter: ArrayAdapter<*>
             var myHospitalList = binding.hospitalsList
 
             //for the list with the shared prescriptions
-           var arrayAdapterShared: ArrayAdapter<*>
+
            //var mySharedPrescriptions=binding.listWithSharedHospitals
 //            arrayAdapter= ArrayAdapter(requireActivity(),android.R.layout.simple_list_item_checked,arrayOfHospitals)
 
@@ -61,6 +93,8 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
                     arrayOfHospitals
                 )
 
+
+
                 myHospitalList.adapter = arrayAdapter
 //                arrayAdapterShared= ArrayAdapter(
 //                    requireActivity(),
@@ -68,14 +102,13 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 //                    arrayOfSharedPrescriptions
 //                )
 
+
+
             } catch (e: Exception) {
                 Log.d("ArrayAdapter", e.toString())
             }
 
-            val prescid = arguments?.getString("prescriptionID")
-            Log.d("Prescription id:", "$prescid")
-            val prescname=arguments?.getString("prescriptionName")
-            Log.d("Prescription name:", "$prescname")
+
 
 
             binding.hospitalsList.setOnItemClickListener { parent, view, position, id ->
@@ -116,6 +149,9 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         toast("$failuremessage",activity)
     }
 
+    override fun onSuccessHospitalsByPresc(responseList: MutableLiveData<HospitalsUserResponse>) {
+
+    }
 
 
 }

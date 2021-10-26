@@ -12,6 +12,7 @@ class PrescriptionsShareViewModel(private val authRepo: AuthRepository): ViewMod
 
 
     var authListenerpresc: AuthFunctionsSharePrescriptions? = null
+    var authHospitalListenerpresc: AuthFunctionsHospitalByPresc? = null
 
     private val _hospitals=MutableLiveData<HospitalsUserResponse>()
     val hospitals: LiveData<HospitalsUserResponse>
@@ -35,6 +36,36 @@ class PrescriptionsShareViewModel(private val authRepo: AuthRepository): ViewMod
 
     fun getStatusFromSharePrescriptions(): ErrorResponse?{
         return authRepo.statusFromSharePrescriptions
+    }
+
+    fun getStatusFromHospitalByPresc(): ErrorResponse?{
+        return authRepo.statusFromHospitalByPresc
+    }
+
+    fun getHospitalsByPresc() : MutableLiveData<HospitalsUserResponse> {
+        return authRepo.hospitalsByPrescFromRemoteData
+    }
+
+    fun requestHospitalsBySharedPrescriptions(prescriptionsID: String){
+        authRepo.requestHospitalsByPresc(prescriptionsID,fun(){
+            if(getStatusFromSharePrescriptions() !=null){
+                Log.d("ON FAILED","Share prescription failed")
+                authRepo.statusFromHospitalByPresc?.let {
+                    authListenerpresc?.onFailurePrescriptionShare(
+                        it.message)
+                }
+
+                //Toast.makeText(, "Something went wrong",Toast.LENGTH_LONG).show()
+
+            }else{
+                authHospitalListenerpresc?.onSuccessHospitalsByPresc(authRepo.hospitalsByPrescFromRemoteData)
+                Log.d("On Success","Share prescription succeed")
+
+
+            }
+
+        })
+
     }
 
     fun sharePrescriptions(hospitalName: String,hospitalID: String, prescriptionsID: String){

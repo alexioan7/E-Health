@@ -20,6 +20,7 @@ object AuthRepository {
     val userDataFromLogin: SingleLiveEvent<LoginUserResponse> = SingleLiveEvent()
     var statusFromLogin: String = ""
     var statusFromSharePrescriptions: ErrorResponse? = null
+    var statusFromHospitalByPresc: ErrorResponse? = null
     var statusFromShareDiagnoses: String=" "
 
     val userInfoFromRemoteData: MutableLiveData<MyProfileResponse> = MutableLiveData()
@@ -31,6 +32,7 @@ object AuthRepository {
     val diagnosisShareResponse: SingleLiveEvent<DiagnosesShareResponse> = SingleLiveEvent()
     val failureMessageFromSharePrescriptions: SingleLiveEvent<String> = SingleLiveEvent()
     val failureMessageFromShareDiagnoses: SingleLiveEvent<String> = SingleLiveEvent()
+    val hospitalsByPrescFromRemoteData: MutableLiveData<HospitalsUserResponse> = MutableLiveData()
 
     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
@@ -245,7 +247,31 @@ object AuthRepository {
 
     }
 
+    fun requestHospitalsByPresc(prescId: String, callback: () -> Unit) {
+        val dataSource = RetrofitBuilder()
+        Log.i(TAG, "Hospitals response: Call is started")
+        dataSource.getRetrofit()
+            .getHospitalsByPresc(prescId)
+            .enqueue(object : Callback<HospitalsUserResponse> {
+                override fun onResponse(
+                    call: Call<HospitalsUserResponse>,
+                    response: Response<HospitalsUserResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(AuthRepository.TAG, "onResponse: Response Successful")
+                        hospitalsByPrescFromRemoteData.postValue(response.body())
+                        callback()
+                    }
+                }
 
+                override fun onFailure(call: Call<HospitalsUserResponse>, t: Throwable) {
+                    Log.i(AuthRepository.TAG, "onFailure: " + t.message)
+                    callback()
+                }
+
+            })
+
+    }
 
 
 
