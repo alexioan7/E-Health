@@ -251,10 +251,6 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
     }
 
     private fun goToAppointmentFragment() {
-        try {
             findNavController().navigate(R.id.action_createAppointmentFragment_to_navigation_appointments)
-        }catch (e: Exception){
-            Log.d("NavController", e.toString())
-        }
     }
 }
