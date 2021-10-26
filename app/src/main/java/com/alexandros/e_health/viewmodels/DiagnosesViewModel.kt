@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.alexandros.e_health.api.responseModel.*
 import com.alexandros.e_health.repositories.AuthRepository
+import com.alexandros.e_health.utils.SingleLiveEvent
 
 class DiagnosesViewModel(private val authRepo: AuthRepository) : ViewModel() {
 
@@ -31,5 +32,9 @@ class DiagnosesViewModel(private val authRepo: AuthRepository) : ViewModel() {
     fun getUserDiagnosesFromRepo(): MutableLiveData<DiagnosesUserResponse> {
         return authRepo.userDiagnosesFromRemoteData
 
+    }
+
+    fun getFailureMessageFromDiagnoses(): SingleLiveEvent<String> {
+        return authRepo.failureMessageFromDiagnoses
     }
 }
