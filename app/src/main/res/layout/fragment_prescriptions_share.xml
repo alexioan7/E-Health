@@ -15,9 +15,11 @@
         android:text="Back"
         app:layout_constraintBottom_toTopOf="@+id/welcome_prescription_share"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+
         app:layout_constraintVertical_bias="0.0"
         android:textSize="18sp"
         android:layout_marginBottom="15dp"/>
@@ -29,10 +31,9 @@
         android:padding="12dp"
         android:text="Please select a hospital you want to share your prescription with"
         android:textSize="18sp"
-        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/back_to_prescriptions" />
 
 
     <ListView
