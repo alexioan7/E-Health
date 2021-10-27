@@ -45,6 +45,14 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
             Log.d("APPOINTMENTS!!", it.data.appointments.toString())
             val prescriptions = it.data.appointments
             appointments = prescriptions
+
+            if(!appointments.isNullOrEmpty()) {
+                appointments = appointments.sortedByDescending { it2 ->
+                    it2.date
+                } as MutableList<Appointment>
+
+            }
+
             var temList = mutableListOf<Appointment>()
             appointments.forEach {
                 if(it.active){
@@ -53,7 +61,7 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
             }
             futureAppointments = temList
 
-            Log.d("Future", futureAppointments.toString())
+
             Log.d("Future", futureAppointments.toString())
             initRecyclerView()
         })
@@ -79,9 +87,7 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
             }
             futureAppointments = temList
             Log.d("Future", futureAppointments.toString())
-            if(!futureAppointments.isNullOrEmpty()) {
-                updateAdapter(futureAppointments)
-            }
+            updateAdapter(futureAppointments)
 
         }
 
@@ -99,17 +105,16 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
                 pastAppointments = pastAppointments.sortedByDescending { it2 ->
                     it2.date
                 } as MutableList<Appointment>
-                updateAdapter(pastAppointments)
+
             }
+            updateAdapter(pastAppointments)
         }
     }
 
     private fun updateAdapter(list: MutableList<Appointment>){
         binding.recyclerviewAppointments.apply {
-            if(!list.isNullOrEmpty()) {
-                adapter = AppointmentsAdapter(list)
-                adapter!!.notifyDataSetChanged()
-            }
+            adapter = AppointmentsAdapter(list)
+            adapter!!.notifyDataSetChanged()
         }
     }
 
