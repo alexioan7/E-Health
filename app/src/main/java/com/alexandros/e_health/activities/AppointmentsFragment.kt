@@ -45,9 +45,16 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
             Log.d("APPOINTMENTS!!", it.data.appointments.toString())
             val prescriptions = it.data.appointments
             appointments = prescriptions
-            appointments = appointments.sortedBy { it2->
-                it2.date
+            var temList = mutableListOf<Appointment>()
+            appointments.forEach {
+                if(it.active){
+                    temList.add(it)
+                }
             }
+            futureAppointments = temList
+
+            Log.d("Future", futureAppointments.toString())
+            Log.d("Future", futureAppointments.toString())
             initRecyclerView()
         })
 
@@ -103,7 +110,7 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
     private fun initRecyclerView() {
         binding.recyclerviewAppointments.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = AppointmentsAdapter(appointments)
+            adapter = AppointmentsAdapter(futureAppointments)
         }
     }
 
