@@ -30,8 +30,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arrayOfSharedPrescriptions.clear()
-        hosp.clear()
+
         arrayAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_checked, hosp)
 
         arrayAdapterShared = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, arrayOfSharedPrescriptions)
@@ -60,6 +59,8 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
             if(arrayOfSharedPrescriptions.size != 0) {
                 temp.removeAll(arrayOfSharedPrescriptions)
             }
+
+            hosp.clear()
             hosp.addAll(temp)
             Log.d("HOSPITALS", it.data.hospitals.toString())
 
@@ -68,7 +69,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         })
 
         viewmodel.getHospitalsByPresc().observe(viewLifecycleOwner, {
-
+            arrayOfSharedPrescriptions.clear()
             arrayOfSharedPrescriptions.addAll(it.data.hospitals)
 
             Log.d("Prescription id", it.data.hospitals.toString())
@@ -122,4 +123,6 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
     override fun onSuccessHospitalsByPresc(responseList: MutableLiveData<HospitalsUserResponse>) {
 
     }
+
+
 }
