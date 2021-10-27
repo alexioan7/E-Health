@@ -42,14 +42,13 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
         viewModel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(
             CreateAppointmentViewModel::class.java
         )
-        val arrayOfHospitals = ArrayList<String>()
 
         viewModel.requestHospitals()
         viewModel.getHospitalsFromRepo().observe(requireActivity(), {
             val hospitals = it.data.hospitals
             hospitals.forEach { it2 ->
                 hospitalList.add(HospitalsDetails(it2._id, it2.name, it2.prefecture))
-                arrayOfHospitals.add(it2.name + ", " + it2.prefecture)
+
 
             }
             var arrayHospitlasAdapter: ArrayAdapter<*>
@@ -253,5 +252,10 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
 
     private fun goToAppointmentFragment() {
             findNavController().navigate(R.id.action_createAppointmentFragment_to_navigation_appointments)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hospitalList.clear()
     }
 }
