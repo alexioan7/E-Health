@@ -42,7 +42,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
         viewmodel.authListenerpresc = this
         viewmodel.authHospitalListenerpresc = this
-
+        viewmodel.requestHospitals()
         if (prescid != null) {
             viewmodel.requestHospitalsBySharedPrescriptions(prescid)
         }
@@ -67,7 +67,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
             Log.d("arrayd of shared prescriptions",arrayOfSharedPrescriptions.toString())
 
-            viewmodel.requestHospitals()
+
 
             viewmodel.getHospitalsFromRepo().observe(viewLifecycleOwner, {
 

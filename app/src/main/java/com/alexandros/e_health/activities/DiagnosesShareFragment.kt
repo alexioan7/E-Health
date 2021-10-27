@@ -37,11 +37,9 @@ class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthF
 
         viewmodel.authListenerdiag=this
         viewmodel.authHospitalListenerpresc=this
-
+        viewmodel.requestHospitals()
         if(diagid != null){
-
             viewmodel.requestHospitalsBySharedDiagnoses(diagid)
-
         }
         viewmodel.getHospitalsByDiag().observe(viewLifecycleOwner,{
             arrayOfSharedDiagnoses.clear()
@@ -59,7 +57,6 @@ class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthF
                 Log.d("ArrayAdapter", e.toString())
             }
 
-            viewmodel.requestHospitals()
             viewmodel.getHospitalsFromRepo().observe(viewLifecycleOwner, {
                 Log.d("HOSPITALS", it.data.hospitals.toString())
 
