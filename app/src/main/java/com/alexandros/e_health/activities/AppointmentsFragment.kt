@@ -79,7 +79,9 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
             }
             futureAppointments = temList
             Log.d("Future", futureAppointments.toString())
-            updateAdapter(futureAppointments)
+            if(!futureAppointments.isNullOrEmpty()) {
+                updateAdapter(futureAppointments)
+            }
 
         }
 
@@ -93,17 +95,21 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
             pastAppointments = temList
 
             Log.d("Future", pastAppointments.toString())
-            pastAppointments = pastAppointments.sortedByDescending { it2->
-                it2.date
-            } as MutableList<Appointment>
-            updateAdapter(pastAppointments)
+            if(!pastAppointments.isNullOrEmpty()) {
+                pastAppointments = pastAppointments.sortedByDescending { it2 ->
+                    it2.date
+                } as MutableList<Appointment>
+                updateAdapter(pastAppointments)
+            }
         }
     }
 
     private fun updateAdapter(list: MutableList<Appointment>){
         binding.recyclerviewAppointments.apply {
-            adapter = AppointmentsAdapter(list)
-            adapter!!.notifyDataSetChanged()
+            if(!list.isNullOrEmpty()) {
+                adapter = AppointmentsAdapter(list)
+                adapter!!.notifyDataSetChanged()
+            }
         }
     }
 
