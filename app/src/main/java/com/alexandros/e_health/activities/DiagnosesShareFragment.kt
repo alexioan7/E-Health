@@ -97,7 +97,7 @@ class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthF
             }
         }
 
-        binding.backToPrescriptions.setOnClickListener {
+        binding.backToDiagnoses.setOnClickListener {
             findNavController().navigate(R.id.action_diagnosesShareFragment_to_diagnosesFragment)
         }
 
