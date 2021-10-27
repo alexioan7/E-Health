@@ -88,8 +88,8 @@ class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthF
 
 
         binding.sharebutton.setOnClickListener {
-            if(hosp.size != 0) {
-                val position = binding.hospitalsList.checkedItemPosition
+            val position = binding.hospitalsList.checkedItemPosition
+            if(hosp.size != 0 && position != -1) {
                 var hospital_id = hosp[position]._id
                 var diagnosis_id = diagid
                 var hospital_name = hosp[position].name
