@@ -21,7 +21,7 @@
     <ListView
         android:id="@+id/hospitals_list"
         android:layout_width="415dp"
-        android:layout_height="301dp"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginTop="4dp"
         android:choiceMode="singleChoice"
@@ -75,7 +75,7 @@
     <ListView
         android:id="@+id/hospitalsByPrescList"
         android:layout_width="412dp"
-        android:layout_height="171dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -34,8 +34,7 @@ class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthF
         Log.d("Diagnosis id:", "$diagid")
         binding = FragmentDiagnosesShareBinding.bind(view)
         viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(DiagnosesShareViewModel::class.java)
-        val arrayOfHospitals = ArrayList<String>()
-        //val arrayOfHospitalPrefectures=ArrayList<String>()
+
         viewmodel.authListenerdiag=this
         viewmodel.authHospitalListenerpresc=this
 
@@ -44,10 +43,10 @@ class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthF
             viewmodel.requestHospitalsBySharedDiagnoses(diagid)
 
         }
-        viewmodel.getHospitalsByDiag().observe(requireActivity(),{
-
+        viewmodel.getHospitalsByDiag().observe(viewLifecycleOwner,{
+            arrayOfSharedDiagnoses.clear()
             arrayOfSharedDiagnoses.addAll(it.data.hospitals)
-            var myHospitalByDiagList=binding.hospitalsByDiagList
+            var myHospitalByDiagList = binding.hospitalsByDiagList
 
             try{
                 arrayAdapterShared = ArrayAdapter(
@@ -59,50 +58,48 @@ class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthF
             } catch (e: Exception) {
                 Log.d("ArrayAdapter", e.toString())
             }
+
+            viewmodel.requestHospitals()
+            viewmodel.getHospitalsFromRepo().observe(viewLifecycleOwner, {
+                Log.d("HOSPITALS", it.data.hospitals.toString())
+
+                var tempHosp = mutableListOf<HospitalsDetails>()
+                tempHosp.addAll(it.data.hospitals)
+                if(arrayOfSharedDiagnoses.size != 0) {
+                    tempHosp.removeAll(arrayOfSharedDiagnoses)
+                }
+                hosp.clear()
+                hosp.addAll(tempHosp)
+
+                var myHospitalList= binding.hospitalsList
+
+                try {
+                    arrayAdapter = ArrayAdapter(
+                        requireActivity(),
+                        android.R.layout.simple_list_item_checked,
+                        hosp
+                    )
+                    myHospitalList.adapter = arrayAdapter
+                } catch (e: Exception) {
+                    Log.d("ArrayAdapter", e.toString())
+                }
+            })
         })
 
-        viewmodel.requestHospitals()
-        viewmodel.getHospitalsFromRepo().observe(requireActivity(), {
-            Log.d("HOSPITALS", it.data.hospitals.toString())
 
-                hosp.addAll(it.data.hospitals)
-                var myHospitalList= binding.hospitalsList
-            try {
-                arrayAdapter = ArrayAdapter(
-                    requireActivity(),
-                    android.R.layout.simple_list_item_checked,
-                   hosp
-                )
-                myHospitalList.adapter = arrayAdapter
-            } catch (e: Exception) {
-                Log.d("ArrayAdapter", e.toString())
-            }
-
-
-
-            binding.hospitalsList.setOnItemClickListener { parent, view, position, id ->
-                val element = parent.getItemAtPosition(position)
-                Log.d("Item in hospitals", "$element")
+        binding.sharebutton.setOnClickListener {
+            if(hosp.size != 0) {
+                val position = binding.hospitalsList.checkedItemPosition
                 var hospital_id = hosp[position]._id
                 var diagnosis_id = diagid
-                var hospital_name=hosp[position].name
-
-                binding.sharebutton.setOnClickListener {
-                    viewmodel.onShareButtonClick(hospital_name,hospital_id,diagnosis_id.toString())
-
-                }
-
-
+                var hospital_name = hosp[position].name
+                viewmodel.onShareButtonClick(hospital_name, hospital_id, diagnosis_id.toString())
             }
+        }
 
-
-
-            binding.backToPrescriptions.setOnClickListener {
-                findNavController().navigate(R.id.action_diagnosesShareFragment_to_diagnosesFragment)
-            }
-
-
-        })
+        binding.backToPrescriptions.setOnClickListener {
+            findNavController().navigate(R.id.action_diagnosesShareFragment_to_diagnosesFragment)
+        }
 
 
     }
@@ -111,6 +108,15 @@ class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthF
         Log.d("In success","In onsuccssPrescriptionShare")
         toast("You have successfully shared your diagnosis with $hospitalName", activity)
         //Toast.makeText(activity, "You successfully shared your prescription with $hospitalName", Toast.LENGTH_SHORT).show()
+        for(hospital in hosp) {
+            if(hospitalName.contains(hospital.name)) {
+                arrayOfSharedDiagnoses.add(hospital)
+                hosp.remove(hospital)
+                break
+            }
+        }
+        arrayAdapter.notifyDataSetChanged()
+        arrayAdapterShared.notifyDataSetChanged()
     }
 
     override fun onFailureDiagnosesShare(failuremessage: String){
