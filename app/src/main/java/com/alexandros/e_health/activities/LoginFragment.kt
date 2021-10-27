@@ -55,6 +55,7 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
     }
 
     override fun OnStarted() {
+        binding.textViewError.visibility = View.INVISIBLE
         Log.d("Login fragment", "Login...")
 //        Toast.makeText(activity, "Login", Toast.LENGTH_LONG).show()
        toast("Login...", activity)
@@ -74,6 +75,8 @@ class LoginFragment : Fragment(R.layout.fragment_login), AuthFunctions {
 
     override fun OnFailure(errorCode: MutableList<Int>) {
         Log.d("Login fragment", "Wrong Id or Password")
+        binding.textViewError.visibility = View.VISIBLE
+        binding.textViewError.setText("Wrong Health Identification Number or Password.")
         toast("Wrong Health Id or Password", activity)
     }
 

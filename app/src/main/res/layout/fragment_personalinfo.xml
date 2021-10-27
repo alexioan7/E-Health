@@ -59,7 +59,7 @@
                     android:id="@+id/email_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/firstname"
+                    android:layout_below="@id/name"
                     android:layout_marginTop="32dp"
                     android:drawableLeft="@drawable/ic_baseline_email_24"
                     android:drawablePadding="5dp"
@@ -112,7 +112,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/firstname"
+                    android:id="@+id/name"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/name_tag"
@@ -125,7 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/name_tag"
-                    android:layout_toRightOf="@id/firstname"
+                    android:layout_toRightOf="@id/name"
                     android:text="@={personalinfoviewmodel.surname}"
                     android:textSize="18sp" />
 

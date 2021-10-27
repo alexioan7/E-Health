@@ -7,6 +7,7 @@ import com.alexandros.e_health.api.responseModel.LoginUserResponse
 import com.alexandros.e_health.api.responseModel.RegisterUserResponse
 import com.alexandros.e_health.repositories.AuthRepository
 import com.alexandros.e_health.utils.*
+import kotlinx.android.synthetic.main.fragment_register.view.*
 
 //ERROR CODES
 //810 -> HealthId must be 11 chars(Login)

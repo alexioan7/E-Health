@@ -46,13 +46,11 @@ class PersonalinfoFragment : Fragment(R.layout.fragment_personalinfotest) {
 
 
         binding.apply {
-            firstname.text = it.data.user.name
+            name.text = it.data.user.name + " " + it.data.user.surname
             amka.text = it.data.user.amka
-            surname.text = it.data.user.surname
             email.text = it.data.user.email
             phoneNumber.text = it.data.user.phoneNumber
             bloodType.text = it.data.user.bloodtype
-            welcomeText.text="Welcome, ${it.data.user.name}"
             "${it.data.user.familyDoctor.name} ${it.data.user.familyDoctor.surname}".also { familyDoctor.text = it }
         }
 

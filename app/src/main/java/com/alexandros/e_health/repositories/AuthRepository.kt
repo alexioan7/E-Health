@@ -26,15 +26,22 @@ object AuthRepository {
 
     val userInfoFromRemoteData: MutableLiveData<MyProfileResponse> = MutableLiveData()
     val userPrescriptionsFromRemoteData: MutableLiveData<PrescriptionsUserResponse> = MutableLiveData()
+    val failureMessageFromPrescriptions: SingleLiveEvent<String> = SingleLiveEvent()
     val userDiagnosesFromRemoteData: MutableLiveData<DiagnosesUserResponse> = MutableLiveData()
+    val failureMessageFromDiagnoses: SingleLiveEvent<String> = SingleLiveEvent()
     val userAppointmentsFromRemoteData: MutableLiveData<UserApointmentsResponse> = MutableLiveData()
     val hospitalsFromRemoteData: MutableLiveData<HospitalsUserResponse> =MutableLiveData()
+    val hospitalDepartmentFromRemoteData: MutableLiveData<HospitalDepartmentsResponse> = MutableLiveData()
+    val timeslotsFromRemoteData: MutableLiveData<TimeslotsResponse> = MutableLiveData()
     val prescriptionsShareResponse: SingleLiveEvent<PrescriptionsShareResponse> = SingleLiveEvent()
     val diagnosisShareResponse: SingleLiveEvent<DiagnosesShareResponse> = SingleLiveEvent()
     val failureMessageFromSharePrescriptions: SingleLiveEvent<String> = SingleLiveEvent()
     val failureMessageFromShareDiagnoses: SingleLiveEvent<String> = SingleLiveEvent()
     val hospitalsByPrescFromRemoteData: MutableLiveData<HospitalsUserResponse> = MutableLiveData()
     val hospitalsByDiagFromRemoteData: MutableLiveData<HospitalsUserResponse> = MutableLiveData()
+
+    val appointmentData: SingleLiveEvent<CreateAppointmentResponse> = SingleLiveEvent()
+    val failureMessageFromCreateAppointment: SingleLiveEvent<String> = SingleLiveEvent()
 
     fun getDataFromRegisteredUser(): SingleLiveEvent<RegisterUserResponse> {
         return userDataFromRegister
@@ -174,6 +181,40 @@ object AuthRepository {
                     Log.i(AuthRepository.TAG, "onFailure: " + t.message)
 
                 }
+            })
+    }
+
+    fun requestPrescriptionsFromDate(date: String) {
+        val dataSource = RetrofitBuilder()
+        Log.i(TAG, "Prescriptions response: Call is started")
+        dataSource.getRetrofit()
+            .getUserPrescriptionsFromDate(date)
+            .enqueue(object : Callback<PrescriptionsUserResponse> {
+                override fun onResponse(
+                    call: Call<PrescriptionsUserResponse>,
+                    response: Response<PrescriptionsUserResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(AuthRepository.TAG, "onResponse: Response Successful")
+                        userPrescriptionsFromRemoteData.postValue(response.body())
+                    }else {
+                        try {
+                            val responseObj: ErrorResponse = gson.fromJson(
+                                response.errorBody()?.string(),
+                                ErrorResponse::class.java
+                            )
+                            failureMessageFromPrescriptions.postValue(responseObj.message)
+                        } catch (e: Exception) {
+                            failureMessageFromPrescriptions.postValue("Something Went Wrong")
+                        }
+
+                    }
+                }
+
+                override fun onFailure(call: Call<PrescriptionsUserResponse>, t: Throwable) {
+                    Log.i(AuthRepository.TAG, "onFailure: " + t.message)
+                }
+
             })
 
     }
@@ -341,6 +382,16 @@ object AuthRepository {
                     if (response.isSuccessful && response.body() != null) {
                         Log.i(AuthRepository.TAG, "onResponse: Response Successful")
                         userDiagnosesFromRemoteData.postValue(response.body())
+                    }else {
+                        try {
+                            val responseObj: ErrorResponse = gson.fromJson(
+                                response.errorBody()?.string(),
+                                ErrorResponse::class.java
+                            )
+                            failureMessageFromDiagnoses.postValue(responseObj.message)
+                        } catch (e: Exception) {
+                            failureMessageFromDiagnoses.postValue("Something Went Wrong")
+                        }
 
                     }
                 }
@@ -419,6 +470,96 @@ object AuthRepository {
                 override fun onFailure(call: Call<UserApointmentsResponse>, t: Throwable) {
                     Log.i(AuthRepository.TAG, "onFailure: " + t.message)
 
+                }
+            })
+
+    }
+
+    fun requestHospitalDepartments( id: String){
+        val dataSource = RetrofitBuilder()
+        Log.i(AuthRepository.TAG, "Appointments response: Call is started")
+        dataSource.getRetrofit()
+            .getHospitalDepartments(id)
+            .enqueue(object : Callback<HospitalDepartmentsResponse> {
+                override fun onResponse(
+                    call: Call<HospitalDepartmentsResponse>,
+                    response: Response<HospitalDepartmentsResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(AuthRepository.TAG, "onResponse: Response Successful")
+                        hospitalDepartmentFromRemoteData.postValue(response.body())
+
+                    }
+                }
+
+                override fun onFailure(call: Call<HospitalDepartmentsResponse>, t: Throwable) {
+                    Log.i(AuthRepository.TAG, "onFailure: " + t.message)
+
+                }
+            })
+
+
+
+
+    }
+
+    fun requestTimeslots(id:String, date:String) {
+        val dataSource = RetrofitBuilder()
+        Log.i(AuthRepository.TAG, "get Timeslots response: Call is started")
+        dataSource.getRetrofit()
+            .getAvailableTimeslots(id, date)
+            .enqueue(object : Callback<TimeslotsResponse> {
+                override fun onResponse(
+                    call: Call<TimeslotsResponse>,
+                    response: Response<TimeslotsResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(AuthRepository.TAG, "onResponse: Response Successful")
+                        timeslotsFromRemoteData.postValue(response.body())
+
+                    }
+                }
+
+                override fun onFailure(call: Call<TimeslotsResponse>, t: Throwable) {
+                    Log.i(AuthRepository.TAG, "onFailure: " + t.message)
+
+                }
+            })
+
+    }
+
+    fun requestToCreateAppointmentFromRemoteData(date: String, timeslots:String, department: String) {
+        val dataSource = RetrofitBuilder()
+
+        Log.i(TAG, "createAppointment: Call is started")
+        val body = CreateAppointmentBody(date, timeslots, department)
+        dataSource.getRetrofit()
+            .creteAppointment(body)
+            .enqueue(object : Callback<CreateAppointmentResponse> {
+                override fun onResponse(
+                    call: Call<CreateAppointmentResponse>,
+                    response: Response<CreateAppointmentResponse>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        Log.i(TAG, "onResponse: Response Successful")
+                        appointmentData.postValue(response.body())
+
+                    } else {
+                        try {
+                            val responseObj: ErrorResponse = gson.fromJson(
+                                response.errorBody()?.string(),
+                                ErrorResponse::class.java
+                            )
+                            failureMessageFromCreateAppointment.postValue(responseObj.message)
+                        } catch (e: Exception) {
+                            failureMessageFromCreateAppointment.postValue("Something Went Wrong")
+                        }
+
+                    }
+                }
+
+                override fun onFailure(call: Call<CreateAppointmentResponse>, t: Throwable) {
+                    Log.i(TAG, "onFailure: " + t.message)
                 }
             })
 

@@ -10,7 +10,6 @@ import retrofit2.http.Query
 
 interface ApiInterface {
 
-
     @POST("users/signup")
     fun registerUser(
         @Body body: RegisterBody
@@ -21,12 +20,14 @@ interface ApiInterface {
         @Body body: LoginBody
     ): Call<LoginUserResponse>
 
-
     @GET("users/myProfile")
     fun getUserInfo(): Call<MyProfileResponse>
 
     @GET("prescriptions")
     fun getUserPrescriptions(): Call<PrescriptionsUserResponse>
+
+    @GET("prescriptions")
+    fun getUserPrescriptionsFromDate(@Query("createdAt[gt]") date:String):  Call<PrescriptionsUserResponse>
 
     @GET("hospitals")
     fun getShareHospitals(): Call<HospitalsUserResponse>
@@ -56,9 +57,15 @@ interface ApiInterface {
     @GET("hospitals")
     fun getHospitalsByDiag(@Query("diag") prescId: String) : Call<HospitalsUserResponse>
 
+    @GET("departments")
+    fun getHospitalDepartments(@Query("hospital") id: String): Call<HospitalDepartmentsResponse>
 
+    @GET("appointments/available")
+    fun getAvailableTimeslots(@Query("department") id: String ,@Query("date") date: String): Call<TimeslotsResponse>
 
-
-
+    @POST("appointments")
+    fun creteAppointment(
+        @Body body: CreateAppointmentBody
+    ): Call<CreateAppointmentResponse>
 
 }
