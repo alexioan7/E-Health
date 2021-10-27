@@ -43,7 +43,7 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
         )
 
         viewModel.requestHospitals()
-        viewModel.getHospitalsFromRepo().observe(requireActivity(), {
+        viewModel.getHospitalsFromRepo().observe(viewLifecycleOwner, {
             hospitals = it.data.hospitals as MutableList<HospitalsDetails>
 
             var arrayHospitalsAdapter: ArrayAdapter<*>
@@ -75,7 +75,7 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
 
                     Log.d("Hospital Departments List",hospitalDepartments.toString())
                     viewModel.requestHospitalDepartments(hospital_id)
-                    viewModel.getHospitalDepartmentsFromRepo().observe(requireActivity(), {
+                    viewModel.getHospitalDepartmentsFromRepo().observe(viewLifecycleOwner, {
 
                         hospitalDepartments = it.data.departments as MutableList<Department>
 
@@ -126,7 +126,7 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
                 binding.selectedDateTextView.setText(dayOfMonth.toString() + "-" + (monthOfYear+1).toString() + "-" + year.toString())
 
                 viewModel.requestTimeslots(selectedDepartment, selectedDate)
-                viewModel.getTimeSlots().observe(requireActivity(), {
+                viewModel.getTimeSlots().observe(viewLifecycleOwner, {
                     Log.d("appointmentList", it.data.appointmentList.toString())
                     timeslots = it.data.appointmentList as MutableList<String>
 
@@ -187,14 +187,14 @@ class CreateAppointmentFragment : Fragment(R.layout.fragment_create_appointment)
 
         binding.confirmAppointmentButton.setOnClickListener{
             viewModel.requestToCreateAppointment(selectedDate,selectedTimeslot,selectedDepartment)
-            viewModel.getResponseDataFromCreateAppointment().observe(requireActivity(),{
+            viewModel.getResponseDataFromCreateAppointment().observe(viewLifecycleOwner,{
                 if(it?.status == "success"){
-//                    Toast.makeText(requireContext(), "Appointment confirmed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Appointment confirmed", Toast.LENGTH_SHORT).show()
                     goToAppointmentFragment()
                 }else{
 
                     Log.d("ERRORRRRRRRR",  viewModel.getFailureMessageFromCreateAppointment().value.toString())
-//                    Toast.makeText(requireContext(), viewModel.getFailureMessageFromCreateAppointment().value.toString(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), viewModel.getFailureMessageFromCreateAppointment().value.toString(), Toast.LENGTH_LONG).show()
                 }
             })
         }
