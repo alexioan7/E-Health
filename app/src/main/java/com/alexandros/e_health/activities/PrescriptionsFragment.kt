@@ -112,7 +112,7 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions), DatePic
                 //toast("Test for click channel",requireActivity())
                 val bundle= bundleOf("diagnosisID" to it._id)
 
-                findNavController().navigate(R.id.action_diagnosesFragment_to_diagnosesShareFragment,bundle)
+                findNavController().navigate(R.id.action_prescriptionsFragment_to_prescriptionsShareFragment,bundle)
 
             }.launchIn(lifecycleScope)
         })
@@ -137,7 +137,7 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions), DatePic
             adapter2.shareClicks.onEach {
                 val bundle= bundleOf("diagnosisID" to it._id)
 
-                findNavController().navigate(R.id.action_diagnosesFragment_to_diagnosesShareFragment,bundle)
+                findNavController().navigate(R.id.action_prescriptionsFragment_to_prescriptionsShareFragment,bundle)
 
             }.launchIn(lifecycleScope)
         })

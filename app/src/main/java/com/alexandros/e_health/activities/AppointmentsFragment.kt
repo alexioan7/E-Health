@@ -5,12 +5,10 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexandros.e_health.R
 import com.alexandros.e_health.adapters.AppointmentsAdapter
-import com.alexandros.e_health.adapters.PrescriptionsAdapter
 import com.alexandros.e_health.api.responseModel.Appointment
 import com.alexandros.e_health.databinding.FragmentAppointmentsBinding
 import com.alexandros.e_health.repositories.AuthRepository
@@ -41,13 +39,13 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
         binding.appointmentsviewmodel = viewmodel
         viewmodel.requestUserAppointments()
 
-        viewmodel.getUserAppointmentsromRepo().observe(requireActivity(), {
+        viewmodel.getUserAppointmentsFromRepo().observe(requireActivity(), {
             Log.d("APPOINTMENTS!!", it.data.appointments.toString())
             val prescriptions = it.data.appointments
             appointments = prescriptions
 
             if(!appointments.isNullOrEmpty()) {
-                appointments = appointments.sortedByDescending { it2 ->
+                appointments = appointments.sortedBy { it2 ->
                     it2.date
                 } as MutableList<Appointment>
 

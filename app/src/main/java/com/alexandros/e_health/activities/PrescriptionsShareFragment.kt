@@ -51,7 +51,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         if (prescid != null) {
             viewmodel.requestHospitalsBySharedPrescriptions(prescid)
         }
-        Thread.sleep(2000)
+        Thread.sleep(1000)
         viewmodel.requestHospitals()
 
         viewmodel.authListenerpresc = this

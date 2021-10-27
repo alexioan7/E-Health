@@ -26,7 +26,7 @@ class AppointmentsViewModel(private val authRepo: AuthRepository): ViewModel() {
     }
 
 
-    fun getUserAppointmentsromRepo(): MutableLiveData<UserApointmentsResponse> {
+    fun getUserAppointmentsFromRepo(): MutableLiveData<UserApointmentsResponse> {
         return authRepo.userAppointmentsFromRemoteData
 
     }
