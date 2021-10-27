@@ -59,6 +59,11 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
             }
             futureAppointments = temList
 
+            if(futureAppointments.isNullOrEmpty()){
+                binding.imageCat.visibility = View.VISIBLE
+            }else{
+                binding.imageCat.visibility = View.INVISIBLE
+            }
 
             Log.d("Future", futureAppointments.toString())
             initRecyclerView()
@@ -68,13 +73,13 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
             goToCreateAppointmentFragment()
         }
 
-        binding.buttonFuture.setOnClickListener{
-            appointments.forEach {
-                if(it.active){
-                    futureAppointments.add(it)
-                }
-            }
-        }
+//        binding.buttonFuture.setOnClickListener{
+//            appointments.forEach {
+//                if(it.active){
+//                    futureAppointments.add(it)
+//                }
+//            }
+//        }
 
         binding.buttonFuture.setOnClickListener{
             var temList = mutableListOf<Appointment>()
@@ -84,6 +89,11 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
                 }
             }
             futureAppointments = temList
+            if(futureAppointments.isNullOrEmpty()){
+                binding.imageCat.visibility = View.VISIBLE
+            }else{
+                binding.imageCat.visibility = View.INVISIBLE
+            }
             Log.d("Future", futureAppointments.toString())
             updateAdapter(futureAppointments)
 
@@ -103,6 +113,12 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
                 pastAppointments = pastAppointments.sortedByDescending { it2 ->
                     it2.date
                 } as MutableList<Appointment>
+
+            }
+            if(pastAppointments.isNullOrEmpty()) {
+                binding.imageCat.visibility = View.VISIBLE
+            }else{
+                binding.imageCat.visibility = View.INVISIBLE
 
             }
             updateAdapter(pastAppointments)
