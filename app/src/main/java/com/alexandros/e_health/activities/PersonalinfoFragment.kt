@@ -46,7 +46,7 @@ class PersonalinfoFragment : Fragment(R.layout.fragment_personalinfotest) {
 
 
         binding.apply {
-            name.text = it.data.user.name + it.data.user.surname
+            name.text = it.data.user.name + " " + it.data.user.surname
             amka.text = it.data.user.amka
             email.text = it.data.user.email
             phoneNumber.text = it.data.user.phoneNumber
