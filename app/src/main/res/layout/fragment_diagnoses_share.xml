@@ -23,7 +23,7 @@
     <ListView
         android:id="@+id/hospitals_list"
         android:layout_width="415dp"
-        android:layout_height="301dp"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginTop="8dp"
         android:choiceMode="singleChoice"
@@ -62,6 +62,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sharebutton"
         app:layout_constraintVertical_bias="0.06" />
+    <TextView
+        android:id="@+id/textview_shared_diagnoses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="You have shared your diagnoses with:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_to_prescriptions" />
+
+    <ListView
+        android:id="@+id/hospitalsByDiagList"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_shared_diagnoses"
+        tools:listitem="@layout/prescription_share_item" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

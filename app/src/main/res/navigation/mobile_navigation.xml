@@ -6,6 +6,7 @@
     app:startDestination="@+id/navigation_personalinfo">
 
     <fragment
+
         android:id="@+id/navigation_personalinfo"
         android:name="com.alexandros.e_health.activities.PersonalinfoFragment"
         android:label="@string/title_personalinfo"
@@ -70,7 +71,9 @@
             android:id="@+id/action_navigation_prescriptions_to_navigation_appointments"
             app:destination="@id/navigation_appointments" />
         <action
-
+            app:launchSingleTop="true"
+            app:popUpToInclusive="false"
+            app:popUpTo="@id/prescriptionsShareFragment"
             android:id="@+id/action_prescriptionsFragment_to_prescriptionsShareFragment"
             app:destination="@id/prescriptionsShareFragment">
         <argument
