@@ -12,9 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexandros.e_health.R
-import com.alexandros.e_health.adapters.DiagnosesAdapter
 import com.alexandros.e_health.adapters.PrescriptionsAdapter
-import com.alexandros.e_health.api.responseModel.DiagnosisDetails
 import com.alexandros.e_health.api.responseModel.PrescriptionDetails
 import com.alexandros.e_health.databinding.FragmentPrescriptionsBinding
 import com.alexandros.e_health.viewmodels.PrescriptionsViewModel

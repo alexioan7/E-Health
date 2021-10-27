@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
 import java.time.format.DateTimeFormatter
 
-class PrescriptionsAdapter (
+class PrescriptionsAdapter(
     private val prescriptionDetails: List<PrescriptionDetails>,
     private val coroutineScope: CoroutineScope
 

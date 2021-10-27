@@ -28,7 +28,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="- Today"
-            android:textSize="12sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/TextViewFilter"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,11 +36,11 @@
             android:id="@+id/TextViewFilter"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:drawableRight="@drawable/ic_calendar"
             android:hint="Select date "
-            android:textSize="12sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
