@@ -34,9 +34,12 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         super.onViewCreated(view, savedInstanceState)
         hosp.clear()
         arrayOfSharedPrescriptions.clear()
-        arrayAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_checked, hosp)
 
+        arrayAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_checked, hosp)
         arrayAdapterShared = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, arrayOfSharedPrescriptions)
+
+        arrayAdapter.notifyDataSetChanged()
+        arrayAdapterShared.notifyDataSetChanged()
 
         val prescid = arguments?.getString("prescriptionID")
         Log.d("Prescription id:", "$prescid")
@@ -63,6 +66,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
             }
 
             hosp.clear()
+            arrayAdapter.notifyDataSetChanged()
             hosp.addAll(temp)
             Log.d("HOSPITALS", it.data.hospitals.toString())
 
@@ -74,6 +78,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
             viewmodel.requestHospitals()
             arrayOfSharedPrescriptions.clear()
+            arrayAdapterShared.notifyDataSetChanged()
             arrayOfSharedPrescriptions.addAll(it.data.hospitals)
 
             Log.d("Prescription id", it.data.hospitals.toString())
@@ -136,6 +141,8 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         super.onResume()
         hosp.clear()
         arrayOfSharedPrescriptions.clear()
+        arrayAdapter.notifyDataSetChanged()
+        arrayAdapterShared.notifyDataSetChanged()
     }
 
 
