@@ -18,6 +18,8 @@ import com.alexandros.e_health.viewmodels.AuthFunctionsHospitalByPresc
 import com.alexandros.e_health.viewmodels.AuthFunctionsSharePrescriptions
 import com.alexandros.e_health.viewmodels.PrescriptionsShareViewModel
 import com.alexandros.e_health.viewmodels.ViewModelFactory
+import okhttp3.internal.wait
+import kotlin.concurrent.thread
 
 class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share) ,AuthFunctionsSharePrescriptions, AuthFunctionsHospitalByPresc {
 
@@ -48,6 +50,7 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         if (prescid != null) {
             viewmodel.requestHospitalsBySharedPrescriptions(prescid)
         }
+        Thread.sleep(2000)
         viewmodel.requestHospitals()
 
         viewmodel.authListenerpresc = this
