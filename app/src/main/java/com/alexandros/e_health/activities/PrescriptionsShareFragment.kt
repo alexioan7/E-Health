@@ -51,8 +51,6 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         if (prescid != null) {
             viewmodel.requestHospitalsBySharedPrescriptions(prescid)
         }
-        Thread.sleep(1000)
-        viewmodel.requestHospitals()
 
         viewmodel.authListenerpresc = this
         viewmodel.authHospitalListenerpresc = this
@@ -73,6 +71,8 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         })
 
         viewmodel.getHospitalsByPresc().observe(viewLifecycleOwner, {
+
+            viewmodel.requestHospitals()
             arrayOfSharedPrescriptions.clear()
             arrayOfSharedPrescriptions.addAll(it.data.hospitals)
 
@@ -81,6 +81,10 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
             arrayAdapterShared.notifyDataSetChanged()
 
             Log.d("arrayd of shared prescriptions",arrayOfSharedPrescriptions.toString())
+        })
+
+        viewmodel.getErrorFromRepo().observe(viewLifecycleOwner, {
+            viewmodel.requestHospitals()
         })
 
 

@@ -31,6 +31,7 @@ object AuthRepository {
     val failureMessageFromDiagnoses: SingleLiveEvent<String> = SingleLiveEvent()
     val userAppointmentsFromRemoteData: MutableLiveData<UserApointmentsResponse> = MutableLiveData()
     val hospitalsFromRemoteData: MutableLiveData<HospitalsUserResponse> =MutableLiveData()
+    val errorFromRemoteData: MutableLiveData<ErrorResponse> =MutableLiveData()
     val hospitalDepartmentFromRemoteData: MutableLiveData<HospitalDepartmentsResponse> = MutableLiveData()
     val timeslotsFromRemoteData: MutableLiveData<TimeslotsResponse> = MutableLiveData()
     val prescriptionsShareResponse: SingleLiveEvent<PrescriptionsShareResponse> = SingleLiveEvent()
@@ -304,6 +305,19 @@ object AuthRepository {
                         Log.i(AuthRepository.TAG, "onResponse: Response Successful")
                         hospitalsByPrescFromRemoteData.postValue(response.body())
                         callback()
+                    }else {
+
+                        try {
+                            val responseObj: ErrorResponse = gson.fromJson(
+                                response.errorBody()?.string(),
+                                ErrorResponse::class.java
+                            )
+                            errorFromRemoteData.postValue(responseObj)
+                            callback()
+                        } catch (e: Exception) {
+                            Log.i(AuthRepository.TAG, "onFailure: " + e.message)
+                            callback()
+                        }
                     }
                 }
 
