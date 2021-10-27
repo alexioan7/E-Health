@@ -37,7 +37,7 @@ class DiagnosesFragment : Fragment(R.layout.fragment_diagnoses), DatePickerDialo
         binding.diagnosesviewmodel = viewmodel
         viewmodel.requestUserDiagnoses()
 
-        viewmodel.getUserDiagnosesFromRepo().observe(requireActivity(), {
+        viewmodel.getUserDiagnosesFromRepo().observe(viewLifecycleOwner, {
             Log.d("DIAGNOSES!!",it.data.diagnoses.toString())
             val diagn = it.data.diagnoses
             diagnoses = diagn

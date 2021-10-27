@@ -39,7 +39,7 @@ class PrescriptionsFragment : Fragment(R.layout.fragment_prescriptions), DatePic
 
         viewmodel.requestUserPrescriptions()
 
-        viewmodel.getUserPrescriptionsFromRepo().observe(requireActivity(), {
+        viewmodel.getUserPrescriptionsFromRepo().observe(viewLifecycleOwner, {
             Log.d("PRESCRIPTIONS!!", it.data.prescriptions.toString())
             val prescriptions = it.data.prescriptions
 

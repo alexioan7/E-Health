@@ -125,14 +125,4 @@ class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthF
 
 
     }
-
-
-    override fun onResume() {
-        super.onResume()
-        hosp.clear()
-        arrayOfSharedDiagnoses.clear()
-    }
-
-
-
 }
