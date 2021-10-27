@@ -27,6 +27,9 @@ class DiagnosesShareViewModel(private val authRepo: AuthRepository): ViewModel()
     fun getHospitalsFromRepo(): MutableLiveData<HospitalsUserResponse>{
         return authRepo.hospitalsFromRemoteData
     }
+    fun getErrorFromRepo(): MutableLiveData<ErrorResponse>{
+        return authRepo.errorFromRemoteData
+    }
 
     //these funcions are used to share the prescriptions in post request and receive the status
 

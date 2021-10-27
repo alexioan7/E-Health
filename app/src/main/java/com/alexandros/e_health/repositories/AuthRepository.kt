@@ -344,6 +344,19 @@ object AuthRepository {
                         Log.i(AuthRepository.TAG, "onResponse: Response Successful")
                         hospitalsByDiagFromRemoteData.postValue(response.body())
                         callback()
+                    }else {
+
+                        try {
+                            val responseObj: ErrorResponse = gson.fromJson(
+                                response.errorBody()?.string(),
+                                ErrorResponse::class.java
+                            )
+                            errorFromRemoteData.postValue(responseObj)
+                            callback()
+                        } catch (e: Exception) {
+                            Log.i(AuthRepository.TAG, "onFailure: " + e.message)
+                            callback()
+                        }
                     }
                 }
 

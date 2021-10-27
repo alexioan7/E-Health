@@ -45,12 +45,15 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         Log.d("Prescription id:", "$prescid")
         val prescname = arguments?.getString("prescriptionName")
         Log.d("Prescription name:", "$prescname")
+
         binding = FragmentPrescriptionsShareBinding.bind(view)
         viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(PrescriptionsShareViewModel::class.java)
+
         var myHospitalList = binding.hospitalsList
         myHospitalList.adapter = arrayAdapter
         var myHospitalByPrescList = binding.hospitalsByPrescList
         myHospitalByPrescList.adapter = arrayAdapterShared
+
         if (prescid != null) {
             viewmodel.requestHospitalsBySharedPrescriptions(prescid)
         }
@@ -80,11 +83,9 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
             arrayOfSharedPrescriptions.clear()
             arrayAdapterShared.notifyDataSetChanged()
             arrayOfSharedPrescriptions.addAll(it.data.hospitals)
-
-            Log.d("Prescription id", it.data.hospitals.toString())
-
             arrayAdapterShared.notifyDataSetChanged()
 
+            Log.d("Prescription id", it.data.hospitals.toString())
             Log.d("arrayd of shared prescriptions",arrayOfSharedPrescriptions.toString())
         })
 

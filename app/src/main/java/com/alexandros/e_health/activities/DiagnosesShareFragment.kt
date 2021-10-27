@@ -30,57 +30,58 @@ class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthF
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hosp.clear()
+        arrayOfSharedDiagnoses.clear()
+
+        arrayAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_checked, hosp)
+        arrayAdapterShared = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, arrayOfSharedDiagnoses)
+
+        arrayAdapter.notifyDataSetChanged()
+        arrayAdapterShared.notifyDataSetChanged()
+
         val diagid = arguments?.getString("diagnosisID")
         Log.d("Diagnosis id:", "$diagid")
+
         binding = FragmentDiagnosesShareBinding.bind(view)
         viewmodel = ViewModelProvider(requireActivity(), ViewModelFactory(AuthRepository)).get(DiagnosesShareViewModel::class.java)
 
-        viewmodel.authListenerdiag=this
-        viewmodel.authHospitalListenerpresc=this
-        viewmodel.requestHospitals()
+        var myHospitalByDiagList = binding.hospitalsByDiagList
+        myHospitalByDiagList.adapter = arrayAdapterShared
+        var myHospitalList= binding.hospitalsList
+        myHospitalList.adapter = arrayAdapter
+
         if(diagid != null){
             viewmodel.requestHospitalsBySharedDiagnoses(diagid)
         }
-        viewmodel.getHospitalsByDiag().observe(viewLifecycleOwner,{
-            arrayOfSharedDiagnoses.clear()
-            arrayOfSharedDiagnoses.addAll(it.data.hospitals)
-            var myHospitalByDiagList = binding.hospitalsByDiagList
 
-            try{
-                arrayAdapterShared = ArrayAdapter(
-                    requireActivity(),
-                    android.R.layout.simple_list_item_1,
-                    arrayOfSharedDiagnoses
-                )
-                myHospitalByDiagList.adapter = arrayAdapterShared
-            } catch (e: Exception) {
-                Log.d("ArrayAdapter", e.toString())
+        viewmodel.authListenerdiag=this
+        viewmodel.authHospitalListenerpresc=this
+
+        viewmodel.getHospitalsFromRepo().observe(viewLifecycleOwner, {
+            Log.d("HOSPITALS", it.data.hospitals.toString())
+
+            var tempHosp = mutableListOf<HospitalsDetails>()
+            tempHosp.addAll(it.data.hospitals)
+            if(arrayOfSharedDiagnoses.size != 0) {
+                tempHosp.removeAll(arrayOfSharedDiagnoses)
             }
+            hosp.clear()
+            arrayAdapter.notifyDataSetChanged()
+            hosp.addAll(tempHosp)
+            arrayAdapter.notifyDataSetChanged()
+        })
 
-            viewmodel.getHospitalsFromRepo().observe(viewLifecycleOwner, {
-                Log.d("HOSPITALS", it.data.hospitals.toString())
+        viewmodel.getHospitalsByDiag().observe(viewLifecycleOwner,{
 
-                var tempHosp = mutableListOf<HospitalsDetails>()
-                tempHosp.addAll(it.data.hospitals)
-                if(arrayOfSharedDiagnoses.size != 0) {
-                    tempHosp.removeAll(arrayOfSharedDiagnoses)
-                }
-                hosp.clear()
-                hosp.addAll(tempHosp)
+            viewmodel.requestHospitals()
+            arrayOfSharedDiagnoses.clear()
+            arrayAdapterShared.notifyDataSetChanged()
+            arrayOfSharedDiagnoses.addAll(it.data.hospitals)
+            arrayAdapterShared.notifyDataSetChanged()
+        })
 
-                var myHospitalList= binding.hospitalsList
-
-                try {
-                    arrayAdapter = ArrayAdapter(
-                        requireActivity(),
-                        android.R.layout.simple_list_item_checked,
-                        hosp
-                    )
-                    myHospitalList.adapter = arrayAdapter
-                } catch (e: Exception) {
-                    Log.d("ArrayAdapter", e.toString())
-                }
-            })
+        viewmodel.getErrorFromRepo().observe(viewLifecycleOwner, {
+            viewmodel.requestHospitals()
         })
 
 
@@ -124,5 +125,13 @@ class DiagnosesShareFragment: Fragment(R.layout.fragment_diagnoses_share) ,AuthF
     override fun onSuccessHospitalsByPresc(responseList: MutableLiveData<HospitalsUserResponse>) {
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hosp.clear()
+        arrayOfSharedDiagnoses.clear()
+        arrayAdapter.notifyDataSetChanged()
+        arrayAdapterShared.notifyDataSetChanged()
     }
 }
