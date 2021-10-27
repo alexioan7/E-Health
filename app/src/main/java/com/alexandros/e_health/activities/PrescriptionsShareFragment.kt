@@ -99,8 +99,8 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
         })
 
         binding.sharebutton.setOnClickListener {
-            if(hosp.size != 0) {
-                var position = binding.hospitalsList.checkedItemPosition
+            var position = binding.hospitalsList.checkedItemPosition
+            if(hosp.size != 0 && position!= -1) {
                 var hospital_id = hosp[position]._id
                 var prescription_id = prescid
                 var hospital_name = hosp[position].name
