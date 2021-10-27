@@ -7,12 +7,29 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/back_to_prescriptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawableLeft="?attr/homeAsUpIndicator"
+        android:text="Back"
+        app:layout_constraintBottom_toTopOf="@+id/welcome_prescription_share"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:textSize="18sp"
+        android:layout_marginBottom="15dp"/>
+
+    <TextView
         android:id="@+id/welcome_prescription_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="12dp"
         android:text="Please select a hospital you want to share your prescription with"
         android:textSize="18sp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,17 +66,6 @@
         app:layout_constraintTop_toBottomOf="@+id/hospitals_list"
         app:layout_constraintVertical_bias="0.027" />
 
-    <TextView
-        android:id="@+id/back_to_prescriptions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:text="Back to prescriptions"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sharebutton"
-        app:layout_constraintVertical_bias="0.06" />
 
     <TextView
         android:id="@+id/textview_shared_prescriptions"
@@ -71,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_to_prescriptions" />
+        app:layout_constraintTop_toBottomOf="@+id/sharebutton" />
 
     <ListView
         android:id="@+id/hospitalsByPrescList"
