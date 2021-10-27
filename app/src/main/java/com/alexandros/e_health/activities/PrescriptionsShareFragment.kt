@@ -32,7 +32,8 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        hosp.clear()
+        arrayOfSharedPrescriptions.clear()
         arrayAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_checked, hosp)
 
         arrayAdapterShared = ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, arrayOfSharedPrescriptions)
