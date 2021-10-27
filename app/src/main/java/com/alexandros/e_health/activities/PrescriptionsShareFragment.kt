@@ -128,5 +128,11 @@ class PrescriptionsShareFragment: Fragment(R.layout.fragment_prescriptions_share
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        hosp.clear()
+        arrayOfSharedPrescriptions.clear()
+    }
+
 
 }
