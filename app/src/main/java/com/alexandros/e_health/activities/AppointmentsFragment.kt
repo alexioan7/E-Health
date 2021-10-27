@@ -5,10 +5,12 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexandros.e_health.R
 import com.alexandros.e_health.adapters.AppointmentsAdapter
+import com.alexandros.e_health.adapters.PrescriptionsAdapter
 import com.alexandros.e_health.api.responseModel.Appointment
 import com.alexandros.e_health.databinding.FragmentAppointmentsBinding
 import com.alexandros.e_health.repositories.AuthRepository
@@ -21,6 +23,8 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
     private lateinit var binding: FragmentAppointmentsBinding
 
     private lateinit var appointments : List<Appointment>
+    private var futureAppointments = mutableListOf<Appointment>()
+    private var pastAppointments = mutableListOf<Appointment>()
     // This property is only valid between onCreateView and
     // onDestroyView.
 
@@ -41,24 +45,58 @@ class AppointmentsFragment : Fragment(R.layout.fragment_appointments) {
             Log.d("APPOINTMENTS!!", it.data.appointments.toString())
             val prescriptions = it.data.appointments
             appointments = prescriptions
+            appointments = appointments.sortedBy { it2->
+                it2.date
+            }
             initRecyclerView()
-//            prescriptions.forEach { it2 ->
-//                appointments.add(
-//                    Appointment(
-//                        it2._id,
-//                        it2.active,
-//                        it2.date,
-//                        it2.department,
-//                        it2.id,
-//                        it2.user
-//                    )
-//                )
-//                initRecyclerView()
-//            }
         })
 
         binding.createAppointmentButton.setOnClickListener {
             goToCreateAppointmentFragment()
+        }
+
+        binding.buttonFuture.setOnClickListener{
+            appointments.forEach {
+                if(it.active){
+                    futureAppointments.add(it)
+                }
+            }
+        }
+
+        binding.buttonFuture.setOnClickListener{
+            var temList = mutableListOf<Appointment>()
+            appointments.forEach {
+                if(it.active){
+                    temList.add(it)
+                }
+            }
+            futureAppointments = temList
+            Log.d("Future", futureAppointments.toString())
+            updateAdapter(futureAppointments)
+
+        }
+
+        binding.buttonPast.setOnClickListener{
+            var temList = mutableListOf<Appointment>()
+            appointments.forEach {it2->
+                if(!it2.active){
+                    temList.add(it2)
+                }
+            }
+            pastAppointments = temList
+
+            Log.d("Future", pastAppointments.toString())
+            pastAppointments = pastAppointments.sortedByDescending { it2->
+                it2.date
+            } as MutableList<Appointment>
+            updateAdapter(pastAppointments)
+        }
+    }
+
+    private fun updateAdapter(list: MutableList<Appointment>){
+        binding.recyclerviewAppointments.apply {
+            adapter = AppointmentsAdapter(list)
+            adapter!!.notifyDataSetChanged()
         }
     }
 

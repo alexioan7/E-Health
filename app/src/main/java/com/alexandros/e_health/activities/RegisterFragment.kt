@@ -46,7 +46,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
     }
 
     override fun OnStarted() {
-        Toast.makeText(requireContext(),"Register...", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(),"Registering...", Toast.LENGTH_LONG).show()
         binding.btnRegister.setEnabled(false)
         binding.textViewHealthIdError.visibility = View.INVISIBLE
         binding.textViewEmailError.visibility = View.INVISIBLE
@@ -57,14 +57,16 @@ class RegisterFragment : Fragment(R.layout.fragment_register), AuthFunctions {
         binding.textViewPasswordConfirmError.visibility = View.INVISIBLE
         Log.d("register fragment", "Signing up...")
 //        Toast.makeText(activity, "Login", Toast.LENGTH_LONG).show()
-        toast("Sign up...", activity)
+//        toast("Sign up...", activity)
     }
 
     override fun OnSuccess() {
         Log.d("RegisterFragment", "Succeed..")
+
         //Log.i("VIEWMODEL", viewmodel.getRegisteredUserDataFromRepo().value?.status.toString())
         viewmodel.getRegisteredUserDataFromRepo().observe(requireActivity(), {
             Log.i("VIEWMODEL", "OnSuccess: ${it?.token}")
+            Toast.makeText(requireContext(),"Signed up!", Toast.LENGTH_LONG).show()
             navRegister()
         })
         viewmodel.getFailureMessageFromRegister().observe(requireActivity(), {
