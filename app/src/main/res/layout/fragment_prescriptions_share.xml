@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/back_to_prescriptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
+        android:text="Back"
+        app:layout_constraintBottom_toTopOf="@+id/welcome_prescription_share"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/blue"
+        app:layout_constraintVertical_bias="0.0"
+        android:textSize="18sp"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/white"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/welcome_prescription_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="Please select a hospital you want to share your prescription with"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_to_prescriptions" />
+
+
+    <ListView
+        android:id="@+id/hospitals_list"
+        android:layout_width="415dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="4dp"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/darker_gray"
+        android:listSelector="#362196F3"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_prescription_share"
+        tools:listitem="@layout/prescription_share_item" />
+
+    <Button
+        android:id="@+id/sharebutton"
+        android:layout_width="135dp"
+        android:layout_height="59dp"
+        android:backgroundTint="#362196F3"
+        android:drawableLeft="@android:drawable/ic_menu_share"
+        android:text="Share"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hospitals_list"
+        app:layout_constraintVertical_bias="0.027" />
+
+
+    <TextView
+        android:id="@+id/textview_shared_prescriptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="8dp"
+        android:text="You have shared your prescription with:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sharebutton" />
+
+    <ListView
+        android:id="@+id/hospitalsByPrescList"
+        android:layout_width="412dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_shared_prescriptions"
+        tools:listitem="@layout/prescription_share_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

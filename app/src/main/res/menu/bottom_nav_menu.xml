@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@drawable/ic_person"
+        android:title="@string/title_personalinfo"
+        android:id="@+id/navigation_personalinfo"/>
+
+    <item
+        android:id="@+id/navigation_diagnoses"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_diagnoses" />
+
+    <item
+        android:id="@+id/navigation_prescriptions"
+        android:icon="@drawable/ic_baseline_medication_24"
+        android:title="@string/title_prescriptions" />
+
+    <item
+        android:id="@+id/navigation_appointments"
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title="@string/title_appointments" />
+
+</menu>
